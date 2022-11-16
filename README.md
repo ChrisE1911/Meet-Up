@@ -3,6 +3,7 @@
 ## Database Schema Design
 
 `<insert database schema design here>`
+![DatabaseSchema](./Screenshot%202022-11-16%20at%205.27.45%20PM.png)
 
 ## API Documentation
 
