@@ -51,8 +51,8 @@ Returns the information about the current user that is logged in.
 
 * Require Authentication: true
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: GET
+  * URL: /users/:userid
   * Body: none
 
 * Successful Response when there is a logged in user
@@ -92,8 +92,8 @@ information.
 
 * Require Authentication: false
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: POST
+  * URL: /users/log-in
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -161,8 +161,8 @@ user's information.
 
 * Require Authentication: false
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: POST
+  * URL: /users/sign-up
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -237,8 +237,8 @@ Returns all the groups.
 
 * Require Authentication: false
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: GET
+  * URL: /groups
   * Body: none
 
 * Successful Response
@@ -274,8 +274,8 @@ Returns all the groups.
 
 * Require Authentication: true
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: GET
+  * URL: /users/:userId/groups
   * Body: none
 
 * Successful Response
@@ -311,8 +311,8 @@ Returns the details of a group specified by its id.
 
 * Require Authentication: false
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: GET
+  * URL: /groups/:groupId
   * Body: none
 
 * Successful Response
@@ -384,8 +384,8 @@ Creates and returns a new group.
 
 * Require Authentication: true
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: POST
+  * URL: /groups/create-group
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -497,8 +497,8 @@ Updates and returns an existing group.
 * Require Authentication: true
 * Require proper authorization: Group must belong to the current user
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: PUT
+  * URL: /groups/:groupId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -576,8 +576,8 @@ Deletes an existing group.
 * Require Authentication: true
 * Require proper authorization: Group must belong to the current user
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: DELETE
+  * URL: /groups/:groupId
   * Body: none
 
 * Successful Response
