@@ -2,7 +2,7 @@
 
 ## Database Schema Design
 
-![DatabaseSchema](./Screenshot%202022-11-16%20at%205.27.45%20PM.png)
+![DatabaseSchema](./Db%20schema.png)
 
 ## API Documentation
 
