@@ -93,7 +93,7 @@ information.
 * Require Authentication: false
 * Request
   * Method: POST
-  * URL: /users/session
+  * URL: api/users/session
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -238,7 +238,7 @@ Returns all the groups.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /groups
+  * URL: /api/groups
   * Body: none
 
 * Successful Response
@@ -275,7 +275,7 @@ Returns all the groups.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: /users/:userId/groups
+  * URL: /api/groups/current
   * Body: none
 
 * Successful Response
@@ -312,7 +312,7 @@ Returns the details of a group specified by its id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /groups/:groupId
+  * URL: /api/groups/:groupId
   * Body: none
 
 * Successful Response
@@ -385,7 +385,7 @@ Creates and returns a new group.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: /groups/create-group
+  * URL: /api/groups
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -451,7 +451,7 @@ Create and return a new image for a group specified by id.
 * Require proper authorization: Current User must be the organizer for the group
 * Request
   * Method: POST
-  * URL: /groups/:groupId/create-image
+  * URL: /api/groups/:groupId/groupImages
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -498,7 +498,7 @@ Updates and returns an existing group.
 * Require proper authorization: Group must belong to the current user
 * Request
   * Method: PUT
-  * URL: /groups/:groupId
+  * URL: /api/groups/:groupId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -577,7 +577,7 @@ Deletes an existing group.
 * Require proper authorization: Group must belong to the current user
 * Request
   * Method: DELETE
-  * URL: /groups/:groupId
+  * URL: /api/groups/:groupId
   * Body: none
 
 * Successful Response
@@ -617,7 +617,7 @@ Returns all venues for a group specified by its id
   the group with a status of "co-host"
 * Request
   * Method: GET
-  * URL: /groups/:groupId/venues
+  * URL: /api/groups/:groupId/venues
   * Headers:
     * Content-Type: application/json
   * Body: none
@@ -667,7 +667,7 @@ Creates and returns a new venue for a group specified by its id
   the group with a status of "co-host"
 * Request
   * Method: POST
-  * URL: api/groups/:groupId/venues
+  * URL: /api/groups/:groupId/venues
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -956,7 +956,7 @@ Returns the details of an event specified by its id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: api/events/:eventId
+  * URL: /api/events/:eventId
   * Body: none
 
 * Successful Response
@@ -1113,7 +1113,7 @@ Create and return a new image for an event specified by id.
 * Require proper authorization: Current User must be an attendee of the event
 * Request
   * Method: POST
-  * URL: /events/:eventId/EventImages
+  * URL: /api/events/:eventId/EventImages
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1161,7 +1161,7 @@ Edit and returns an event specified by its id
   the group with a status of "co-host"
 * Request
   * Method: PUT
-  * URL: /events/:eventId
+  * URL: /api/events/:eventId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1258,7 +1258,7 @@ Delete an event specified by its id
   the group with a status of "co-host"
 * Request
   * Method: DELETE
-  * URL: /events/:eventId
+  * URL: /api/events/:eventId
   * Body: none
 
 * Successful Response
@@ -1295,7 +1295,7 @@ Returns the members of a group specified by its id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /api/groups/:groupId/members
+  * URL: /api/groups/:groupId/memberships
   * Body: none
 
 * Successful Response: If you ARE the organizer or a co-host of the group. Shows
@@ -1552,7 +1552,7 @@ Delete a membership to a group specified by id.
   the user whose membership is being deleted
 * Request
   * Method: DELETE
-  * URL: /groups/:groupId/members/:memberId
+  * URL: /api/memberships/:membershipId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1626,7 +1626,7 @@ Returns the attendees of an event specified by its id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /events/:eventId/attendees
+  * URL: /api/events/:eventId/attendees
   * Body: none
 
 * Successful Response: If you ARE the organizer of the group or a member of the
@@ -1720,7 +1720,7 @@ Request attendance for an event specified by id.
 * Require Authorization: Current User must be a member of the group
 * Request
   * Method: POST
-  * URL: /events/:eventId/attendance-request
+  * URL: /events/:eventId/attendees
   * Headers:
     * Content-Type: application/json
   * Body: none
@@ -1788,7 +1788,7 @@ Change the status of an attendance for an event specified by id.
   have a membership to the group with the status of "co-host"
 * Request
   * Method: PUT
-  * URL: /events/:eventId/attendees
+  * URL: /api/attendees/:attendeeId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1863,7 +1863,7 @@ Delete an attendance to an event specified by id.
   the user whose attendance is being deleted
 * Request
   * Method: DELETE
-  * URL: /events/:eventId/attendees
+  * URL: /api/attendees/:attendeeId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1936,7 +1936,7 @@ Delete an existing image for a Group.
   of the Group
 * Request
   * Method: DELETE
-  * URL: /groups/:groupId/groupimages/:id
+  * URL: /api/groupimages/:groupImageId
   * Body: none
 
 * Successful Response
@@ -1975,7 +1975,7 @@ Delete an existing image for an Event.
   of the Group that the Event belongs to
 * Request
   * Method: DELETE
-  * URL: /events/:eventId/eventimages/:id
+  * URL: /api/eventimages/:EventImageId
   * Body: none
 
 * Successful Response
@@ -2011,8 +2011,8 @@ Return events filtered by query parameters.
 
 * Require Authentication: false
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: GET
+  * URL: /api/events
   * Query Parameters
     * page: integer, minimum: 0, maximum: 10, default: 0
     * size: integer, minimum: 0, maximum: 20, default: 20
