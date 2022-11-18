@@ -69,6 +69,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       firstName: {
         type: DataTypes.STRING,
+        allowNull: false,
         validate: {
           isAlpha: true,
           notEmpty: true
@@ -76,6 +77,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       lastName: {
         type: DataTypes.STRING,
+        allowNull: false,
         validate: {
           isAlpha: true,
           notEmpty: true
