@@ -52,7 +52,7 @@ Returns the information about the current user that is logged in.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: /users/:userid
+  * URL: /api/users/current
   * Body: none
 
 * Successful Response when there is a logged in user
@@ -93,7 +93,7 @@ information.
 * Require Authentication: false
 * Request
   * Method: POST
-  * URL: /users/log-in
+  * URL: /users/session
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -162,7 +162,7 @@ user's information.
 * Require Authentication: false
 * Request
   * Method: POST
-  * URL: /users/sign-up
+  * URL: /api/users
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -667,7 +667,7 @@ Creates and returns a new venue for a group specified by its id
   the group with a status of "co-host"
 * Request
   * Method: POST
-  * URL: /groups/:groupId/create-venue
+  * URL: api/groups/:groupId/venues
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -742,7 +742,7 @@ Edit a new venue specified by its id
   the group with a status of "co-host"
 * Request
   * Method: PUT
-  * URL: /venues/:venueId
+  * URL: /api/venues/:venueId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -817,7 +817,7 @@ Returns all the events.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /events
+  * URL: /api/events
   * Body: none
 
 * Successful Response
@@ -880,7 +880,7 @@ Returns all the events of a group specified by its id
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /groups/:groupId/events
+  * URL: /api/groups/:groupId/events
   * Body: none
 
 * Successful Response
@@ -956,7 +956,7 @@ Returns the details of an event specified by its id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /events/:eventId
+  * URL: api/events/:eventId
   * Body: none
 
 * Successful Response
@@ -1030,7 +1030,7 @@ Creates and returns a new event for a group specified by its id
   the group with a status of "co-host"
 * Request
   * Method: POST
-  * URL: /groups/:groupId/create-event
+  * URL: /api/groups/:groupId/events
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1113,7 +1113,7 @@ Create and return a new image for an event specified by id.
 * Require proper authorization: Current User must be an attendee of the event
 * Request
   * Method: POST
-  * URL: /events/:eventsId/add-image
+  * URL: /events/:eventId/EventImages
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1295,7 +1295,7 @@ Returns the members of a group specified by its id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: /groups/:groupId/members
+  * URL: /api/groups/:groupId/members
   * Body: none
 
 * Successful Response: If you ARE the organizer or a co-host of the group. Shows
@@ -1386,7 +1386,7 @@ Request a new membership for a group specified by id.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: /groups/:groupId/request-membership
+  * URL: api/groups/:groupId/memberships
   * Headers:
     * Content-Type: application/json
   * Body: none
@@ -1458,7 +1458,7 @@ Change the status of a membership for a group specified by id.
     * Current User must already be the organizer
 * Request
   * Method: PUT
-  * URL: /groups/:groupId/members/:memberId
+  * URL: /api/members/:memberId
   * Headers:
     * Content-Type: application/json
   * Body:
