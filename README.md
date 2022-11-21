@@ -1,4 +1,4 @@
-# Meetup Clone
+# Meetup-Api-Project
 
 ## Database Schema Design
 
