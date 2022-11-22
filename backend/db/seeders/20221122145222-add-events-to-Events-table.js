@@ -19,8 +19,8 @@ module.exports = {
         type: 'In-Person',
         capacity: 100,
         price: 10.00,
-        startDate: '2022-22-11',
-        endDate: '2022-22-11',
+        startDate: '2022-28-11',
+        endDate: '2022-28-11',
       },
       {
         venueId: 2,
