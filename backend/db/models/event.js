@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     price: {
       //Figure out how to restrict to two decimal places
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(4,2),
       allowNull: false
     },
     startDate: {
