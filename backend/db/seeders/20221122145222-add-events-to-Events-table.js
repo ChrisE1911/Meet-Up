@@ -20,7 +20,7 @@ module.exports = {
         capacity: 100,
         price: 10.00,
         startDate: '2022-28-11',
-        endDate: '2022-28-11',
+        endDate: '2022-29-11',
       },
       {
         venueId: 2,
@@ -31,7 +31,7 @@ module.exports = {
         capacity: 200,
         price: 15.00,
         startDate: '2022-23-11',
-        endDate: '2022-23-11',
+        endDate: '2022-24-11',
       },
       {
         venueId: 3,
@@ -42,7 +42,7 @@ module.exports = {
         capacity: 100,
         price: 15.00,
         startDate: '2022-25-11',
-        endDate: '2022-25-11',
+        endDate: '2022-26-11',
       },
       {
         venueId: 4,
@@ -53,7 +53,7 @@ module.exports = {
         capacity: 50,
         price: 5.00,
         startDate: '2022-24-11',
-        endDate: '2022-24-11',
+        endDate: '2022-25-11',
       },
     ], {})
   },

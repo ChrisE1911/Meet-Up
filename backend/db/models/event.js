@@ -63,8 +63,8 @@ module.exports = (sequelize, DataTypes) => {
     endDate: {
       type: DataTypes.DATE,
       allowNull: false,
-      lessthanStartDate(value) {
-        value < this.startDate
+      validate: {
+        isAfter: this.startDate
       }
     }
   }, {
