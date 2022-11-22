@@ -17,11 +17,13 @@ module.exports = {
       },
       eventId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: { models: "Events" }
       },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: { models: "Users" }
       },
       status: {
         type: Sequelize.STRING,

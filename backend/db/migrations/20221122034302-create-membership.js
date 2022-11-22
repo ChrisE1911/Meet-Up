@@ -18,11 +18,13 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: { models: "Users" }
       },
       groupId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: { models: "Groups" }
       },
       status: {
         type: Sequelize.STRING,
