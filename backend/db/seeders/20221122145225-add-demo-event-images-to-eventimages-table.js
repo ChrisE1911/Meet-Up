@@ -13,27 +13,22 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         eventId: 1,
-        url: 'image1.png',
+        url: 'eventimage1.png',
         preview: true
       },
       {
         eventId: 2,
-        url: 'image2.png',
+        url: 'eventimage2.png',
         preview: true
       },
       {
         eventId: 3,
-        url: 'image3.png',
+        url: 'eventimage3.png',
         preview: true
       },
       {
         eventId: 4,
-        url: 'image4.png',
-        preview: true
-      },
-      {
-        eventId: 5,
-        url: 'image5.png',
+        url: 'eventimage4.png',
         preview: true
       }
     ], {});
@@ -43,7 +38,7 @@ module.exports = {
     options.tableName = 'EventImages';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      url: { [Op.in]: ['image1.png', 'image2.png', 'image3.png', 'image4.png', 'image5.png',] }
+      id: { [Op.in]: [1, 2, 3] }
     }, {});
   }
 };
