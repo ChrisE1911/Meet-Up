@@ -30,8 +30,8 @@ module.exports = {
         type: 'In-Person',
         capacity: 200,
         price: 15.00,
-        startDate: '2022-23-11',
-        endDate: '2022-24-11',
+        startDate: '2022-11-23',
+        endDate: '2022-11-24',
       },
       {
         venueId: 3,
@@ -41,8 +41,8 @@ module.exports = {
         type: 'In-Person',
         capacity: 100,
         price: 15.00,
-        startDate: '2022-25-11',
-        endDate: '2022-26-11',
+        startDate: '2022-11-25',
+        endDate: '2022-11-26',
       },
       {
         venueId: 4,
@@ -52,8 +52,8 @@ module.exports = {
         type: 'In-Person',
         capacity: 50,
         price: 5.00,
-        startDate: '2022-24-11',
-        endDate: '2022-25-11',
+        startDate: '2022-11-24',
+        endDate: '2022-11-25',
       },
     ], {})
   },
