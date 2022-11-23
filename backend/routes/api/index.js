@@ -2,9 +2,12 @@ const router = require('express').Router();
 const { restoreUser } = require('../../utils/auth.js');
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
+const groupsRouter = require('./groups.js')
 router.use(restoreUser);
 
 router.use('/session', sessionRouter);
+
+router.use('/groups', groupsRouter)
 
 router.use('/users', usersRouter);
 
