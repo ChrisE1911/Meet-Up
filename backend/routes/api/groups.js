@@ -52,6 +52,8 @@ router.get('/', async (req, res, next) => {
     })
 });
 
+//Get all Groups by current User
+
 router.get('/current', requireAuth, async (req, res, next) => {
     const { user } = req;
 
@@ -95,7 +97,34 @@ router.get('/current', requireAuth, async (req, res, next) => {
     })
 });
 
+router.post('/', requireAuth, async (req, res, next) => {
 
+    const { name, about, type, private, city, state } = req.body;
+
+    const { user } = req;
+
+        const newGroup = await Group.create({
+            name: name,
+            organizerId: user.id,
+            about: about,
+            type: type,
+            private: private,
+            city: city,
+            state: state
+        })
+        res.json(newGroup)
+});
+
+router.post('/:groupId/images', requireAuth, async (req, res, next) => {
+
+    const currentGroup = await Group.findByPk(req.params.groupId);
+    const { preview, url } = req.body;
+    const newImage = await currentGroup.createGroupImage({
+        url,
+        preview
+    })
+    res.json(newImage)
+})
 
 
 module.exports = router;
