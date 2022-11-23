@@ -11,13 +11,13 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
     const groups = await Group.findAll({
-        attributes: {
-            include: [
-                [
-                    sequelize.fn('COUNT', sequelize.col('id')), 'numMembers'
-                ]
-            ]
-        }
+        // attributes: {
+        //     include: [
+        //         [
+        //             sequelize.fn('COUNT', sequelize.col('id')), 'numMembers'
+        //         ]
+        //     ]
+        // }
     });
     res.json(groups)
 

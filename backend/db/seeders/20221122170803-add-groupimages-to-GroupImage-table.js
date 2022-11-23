@@ -19,17 +19,17 @@ module.exports = {
       {
         groupId: 2,
         url: 'groupimage2.png',
-        preview: true
+        preview: false
       },
       {
         groupId: 3,
         url: 'groupimage3.png',
-        preview: true
+        preview: false
       },
       {
         groupId: 4,
         url: 'groupimage4.png',
-        preview: true
+        preview: false
       }
     ], {})
   },

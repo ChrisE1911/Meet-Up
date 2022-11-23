@@ -19,17 +19,17 @@ module.exports = {
       {
         eventId: 2,
         url: 'eventimage2.png',
-        preview: true
+        preview: false
       },
       {
         eventId: 3,
         url: 'eventimage3.png',
-        preview: true
+        preview: false
       },
       {
         eventId: 4,
         url: 'eventimage4.png',
-        preview: true
+        preview: false
       }
     ], {});
   },
