@@ -21,11 +21,13 @@ module.exports = (sequelize, DataTypes) => {
   Group.init({
     organizerId: {
       type: DataTypes.INTEGER,
-      allowNull: false
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        len: [0,60]
+      }
     },
     about: {
       type: DataTypes.STRING,
@@ -38,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isIn: [['Online', 'In-Person']]
+        isIn: [['Online', 'In person']]
       }
     },
     private: {
@@ -48,7 +50,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     city: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        emptyString(value) {
+          if (value === '') {
+            throw new Error("City is required")
+          }
+        }
+      }
     },
     state: {
       type: DataTypes.STRING,
