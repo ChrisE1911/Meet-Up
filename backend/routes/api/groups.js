@@ -61,11 +61,11 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
     console.log(user.id)
 
-        const currentUserGroup = await Group.findAll({
-            where: {
-                organizerId: currentUser
-            }
-        })
+    const currentUserGroup = await Group.findAll({
+        where: {
+            organizerId: currentUser
+        }
+    })
 
     let newArr = [];
 
@@ -107,16 +107,16 @@ router.post('/', requireAuth, async (req, res, next) => {
 
     const { user } = req;
 
-        const newGroup = await Group.create({
-            name: name,
-            organizerId: user.id,
-            about: about,
-            type: type,
-            private: private,
-            city: city,
-            state: state
-        })
-        res.json(newGroup)
+    const newGroup = await Group.create({
+        name: name,
+        organizerId: user.id,
+        about: about,
+        type: type,
+        private: private,
+        city: city,
+        state: state
+    })
+    res.json(newGroup)
 });
 
 //Add an image to a group
@@ -150,5 +150,55 @@ router.post('/:groupId/images', requireAuth, async (req, res, next) => {
 
 });
 
+//Get Details of a Group By Id
+
+router.get('/:groupId', async (req, res, next) => {
+
+    let group = await Group.findByPk(req.params.groupId, {
+        include: {
+            model: GroupImage
+        }
+    });
+
+    let venue = await Venue.findAll({
+        where: {
+            groupId: req.params.groupId
+        },
+        attributes: ['id', 'groupId', 'address', 'city', 'state', 'lat', 'lng']
+    })
+
+    let numMembers = await Membership.count({
+        where: {
+            groupId: req.params.groupId
+        }
+    })
+
+    // console.log(numMembers)
+
+    const user = await group.getUser({
+        attributes: ['id', 'firstName', 'lastName']
+    });
+
+    console.log(user)
+
+    group = group.toJSON();
+
+
+    group.numMembers = numMembers
+    group.Organizer = user;
+    group.Venues = venue;
+
+
+    // console.log(group)
+
+    if (!group) {
+        const err = new Error("Group does not exist");
+        err.status = 404;
+        err.title = "Group does not exist";
+        err.errors = ["Group couldn't be found"];
+        return next(err);
+    };
+    res.json(group)
+})
 
 module.exports = router;
