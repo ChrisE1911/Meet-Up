@@ -16,8 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   EventImage.init({
     eventId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+      type: DataTypes.INTEGER
     },
     url: {
       type: DataTypes.STRING,
