@@ -24,6 +24,7 @@ router.get('/', async (req, res, next) => {
     res.json(groups)
 
     //preview image needs to be added
+    //find out why one group is being returned instead of all
 })
 
 
