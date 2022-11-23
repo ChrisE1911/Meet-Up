@@ -1,12 +1,13 @@
 'use strict';
 const { Model, Validator } = require('sequelize');
+
 const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     toSafeObject() {
       const { id, firstName, lastName, username, email } = this; // context will be the User instance
-      return { id, firstName, lastName, username, email };
+      return { id, firstName, lastName, email};
     };
 
     validatePassword(password) {
