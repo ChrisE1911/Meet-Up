@@ -1,6 +1,8 @@
 const express = require('express');
 
-const { Group, GroupImage, Membership } = require('../../db/models');
+const { Group, GroupImage, Membership, User, Attendance, Event, Venue, EventImage } = require('../../db/models');
+
+const { requireAuth } = require('../../utils/auth');
 
 const sequelize = require('sequelize')
 
@@ -45,6 +47,49 @@ router.get('/', async (req, res, next) => {
 
         newArr.push(group);
     }
+    res.json({
+        Groups: newArr
+    })
+});
+
+router.get('/current', requireAuth, async (req, res, next) => {
+    const { user } = req;
+
+    let currentUser = user.id
+
+    console.log(user.id)
+
+        const currentUserGroup = await Group.findAll({
+            where: {
+                organizerId: currentUser
+            }
+        })
+
+    let newArr = [];
+
+    for (let group of currentUserGroup) {
+        group = group.toJSON();
+
+        let numMembers = await Membership.count({
+            where: {
+                groupId: group.id
+            }
+        });
+
+        let groupImage = await GroupImage.findOne({
+            where: {
+                groupId: group.id,
+                preview: true
+            },
+            //set raw to true to get that actual json object
+            raw: true
+        });
+        group.numMembers = numMembers;
+        group.previewImage = groupImage.url
+
+        newArr.push(group)
+    }
+
     res.json({
         Groups: newArr
     })
