@@ -89,6 +89,8 @@ router.get('/current', requireAuth, async (req, res, next) => {
         group.numMembers = numMembers;
         group.previewImage = groupImage.url
 
+        console.log(group)
+
         newArr.push(group)
     }
 
@@ -96,6 +98,8 @@ router.get('/current', requireAuth, async (req, res, next) => {
         Groups: newArr
     })
 });
+
+//Create a group
 
 router.post('/', requireAuth, async (req, res, next) => {
 
@@ -115,16 +119,36 @@ router.post('/', requireAuth, async (req, res, next) => {
         res.json(newGroup)
 });
 
+//Add an image to a group
 router.post('/:groupId/images', requireAuth, async (req, res, next) => {
 
     const currentGroup = await Group.findByPk(req.params.groupId);
+
+    console.log(currentGroup)
+
+    if (!currentGroup) {
+        const err = new Error("Group does not exist");
+        err.status = 404;
+        err.title = "Group does not exist";
+        err.errors = ["Group couldn't be found"];
+        return next(err);
+    }
+
     const { preview, url } = req.body;
-    const newImage = await currentGroup.createGroupImage({
+
+    let newImage = await GroupImage.create({
+        preview,
         url,
-        preview
+        groupId: req.params.groupId
     })
+
+    newImage = newImage.toJSON();
+
+    newImage = await GroupImage.findByPk(newImage.id)
+
     res.json(newImage)
-})
+
+});
 
 
 module.exports = router;
