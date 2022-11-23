@@ -19,8 +19,6 @@ router.get('/', async (req, res, next) => {
             ]
         }
     });
-
-
     res.json(groups)
 
     //preview image needs to be added
