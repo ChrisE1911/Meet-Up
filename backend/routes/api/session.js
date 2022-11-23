@@ -1,7 +1,7 @@
 // backend/routes/api/session.js
 const express = require('express');
 
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 
 // backend/routes/api/session.js
@@ -58,21 +58,21 @@ router.delete(
 
 // Restore session user
 router.get(
-    '/',
+    '/', requireAuth,
     restoreUser,
-    (req, res) => {
+  (req, res) => {
       const { user } = req;
       if (user) {
-        return res.json({
-          user: user.toSafeObject()
-        });
+        return res.json(
+          user.toSafeObject(),
+        );
       } else return res.json({});
     }
   );
 
-  // ...
+//   ...
 
-  // backend/routes/api/session.js
+//   backend/routes/api/session.js
 // ...
 
 const validateLogin = [
@@ -95,7 +95,6 @@ router.post(
   validateLogin,
   async (req, res, next) => {
     const { credential, password } = req.body;
-
     const user = await User.login({ credential, password });
 
     if (!user) {
@@ -105,7 +104,6 @@ router.post(
       err.errors = ['The provided credentials were invalid.'];
       return next(err);
     }
-
     await setTokenCookie(res, user);
 
     return res.json({
