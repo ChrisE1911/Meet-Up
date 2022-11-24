@@ -308,6 +308,14 @@ router.get('/:groupId/venues', requireAuth, async (req, res, next) => {
 router.post('/:groupId/events', requireAuth, async (req, res, next) => {
     const group = await Group.findByPk(req.params.groupId);
 
+    if (!group) {
+        const err = new Error("Group does not exist");
+        err.status = 404;
+        err.title = "Group does not exist";
+        err.errors = ["Group couldn't be found"];
+        return next(err);
+    }
+
     const events = await Event.findAll({
         where: {
            groupId: req.params.groupId
