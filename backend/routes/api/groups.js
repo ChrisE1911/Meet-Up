@@ -201,4 +201,106 @@ router.get('/:groupId', async (req, res, next) => {
     res.json(group)
 })
 
+//Edit a Group
+
+router.put('/:groupId', requireAuth, async (req, res, next) => {
+    const currentGroup = await Group.findOne({
+        where: {
+            id: req.params.groupId
+        }
+    });
+    // console.log(currentGroup)
+    if (!currentGroup) {
+        const err = new Error("Group does not exist");
+        err.status = 404;
+        err.title = "Group does not exist";
+        err.errors = ["Group couldn't be found"];
+        return next(err);
+    }
+
+    const { name, about, type, private, city, state } = req.body;
+
+    if (name) {
+        currentGroup.name = name
+    };
+    if (about) {
+        currentGroup.about = about
+    };
+    if (type) {
+        currentGroup.type = type
+    };
+    if (private) {
+        currentGroup.private = private
+    };
+    if (city) {
+        currentGroup.city = city
+    };
+    if (state) {
+        currentGroup.state = state
+    };
+
+    currentGroup.save();
+
+    res.json(await currentGroup)
+});
+
+//Create a New Venue for a Group By Id
+
+router.post('/:groupId/venues', requireAuth, async (req, res, next) => {
+    const group = await Group.findByPk(req.params.groupId);
+
+    if (!group) {
+        const err = new Error("Group does not exist");
+        err.status = 404;
+        err.title = "Group does not exist";
+        err.errors = ["Group couldn't be found"];
+        return next(err);
+    }
+
+    const { address, city, state, lat, lng } = req.body;
+
+    let newVenue = await group.createVenue({
+        address: address,
+        groupId: req.params.groupId,
+        city,
+        state,
+        lat,
+        lng,
+    })
+
+    newVenue = newVenue.toJSON();
+
+    delete newVenue['createdAt'];
+    delete newVenue['updatedAt'];
+
+
+    res.json(newVenue)
+
+});
+
+// Get All Venues for a Group By Id
+
+router.get('/:groupId/venues', requireAuth, async (req, res, next) => {
+    const group = await Group.findByPk(req.params.groupId);
+
+    if (!group) {
+        const err = new Error("Group does not exist");
+        err.status = 404;
+        err.title = "Group does not exist";
+        err.errors = ["Group couldn't be found"];
+        return next(err);
+    }
+
+    const groupVenues = await Venue.findAll({
+        where: {
+            groupId: req.params.groupId
+        }
+    });
+
+    console.log(groupVenues)
+    res.json({
+        Venues: groupVenues
+    })
+})
+
 module.exports = router;
