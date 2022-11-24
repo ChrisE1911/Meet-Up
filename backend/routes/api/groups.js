@@ -260,12 +260,12 @@ router.post('/:groupId/venues', requireAuth, async (req, res, next) => {
     const { address, city, state, lat, lng } = req.body;
 
     let newVenue = await group.createVenue({
-        address: address,
+        address,
         groupId: req.params.groupId,
         city,
         state,
         lat,
-        lng,
+        lng
     })
 
     newVenue = newVenue.toJSON();
@@ -301,6 +301,40 @@ router.get('/:groupId/venues', requireAuth, async (req, res, next) => {
     res.json({
         Venues: groupVenues
     })
+});
+
+// Create an Event by Group Id
+
+router.post('/:groupId/events', requireAuth, async (req, res, next) => {
+    const group = await Group.findByPk(req.params.groupId);
+
+    const events = await Event.findAll({
+        where: {
+           groupId: req.params.groupId
+       }
+    })
+
+    const { venueId, name, type, capacity, price, description, startDate, endDate } = req.body;
+
+    let event = await Event.create({
+        venueId,
+        groupId: +req.params.groupId,
+        name,
+        type,
+        capacity,
+        price,
+        description,
+        startDate,
+        endDate
+    })
+
+    event = event.toJSON();
+
+    delete event['createdAt'];
+    delete event['updatedAt'];
+
+    // console.log(groupId)
+    res.json(event)
 })
 
 module.exports = router;

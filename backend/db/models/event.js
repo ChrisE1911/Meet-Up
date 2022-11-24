@@ -19,18 +19,16 @@ module.exports = (sequelize, DataTypes) => {
   }
   Event.init({
     venueId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+      type: DataTypes.INTEGER
     },
     groupId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+      type: DataTypes.INTEGER
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [5,30]
+        len: [5,265]
       }
     },
     description: {
@@ -49,7 +47,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     price: {
-      //Figure out how to restrict to two decimal places
       type: DataTypes.DECIMAL(4,2),
       allowNull: false
     },
@@ -57,14 +54,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false,
       validate: {
-        isAfter: "2022-21-11"
+        isAfter: "2022-11-19"
       }
     },
     endDate: {
       type: DataTypes.DATE,
       allowNull: false,
       validate: {
-        isAfter: this.startDate
+        afterStartDate(value) {
+          if (value < this.startDate) {
+            throw new Error('Date must be after Start Date')
+          }
+        }
       }
     }
   }, {
