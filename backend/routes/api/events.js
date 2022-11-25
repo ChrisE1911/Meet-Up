@@ -57,4 +57,31 @@ router.get('/', async (req, res, next) => {
     })
 })
 
+// Get details of an Event specified by its id
+
+router.get('/:eventId', async (req, res, next) => {
+    let event = await Event.findByPk(req.params.eventId, {
+        include: [
+            { model: Group, attributes: ['id', 'name', 'private', 'city', 'state']},
+            { model: Venue, attributes: ['id', 'address', 'city', 'state', 'lat', 'lng'] },
+            { model: EventImage, attributes: ['id', 'url', 'preview'] }
+        ],
+
+        attributes: {
+            exclude: ['createdAt', 'updatedAt']
+        }
+    });
+    let numAttending = await Attendance.count({
+        where: {
+            eventId: req.params.eventId
+        }
+    })
+    event = event.toJSON();
+
+    event.numAttending = numAttending;
+
+
+    res.json(event)
+})
+
 module.exports = router;
