@@ -396,5 +396,74 @@ router.get('/:groupId/events', async (req, res, next) => {
     })
 });
 
+//Request a Membership for a Group based on the Group's id
+
+router.post('/:groupId/membership', requireAuth, async (req, res, next) => {
+    let group = await Group.findByPk(req.params.groupId);
+
+    //group error
+
+    if (!group) {
+        const err = new Error("Group couldn't be found");
+        err.status = 404;
+        err.title = "Group does not exist";
+        err.errors = ["Group couldn't be found"];
+        return next(err);
+    }
+
+    //converting  group to toJSON() to grab the group id out of the object
+    group = group.toJSON()
+
+    //grabbing the user
+    const { user } = req;
+
+    //errors
+    //checked to see if status was either pending or member
+
+    const memberships = await Membership.findOne({
+        where: {
+            groupId: group.id,
+            userId: user.id
+        }
+    })
+
+    if (memberships) {
+        if (memberships.status === 'pending') {
+            const err = new Error("Current User already has a pending membership for the group");
+            err.status = 404;
+            err.title = "Membership has already been requested";
+            err.errors = ["Current User already has a pending membership for the group"];
+            return next(err);
+        } else {
+            const err = new Error("User is already a member of the group");
+            err.status = 400;
+            err.title = "User is already a member";
+            err.errors = ["User is already a member of the group"];
+            return next (err)
+        }
+    }
+
+    let newMembership = await Membership.create({
+        userId: user.id,
+        groupId: group.id,
+        status: 'pending'
+    })
+
+    newMembership = newMembership.toJSON();
+
+    delete newMembership['createdAt'];
+    delete newMembership['updatedAt'];
+    delete newMembership['groupId'];
+    delete newMembership['userId'];
+    delete newMembership['id']
+
+    newMembership.memberId = memberships.id;
+
+    res.json(newMembership)
+
+})
+
+
+
 
 module.exports = router;
