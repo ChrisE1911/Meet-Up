@@ -97,4 +97,61 @@ router.get('/:eventId', async (req, res, next) => {
     res.json(event)
 })
 
+//Edit an event
+
+router.put('/:eventId', requireAuth, async (req, res, next) => {
+    const event = await Event.findByPk(req.params.eventId, {
+        attributes: {
+            exclude: ['createdAt', 'updatedAt']
+        }
+    });
+
+    if (!event) {
+        const err = new Error("Event couldn't be found");
+        err.title = "Event couldn't be found"
+        err.status = 404;
+        err.errors = ["Event couldn't be found"]
+        return next(err)
+    }
+
+    const { venueId, name, type, capacity, price, description, startDate, endDate } = req.body;
+
+    if (!venueId) {
+        const err = new Error("Venue couldn't be found");
+        err.title = "Venue couldn't be found"
+        err.status = 404;
+        err.errors = ["Venue couldn't be found"]
+        return next(err)
+    }
+
+    if (venueId) {
+        event.venueId = venueId;
+    }
+    if (name) {
+        event.name = name;
+    }
+    if (type) {
+        event.type = type;
+    }
+    if (capacity) {
+        event.capacity = capacity;
+    }
+    if (price) {
+        event.price = price;
+    }
+    if (description) {
+        event.description = description;
+    }
+    if (startDate) {
+        event.startDate = startDate;
+    }
+    if (endDate) {
+        event.endDate = endDate;
+    }
+
+    event.save();
+
+    res.json(await event)
+})
+
 module.exports = router;
