@@ -300,7 +300,7 @@ router.get('/:groupId/venues', requireAuth, async (req, res, next) => {
     console.log(groupVenues)
     res.json({
         Venues: groupVenues
-    })
+    },)
 });
 
 // Create an Event by Group Id
@@ -315,12 +315,6 @@ router.post('/:groupId/events', requireAuth, async (req, res, next) => {
         err.errors = ["Group couldn't be found"];
         return next(err);
     }
-
-    const events = await Event.findAll({
-        where: {
-           groupId: req.params.groupId
-       }
-    })
 
     const { venueId, name, type, capacity, price, description, startDate, endDate } = req.body;
 
@@ -341,8 +335,66 @@ router.post('/:groupId/events', requireAuth, async (req, res, next) => {
     delete event['createdAt'];
     delete event['updatedAt'];
 
-    // console.log(groupId)
     res.json(event)
 })
+
+//Get all events by Group ID
+
+router.get('/:groupId/events', async (req, res, next) => {
+
+    const group = await Group.findByPk(req.params.groupId);
+
+
+    if (!group) {
+        const err = new Error("Group does not exist");
+        err.status = 404;
+        err.title = "Group does not exist";
+        err.errors = ["Group couldn't be found"];
+        return next(err);
+    }
+
+    const groupEvent = await Event.findAll({
+        where: {
+            groupId: req.params.groupId
+        },
+        include: [
+            { model: Group, attributes: ['id', 'name', 'city', 'state'] },
+            { model: Venue, attributes: ['id', 'city', 'state'] }
+        ],
+        attributes: ['id', 'groupId', 'venueId', 'name', 'type', 'startDate', 'endDate']
+    })
+
+
+    let newArr = []
+
+    for (let event of groupEvent) {
+        event = event.toJSON();
+
+        let numAttending = await Attendance.count({
+            where: {
+                eventId: event.id
+            }
+        })
+
+        let eventImage = await EventImage.findOne({
+            where: {
+                eventId: event.id,
+                preview: true
+            }
+        })
+        // console.log(eventImage)
+        event.numAttending = numAttending;
+        event.previewImage = eventImage.url
+
+
+        newArr.push(event)
+    }
+
+
+    res.json({
+        Events: newArr
+    })
+});
+
 
 module.exports = router;
