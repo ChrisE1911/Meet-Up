@@ -71,6 +71,19 @@ router.get('/:eventId', async (req, res, next) => {
             exclude: ['createdAt', 'updatedAt']
         }
     });
+
+    if (!event) {
+        const err = new Error();
+        err.message = "Event couldn't be found"
+        err.status = 404;
+
+        res.json({
+            message: err.message,
+            statusCode: err.status
+        });
+        return next(err)
+    }
+
     let numAttending = await Attendance.count({
         where: {
             eventId: req.params.eventId
