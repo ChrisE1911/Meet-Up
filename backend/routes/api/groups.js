@@ -415,7 +415,11 @@ router.post('/:groupId/membership', requireAuth, async (req, res, next) => {
     group = group.toJSON()
 
     //grabbing the user
-    const { user } = req;
+    let { user } = req;
+
+    console.log(user)
+
+    user = user.toJSON();
 
     //errors
     //checked to see if status was either pending or member
@@ -427,39 +431,77 @@ router.post('/:groupId/membership', requireAuth, async (req, res, next) => {
         }
     })
 
-    if (memberships) {
-        if (memberships.status === 'pending') {
-            const err = new Error("Current User already has a pending membership for the group");
-            err.status = 404;
-            err.title = "Membership has already been requested";
-            err.errors = ["Current User already has a pending membership for the group"];
-            return next(err);
-        } else {
-            const err = new Error("User is already a member of the group");
-            err.status = 400;
-            err.title = "User is already a member";
-            err.errors = ["User is already a member of the group"];
-            return next (err)
-        }
-    }
+    // console.log(memberships)
 
-    let newMembership = await Membership.create({
-        userId: user.id,
-        groupId: group.id,
-        status: 'pending'
+    if (memberships) {
+        let newArr = [];
+
+        let newMembership = await Membership.create({
+            userId: user.id,
+            groupId: group.id,
+            // memberId: memberships.id,
+            status: 'pending'
+        })
+
+        newMembership = newMembership.toJSON();
+
+        delete newMembership['createdAt'];
+        delete newMembership['updatedAt'];
+        // delete newMembership['groupId'];
+        delete newMembership['userId'];
+        // delete newMembership['id']
+
+        newMembership.memberId = memberships.id;
+
+        newArr.push(newMembership);
+
+        res.json(newMembership)
+    }
+     // else {
+        // if (memberships) {
+        //     if (memberships.status === 'pending') {
+        //         const err = new Error("Current User already has a pending membership for the group");
+        //         err.status = 400;
+        //         err.title = "Membership has already been requested";
+        //         err.errors = ["Current User already has a pending membership for the group"];
+        //         return next(err);
+        //     } else {
+        //         const err = new Error("User is already a member of the group");
+        //         err.status = 400;
+        //         err.title = "User is already a member";
+        //         err.errors = ["User is already a member of the group"];
+        //         return next(err)
+        //     }
+        // }
+    // }
+});
+
+//Change the status of a membership for a group specified by id
+
+router.put('/:groupId/membership', requireAuth, async (req, res, next) => {
+
+    let group = await Group.findByPk(req.params.groupId);
+
+    group = group.toJSON();
+
+    console.log(group)
+
+    let { user } = req;
+
+    user = user.toJSON();
+
+    // console.log(user)
+
+    let membership = await Membership.findOne({
+        where: {
+            userId: user.id,
+            groupId: group.id
+        }
     })
 
-    newMembership = newMembership.toJSON();
+    console.log(membership)
 
-    delete newMembership['createdAt'];
-    delete newMembership['updatedAt'];
-    delete newMembership['groupId'];
-    delete newMembership['userId'];
-    delete newMembership['id']
 
-    newMembership.memberId = memberships.id;
-
-    res.json(newMembership)
 
 })
 

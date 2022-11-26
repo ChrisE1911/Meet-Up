@@ -73,15 +73,11 @@ router.get('/:eventId', async (req, res, next) => {
     });
 
     if (!event) {
-        const err = new Error();
-        err.message = "Event couldn't be found"
+        const err = new Error("Event couldn't be found");
         err.status = 404;
-
-        res.json({
-            message: err.message,
-            statusCode: err.status
-        });
-        return next(err)
+        err.title = "Event does not exist";
+        err.errors = ["Event couldn't be found"];
+        return next(err);
     }
 
     let numAttending = await Attendance.count({
