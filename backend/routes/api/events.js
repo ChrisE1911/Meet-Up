@@ -163,6 +163,8 @@ router.post('/:eventId/attendance', requireAuth, async (req, res, next) => {
         return next(err)
     }
 
+    event = event.toJSON();
+
 
     // const { userId, status } = req.body;
 
@@ -170,16 +172,17 @@ router.post('/:eventId/attendance', requireAuth, async (req, res, next) => {
 
     user = user.toJSON()
 
-    console.log(user)
+    // console.log(user)
 
     // console.log(req.body)
+
 
     const attendee = await Attendance.findOne({
         attributes: {
             exclude : ['id']
         },
         where: {
-            eventId: req.params.eventId,
+            eventId: event.id,
             userId: user.id
         }
     })
@@ -187,14 +190,31 @@ router.post('/:eventId/attendance', requireAuth, async (req, res, next) => {
     if (!attendee) {
         let newAttendee = await Attendance.create({
             userId: user.id,
+            eventId: event.id,
             status: 'pending'
         })
+
+        console.log(newAttendee);
 
         newAttendee = newAttendee.toJSON();
         delete newAttendee['updatedAt'];
         delete newAttendee['createdAt'];
 
         res.json(newAttendee)
+    } else {
+            if (attendee.status === 'pending') {
+                const err = new Error("Attendance has already been requested");
+                err.status = 400;
+                err.title = "Attendance already exists";
+                err.errors = ["Attendance has already been requested"];
+                return next(err);
+            } else {
+                const err = new Error( "User is already an attendee of the event");
+                err.status = 400;
+                err.title = "User is already an attendee";
+                err.errors = ["User is already an attendee of the event"];
+                return next(err)
+            }
     }
 })
 
