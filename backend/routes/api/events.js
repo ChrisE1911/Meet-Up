@@ -148,6 +148,74 @@ router.put('/:eventId', requireAuth, async (req, res, next) => {
     event.save();
 
     res.json(await event)
+});
+
+// Request Attendance to an Event
+
+router.post('/:eventId/attendance', requireAuth, async (req, res, next) => {
+    let event = await Event.findByPk(req.params.eventId);
+
+    if (!event) {
+        const err = new Error("Event couldn't be found");
+        err.title = "Event couldn't be found"
+        err.status = 404;
+        err.errors = ["Event couldn't be found"]
+        return next(err)
+    }
+
+    event = event.toJSON();
+
+
+    // const { userId, status } = req.body;
+
+    let { user } = req;
+
+    user = user.toJSON()
+
+    // console.log(user)
+
+    // console.log(req.body)
+
+
+    const attendee = await Attendance.findOne({
+        attributes: {
+            exclude : ['id']
+        },
+        where: {
+            eventId: event.id,
+            userId: user.id
+        }
+    })
+
+    if (!attendee) {
+        let newAttendee = await Attendance.create({
+            userId: user.id,
+            eventId: event.id,
+            status: 'pending'
+        })
+
+        console.log(newAttendee);
+
+        newAttendee = newAttendee.toJSON();
+        delete newAttendee['updatedAt'];
+        delete newAttendee['createdAt'];
+
+        res.json(newAttendee)
+    } else {
+            if (attendee.status === 'pending') {
+                const err = new Error("Attendance has already been requested");
+                err.status = 400;
+                err.title = "Attendance already exists";
+                err.errors = ["Attendance has already been requested"];
+                return next(err);
+            } else {
+                const err = new Error( "User is already an attendee of the event");
+                err.status = 400;
+                err.title = "User is already an attendee";
+                err.errors = ["User is already an attendee of the event"];
+                return next(err)
+            }
+    }
 })
 
 module.exports = router;
