@@ -21,7 +21,7 @@ router.post(
     async (req, res, next) => {
       const { credential, password } = req.body;
 
-      const user = await User.login({ credential, password });
+      let user = await User.login({ credential, password });
 
       if (!user) {
         const err = new Error('Login failed');
@@ -33,8 +33,10 @@ router.post(
 
       await setTokenCookie(res, user);
 
+      user = user.toJSON();
+
       return res.json({
-        user
+        ...user
       });
     }
 );
