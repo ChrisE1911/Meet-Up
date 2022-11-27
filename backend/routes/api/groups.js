@@ -498,6 +498,70 @@ router.put('/:groupId/membership', requireAuth, async (req, res, next) => {
     }
 })
 
+//Get all Members of a Group specified by its id
+
+router.get('/:groupId/members', async (req, res, next) => {
+
+    let group = await Group.findByPk(req.params.groupId);
+
+    if (!group) {
+        const err = new Error("Group couldn't be found");
+        err.status = 404;
+        err.title = "Group does not exist";
+        err.errors = ["Group couldn't be found"];
+        return next(err);
+    }
+
+    group = group.toJSON();
+
+    let { user } = req;
+
+    user = user.toJSON();
+
+
+    if (user.id === group.organizerId) {
+        let members = await Membership.findAll({
+            include: [{
+                model: User,
+                attributes: []
+            }],
+            where: {
+               groupId: group.id
+            },
+            attributes: {
+                include: [[sequelize.col('User.id'), 'id'],
+                    [sequelize.col('User.firstName'), 'firstName'],
+                    [sequelize.col('User.lastName'), 'lastName']],
+                exclude: ['createdAt', 'updatedAt', 'status', 'groupId', 'userId']
+            },
+            raw: true
+        })
+
+        for (let member of members) {
+
+            let memStatus = await Membership.findOne({
+                where: {
+                   userId: member.id
+                },
+            })
+
+            memStatus = memStatus.toJSON()
+
+            delete memStatus['id'];
+            delete memStatus['userId'];
+            delete memStatus['groupId'];
+            delete memStatus['createdAt'];
+            delete memStatus['updatedAt'];
+
+            member.Membership = memStatus
+
+        }
+        res.json({
+            Members: members
+        })
+    }
+})
+
 
 
 
