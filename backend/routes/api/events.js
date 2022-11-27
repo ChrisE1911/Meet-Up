@@ -148,6 +148,54 @@ router.put('/:eventId', requireAuth, async (req, res, next) => {
     event.save();
 
     res.json(await event)
+});
+
+// Request Attendance to an Event
+
+router.post('/:eventId/attendance', requireAuth, async (req, res, next) => {
+    let event = await Event.findByPk(req.params.eventId);
+
+    if (!event) {
+        const err = new Error("Event couldn't be found");
+        err.title = "Event couldn't be found"
+        err.status = 404;
+        err.errors = ["Event couldn't be found"]
+        return next(err)
+    }
+
+
+    // const { userId, status } = req.body;
+
+    let { user } = req;
+
+    user = user.toJSON()
+
+    console.log(user)
+
+    // console.log(req.body)
+
+    const attendee = await Attendance.findOne({
+        attributes: {
+            exclude : ['id']
+        },
+        where: {
+            eventId: req.params.eventId,
+            userId: user.id
+        }
+    })
+
+    if (!attendee) {
+        let newAttendee = await Attendance.create({
+            userId: user.id,
+            status: 'pending'
+        })
+
+        newAttendee = newAttendee.toJSON();
+        delete newAttendee['updatedAt'];
+        delete newAttendee['createdAt'];
+
+        res.json(newAttendee)
+    }
 })
 
 module.exports = router;
