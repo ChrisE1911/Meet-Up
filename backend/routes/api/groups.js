@@ -432,7 +432,7 @@ router.post('/:groupId/membership', requireAuth, async (req, res, next) => {
 
         res.json(newMembership)
     }
-     else {
+    else {
         if (memberships) {
             if (memberships.status === 'pending') {
                 const err = new Error("Current User already has a pending membership for the group");
@@ -467,36 +467,35 @@ router.put('/:groupId/membership', requireAuth, async (req, res, next) => {
 
     group = group.toJSON();
 
-    // console.log(group)
-
     let { user } = req;
 
     user = user.toJSON();
 
-
     if (user.id === group.organizerId) {
+        const { memberId, status } = req.body;
         let membership = await Membership.findOne({
             where: {
                 groupId: group.id,
-                status: 'pending'
-            }
+                userId: memberId
+            },
+            attributes: {
+                include: [[sequelize.col('User.id'), 'memberId']],
+                exclude: ['userId', 'createdAt', 'updatedAt']
+            },
+            include: [{
+                model: User,
+                attributes: []
+            }]
         })
 
-            const { memberId, status } = req.body;
-
-            if (memberId) {
-                membership.memberId = memberId
-            };
-
-            if (status) {
-                membership.status = status
-            }
-
-            membership.save();
-
-
-            res.json(await membership)
+        if (status) {
+            membership.status = status
         }
+        res.json(membership)
+
+        await membership.save();
+
+    }
 })
 
 
