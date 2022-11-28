@@ -31,9 +31,15 @@ router.post(
         return next(err);
       }
 
-      await setTokenCookie(res, user);
+      let token = await setTokenCookie(res, user);
 
       user = user.toJSON();
+
+      delete user['createdAt'];
+      delete user['updatedAt'];
+      delete user['username'];
+
+      user.token = token;
 
       return res.json({
         ...user
