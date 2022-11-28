@@ -46,8 +46,8 @@ router.post('/:eventId/images', requireAuth, async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
     const events = await Event.findAll({
-        include:[
-            { model: Group, attributes: ['id', 'name', 'city', 'state']},
+        include: [
+            { model: Group, attributes: ['id', 'name', 'city', 'state'] },
             { model: Venue, attributes: ['id', 'city', 'state'] },
         ]
     });
@@ -62,7 +62,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:eventId', async (req, res, next) => {
     let event = await Event.findByPk(req.params.eventId, {
         include: [
-            { model: Group, attributes: ['id', 'name', 'private', 'city', 'state']},
+            { model: Group, attributes: ['id', 'name', 'private', 'city', 'state'] },
             { model: Venue, attributes: ['id', 'address', 'city', 'state', 'lat', 'lng'] },
             { model: EventImage, attributes: ['id', 'url', 'preview'] }
         ],
@@ -179,7 +179,7 @@ router.post('/:eventId/attendance', requireAuth, async (req, res, next) => {
 
     const attendee = await Attendance.findOne({
         attributes: {
-            exclude : ['id']
+            exclude: ['id']
         },
         where: {
             eventId: event.id,
@@ -202,19 +202,19 @@ router.post('/:eventId/attendance', requireAuth, async (req, res, next) => {
 
         res.json(newAttendee)
     } else {
-            if (attendee.status === 'pending') {
-                const err = new Error("Attendance has already been requested");
-                err.status = 400;
-                err.title = "Attendance already exists";
-                err.errors = ["Attendance has already been requested"];
-                return next(err);
-            } else {
-                const err = new Error( "User is already an attendee of the event");
-                err.status = 400;
-                err.title = "User is already an attendee";
-                err.errors = ["User is already an attendee of the event"];
-                return next(err)
-            }
+        if (attendee.status === 'pending') {
+            const err = new Error("Attendance has already been requested");
+            err.status = 400;
+            err.title = "Attendance already exists";
+            err.errors = ["Attendance has already been requested"];
+            return next(err);
+        } else {
+            const err = new Error("User is already an attendee of the event");
+            err.status = 400;
+            err.title = "User is already an attendee";
+            err.errors = ["User is already an attendee of the event"];
+            return next(err)
+        }
     }
 })
 
@@ -275,5 +275,106 @@ router.put('/:eventId/attendance', requireAuth, async (req, res, next) => {
 
 
 });
+
+//GET ALL ATTENDEES OF AN EVENT
+
+router.get('/:eventId/attendees', async (req, res, next) => {
+    let event = await Event.findByPk(req.params.eventId);
+
+
+    if (!event) {
+        const err = new Error("Event couldn't be found");
+        err.title = "Event couldn't be found"
+        err.status = 404;
+        err.errors = ["Event couldn't be found"]
+        return next(err)
+    };
+
+    event = event.toJSON()
+
+
+    let attendees = await Attendance.findAll({
+        where: {
+            eventId: event.id
+        },
+        include: [{
+            model: User,
+            attributes: []
+        }],
+        attributes: {
+            include: [[sequelize.col('User.id'), 'id'],
+            [sequelize.col('User.firstName'), 'firstName'],
+            [sequelize.col('User.lastName'), 'lastName']
+            ],
+            exclude: ['eventId', 'status']
+        },
+        raw: true
+    })
+
+    for (let attendee of attendees) {
+
+        let attendanceStatus = await Attendance.findOne({
+            where: {
+                eventId: event.id,
+                userId: attendee.userId
+            },
+            attributes: {
+                exclude: ['id', 'eventId', 'userId']
+            }
+        })
+
+        delete attendee['userId']
+
+        attendee.Attendance = attendanceStatus
+
+
+    }
+    res.json({
+        Attendees: attendees
+    })
+})
+
+router.delete('/:eventId/attendance', requireAuth, async (req, res, next) => {
+
+    let event = await Event.findByPk(req.params.eventId);
+
+
+    if (!event) {
+        const err = new Error("Event couldn't be found");
+        err.title = "Event couldn't be found"
+        err.status = 404;
+        err.errors = ["Event couldn't be found"]
+        return next(err)
+    };
+
+    event = event.toJSON();
+
+    let { user } = req;
+
+
+    user = user.toJSON();
+
+    let groups = await Group.findOne({
+        where: {
+            organizerId: user.id
+        },
+        raw: true
+    })
+
+
+    if (user.id === groups.organizerId) {
+        const { memberId } = req.body;
+        let attendance = await Attendance.findOne({
+            where: { userId: memberId }
+        })
+
+        await attendance.destroy();
+        // console.log(attendance)
+        res.json({
+            message: "Successfully deleted attendance from event"
+        })
+    }
+
+})
 
 module.exports = router;
