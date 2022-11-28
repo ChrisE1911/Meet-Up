@@ -420,7 +420,10 @@ router.post('/:groupId/membership', requireAuth, async (req, res, next) => {
         where: {
             groupId: group.id,
             userId: user.id
-        }
+        },
+        // attributes: {
+        // exclude: ['id']
+        // }
     })
 
     if (!memberships) {
@@ -429,6 +432,18 @@ router.post('/:groupId/membership', requireAuth, async (req, res, next) => {
             groupId: group.id,
             status: 'pending'
         })
+
+        newMembership = newMembership.toJSON();
+
+        let memberid = newMembership.id
+
+        delete newMembership['updatedAt'];
+        delete newMembership['createdAt'];
+        delete newMembership['id'];
+        delete newMembership['userId'];
+        delete newMembership['groupId'];
+
+        newMembership.memberId = memberid
 
         res.json(newMembership)
     }
