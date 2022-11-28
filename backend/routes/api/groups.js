@@ -606,7 +606,19 @@ router.delete('/:groupId/membership', requireAuth, async (req, res, next) => {
 //Delete a Group by Id
 
 router.delete('/:groupId', requireAuth, async (req, res, next) => {
-    let group = await Group.findByPk(req.params.groupId);
+    let { user } = req;
+
+    user = user.toJSON()
+
+    let group = await Group.findOne({
+        where: {
+            organizerId: user.id
+        }
+    });
+
+    // group = group.toJSON();
+
+    // console.log(group)
 
     if (!group) {
         const err = new Error("Group couldn't be found");
@@ -616,17 +628,7 @@ router.delete('/:groupId', requireAuth, async (req, res, next) => {
         return next(err);
     }
 
-
-    let { user } = req;
-
-    user = user.toJSON();
-
-
-
-
-
     if (user.id === group.organizerId) {
-
         await group.destroy();
 
         res.json({
