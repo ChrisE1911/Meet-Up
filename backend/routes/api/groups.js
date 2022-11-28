@@ -526,12 +526,12 @@ router.get('/:groupId/members', async (req, res, next) => {
                 attributes: []
             }],
             where: {
-               groupId: group.id
+                groupId: group.id
             },
             attributes: {
                 include: [[sequelize.col('User.id'), 'id'],
-                    [sequelize.col('User.firstName'), 'firstName'],
-                    [sequelize.col('User.lastName'), 'lastName']],
+                [sequelize.col('User.firstName'), 'firstName'],
+                [sequelize.col('User.lastName'), 'lastName']],
                 exclude: ['createdAt', 'updatedAt', 'status', 'groupId', 'userId']
             },
             raw: true
@@ -541,7 +541,7 @@ router.get('/:groupId/members', async (req, res, next) => {
 
             let memStatus = await Membership.findOne({
                 where: {
-                   userId: member.id
+                    userId: member.id
                 },
             })
 
@@ -558,6 +558,80 @@ router.get('/:groupId/members', async (req, res, next) => {
         }
         res.json({
             Members: members
+        })
+    }
+})
+
+
+// Delete membership to a group specified by id
+
+router.delete('/:groupId/membership', requireAuth, async (req, res, next) => {
+    let group = await Group.findByPk(req.params.groupId);
+
+    group = group.toJSON();
+
+    console.log(group)
+
+    let { user } = req;
+
+    user = user.toJSON();
+
+    console.log(user)
+
+    if (user.id === group.organizerId) {
+        const { memberId } = req.body;
+
+        let membership = await Membership.findOne({
+            where: {
+                userId: memberId
+            }
+        })
+
+        if (!membership) {
+            const err = new Error("Membership does not exist for this User");
+            err.status = 404;
+            err.title = "Membership does not exist for this User";
+            err.errors = ["Membership does not exist for this User"];
+            return next(err);
+        }
+
+        await membership.destroy();
+
+        res.json({
+            message: "Successfully deleted membership from group"
+        })
+    }
+})
+
+//Delete a Group by Id
+
+router.delete('/:groupId', requireAuth, async (req, res, next) => {
+    let group = await Group.findByPk(req.params.groupId);
+
+    if (!group) {
+        const err = new Error("Group couldn't be found");
+        err.status = 404;
+        err.title = "Group does not exist";
+        err.errors = ["Group couldn't be found"];
+        return next(err);
+    }
+
+
+    let { user } = req;
+
+    user = user.toJSON();
+
+
+
+
+
+    if (user.id === group.organizerId) {
+
+        await group.destroy();
+
+        res.json({
+            message: 'Successfully deleted',
+            statusCode: 200
         })
     }
 })
