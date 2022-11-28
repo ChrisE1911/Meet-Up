@@ -218,6 +218,62 @@ router.post('/:eventId/attendance', requireAuth, async (req, res, next) => {
     }
 })
 
+//Change the status of an attendance for an event specified by id
 
+router.put('/:eventId/attendance', requireAuth, async (req, res, next) => {
+
+    let event = await Event.findByPk(req.params.eventId);
+
+    if (!event) {
+        const err = new Error("Event couldn't be found");
+        err.title = "Event couldn't be found"
+        err.status = 404;
+        err.errors = ["Event couldn't be found"]
+        return next(err)
+    };
+
+    event = event.toJSON();
+
+    let { user } = req;
+
+    user = user.toJSON();
+
+    let groups = await Group.findAll({
+        where: {
+            organizerId: user.id
+        },
+        raw: true
+    })
+
+
+    for (let group of groups) {
+
+        if (user.id === group.organizerId) {
+
+            const { userId, status } = req.body;
+
+            let attendance = await Attendance.findOne({
+                where: {
+                    eventId: event.id,
+                    userId: userId
+                }
+            })
+
+            if (status) {
+                attendance.status = status
+            }
+
+            delete group['updatedAt'];
+            delete group['createdAt'];
+
+            res.json(attendance)
+
+            await attendance.save();
+        }
+
+    }
+
+
+});
 
 module.exports = router;
