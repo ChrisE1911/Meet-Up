@@ -338,6 +338,15 @@ router.delete('/:eventId/attendance', requireAuth, async (req, res, next) => {
 
     let event = await Event.findByPk(req.params.eventId);
 
+
+    if (!event) {
+        const err = new Error("Event couldn't be found");
+        err.title = "Event couldn't be found"
+        err.status = 404;
+        err.errors = ["Event couldn't be found"]
+        return next(err)
+    };
+
     event = event.toJSON();
 
     let { user } = req;
