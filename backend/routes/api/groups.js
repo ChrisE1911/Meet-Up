@@ -603,7 +603,7 @@ router.delete('/:groupId/membership', requireAuth, async (req, res, next) => {
     }
 })
 
-//Delete a Group
+//Delete a Group by Id
 
 router.delete('/:groupId', requireAuth, async (req, res, next) => {
     let group = await Group.findByPk(req.params.groupId);
