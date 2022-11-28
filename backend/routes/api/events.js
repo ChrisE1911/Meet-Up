@@ -218,4 +218,6 @@ router.post('/:eventId/attendance', requireAuth, async (req, res, next) => {
     }
 })
 
+
+
 module.exports = router;
