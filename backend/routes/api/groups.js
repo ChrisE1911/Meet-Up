@@ -526,12 +526,12 @@ router.get('/:groupId/members', async (req, res, next) => {
                 attributes: []
             }],
             where: {
-               groupId: group.id
+                groupId: group.id
             },
             attributes: {
                 include: [[sequelize.col('User.id'), 'id'],
-                    [sequelize.col('User.firstName'), 'firstName'],
-                    [sequelize.col('User.lastName'), 'lastName']],
+                [sequelize.col('User.firstName'), 'firstName'],
+                [sequelize.col('User.lastName'), 'lastName']],
                 exclude: ['createdAt', 'updatedAt', 'status', 'groupId', 'userId']
             },
             raw: true
@@ -541,7 +541,7 @@ router.get('/:groupId/members', async (req, res, next) => {
 
             let memStatus = await Membership.findOne({
                 where: {
-                   userId: member.id
+                    userId: member.id
                 },
             })
 
@@ -587,12 +587,53 @@ router.delete('/:groupId/membership', requireAuth, async (req, res, next) => {
             }
         })
 
+        if (!membership) {
+            const err = new Error("Membership does not exist for this User");
+            err.status = 404;
+            err.title = "Membership does not exist for this User";
+            err.errors = ["Membership does not exist for this User"];
+            return next(err);
+        }
+
         await membership.destroy();
 
         res.json({
-           message: "Successfully deleted membership from group"
-       })
-        }
+            message: "Successfully deleted membership from group"
+        })
+    }
+})
+
+//Delete a Group
+
+router.delete('/:groupId', requireAuth, async (req, res, next) => {
+    let group = await Group.findByPk(req.params.groupId);
+
+    if (!group) {
+        const err = new Error("Group couldn't be found");
+        err.status = 404;
+        err.title = "Group does not exist";
+        err.errors = ["Group couldn't be found"];
+        return next(err);
+    }
+
+
+    let { user } = req;
+
+    user = user.toJSON();
+
+
+
+
+
+    if (user.id === group.organizerId) {
+
+        await group.destroy();
+
+        res.json({
+            message: 'Successfully deleted',
+            statusCode: 200
+        })
+    }
 })
 
 

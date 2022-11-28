@@ -334,6 +334,8 @@ router.get('/:eventId/attendees', async (req, res, next) => {
     })
 })
 
+//delete an attendance
+
 router.delete('/:eventId/attendance', requireAuth, async (req, res, next) => {
 
     let event = await Event.findByPk(req.params.eventId);
@@ -364,19 +366,61 @@ router.delete('/:eventId/attendance', requireAuth, async (req, res, next) => {
 
     if (user.id === groups.organizerId) {
         const { memberId } = req.body;
+
         let attendance = await Attendance.findOne({
             where: { userId: memberId }
         })
 
-        await attendance.destroy();
-        // console.log(attendance)
-        res.json({
-            message: "Successfully deleted attendance from event"
-        })
-    }
+        if (!attendance) {
+            const err = new Error("Attendance does not exist for this User");
+            err.title = "Attendance does not exist"
+            err.status = 404;
+            err.errors = ["Attendance does not exist for this User"];
+            return next(err)
+        }
 
+        await attendance.destroy();
+
+            res.json({
+                message: "Successfully deleted attendance from event"
+            })
+        }
 })
 
+//Delete an event
 
+router.delete('/:eventId', requireAuth, async (req, res, next) => {
+
+    let { user } = req;
+
+    user = user.toJSON();
+
+
+    let group = await Group.findOne({
+        where: {
+            organizerId: user.id
+        }
+    })
+
+    // console.log(group)
+
+    if (user.id === group.organizerId) {
+        const event = await Event.findByPk(req.params.eventId);
+
+        if (!event) {
+            const err = new Error("Event couldn't be found");
+            err.title = "Event couldn't be found"
+            err.status = 404;
+            err.errors = ["Event couldn't be found"]
+            return next(err)
+        }
+
+        await event.destroy();
+
+        res.json({
+            message: 'Successfully deleted'
+        })
+    }
+})
 
 module.exports = router;
