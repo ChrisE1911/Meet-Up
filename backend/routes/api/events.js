@@ -97,8 +97,42 @@ router.get('/', async (req, res, next) => {
         ]
     });
 
+    let newArr = []
+    for (let event of events) {
+        // console.log(event)
+
+        event = event.toJSON();
+
+        let numAttending = await Attendance.count({
+            where: {
+                eventId: event.id
+            }
+        })
+
+        let eventImage = await EventImage.findOne({
+            where: {
+                eventId: event.id,
+                preview: true
+            }
+        })
+
+        event.numAttending = numAttending;
+        event.previewImage = eventImage.url;
+
+        delete event['description'];
+        delete event['capacity'];
+        delete event['price'];
+        delete event['createdAt'];
+        delete event['updatedAt'];
+
+
+        console.log(event)
+
+        newArr.push(event)
+    }
+
     res.json({
-        Events: events
+        Events: newArr
     })
 })
 
@@ -303,6 +337,8 @@ router.put('/:eventId/attendance', requireAuth, async (req, res, next) => {
                     userId: userId
                 }
             })
+
+
 
             if (status) {
                 attendance.status = status
