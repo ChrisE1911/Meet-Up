@@ -608,6 +608,8 @@ router.delete('/:groupId/membership', requireAuth, async (req, res, next) => {
 router.delete('/:groupId', requireAuth, async (req, res, next) => {
     let group = await Group.findByPk(req.params.groupId);
 
+    group = group.toJSON()
+
     if (!group) {
         const err = new Error("Group couldn't be found");
         err.status = 404;
@@ -621,12 +623,7 @@ router.delete('/:groupId', requireAuth, async (req, res, next) => {
 
     user = user.toJSON();
 
-
-
-
-
     if (user.id === group.organizerId) {
-
         await group.destroy();
 
         res.json({
