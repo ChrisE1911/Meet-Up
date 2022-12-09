@@ -31,18 +31,18 @@ router.post(
         return next(err);
       }
 
-      let token = await setTokenCookie(res, user);
+      await setTokenCookie(res, user);
 
       user = user.toJSON();
 
       delete user['createdAt'];
       delete user['updatedAt'];
-      delete user['username'];
+      // delete user['username'];
 
-      user.token = token;
+      // user.token = token;
 
       return res.json({
-        ...user
+        user: user
       });
     }
 );
@@ -66,15 +66,22 @@ router.delete(
 
 // Restore session user
 router.get(
-    '/', requireAuth,
+    '/',
     restoreUser,
   (req, res) => {
-      const { user } = req;
-      if (user) {
-        return res.json(
-          user.toSafeObject(),
-        );
-      } else return res.json({});
+      let { user } = req;
+
+    if (user) {
+      user = user.toJSON();
+
+      delete user['createdAt'];
+      delete user['updatedAt']
+    }
+
+    return res.json({
+      user: user
+    });
+
     }
   );
 
@@ -93,31 +100,5 @@ const validateLogin = [
     .withMessage('Please provide a password.'),
   handleValidationErrors
 ];
-
-// backend/routes/api/session.js
-// ...
-
-// // Log in
-// router.post(
-//   '/',
-//   validateLogin,
-//   async (req, res, next) => {
-//     const { credential, password } = req.body;
-//     const user = await User.login({ credential, password });
-
-//     if (!user) {
-//       const err = new Error('Login failed');
-//       err.status = 401;
-//       err.title = 'Login failed';
-//       err.errors = ['The provided credentials were invalid.'];
-//       return next(err);
-//     }
-//     await setTokenCookie(res, user);
-
-//     return res.json({
-//       user
-//     });
-//   }
-// );
 
 module.exports = router;
