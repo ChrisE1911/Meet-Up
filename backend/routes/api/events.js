@@ -26,8 +26,6 @@ router.post('/:eventId/images', requireAuth, async (req, res, next) => {
         return next(err);
     }
 
-    console.log(event)
-
     const { url, preview } = req.body;
 
     let newImage = await event.createEventImage({
@@ -99,7 +97,7 @@ router.get('/', async (req, res, next) => {
 
     let newArr = []
     for (let event of events) {
-        // console.log(event)
+
 
         event = event.toJSON();
 
@@ -126,7 +124,7 @@ router.get('/', async (req, res, next) => {
         delete event['updatedAt'];
 
 
-        console.log(event)
+
 
         newArr.push(event)
     }
@@ -269,7 +267,7 @@ router.post('/:eventId/attendance', requireAuth, async (req, res, next) => {
             status: 'pending'
         })
 
-        console.log(newAttendee);
+
 
         newAttendee = newAttendee.toJSON();
         delete newAttendee['updatedAt'];
@@ -481,7 +479,7 @@ router.delete('/:eventId', requireAuth, async (req, res, next) => {
         }
     })
 
-    // console.log(group)
+
 
     if (user.id === group.organizerId) {
         const event = await Event.findByPk(req.params.eventId);

@@ -40,7 +40,7 @@ router.get('/', async (req, res, next) => {
             raw: true
         })
 
-        // console.log(numMembers)
+     
 
         group.numMembers = numMembers;
         group.previewImage = groupImage.url;
@@ -59,7 +59,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
     let currentUser = user.id
 
-    console.log(user.id)
+
 
     const currentUserGroup = await Group.findAll({
         where: {
@@ -89,7 +89,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         group.numMembers = numMembers;
         group.previewImage = groupImage.url
 
-        console.log(group)
+
 
         newArr.push(group)
     }
@@ -124,7 +124,7 @@ router.post('/:groupId/images', requireAuth, async (req, res, next) => {
 
     const currentGroup = await Group.findByPk(req.params.groupId);
 
-    console.log(currentGroup)
+
 
     if (!currentGroup) {
         const err = new Error("Group does not exist");
@@ -173,13 +173,13 @@ router.get('/:groupId', async (req, res, next) => {
         }
     })
 
-    // console.log(numMembers)
+
 
     const user = await group.getUser({
         attributes: ['id', 'firstName', 'lastName']
     });
 
-    console.log(user)
+
 
     group = group.toJSON();
 
@@ -189,7 +189,7 @@ router.get('/:groupId', async (req, res, next) => {
     group.Venues = venue;
 
 
-    // console.log(group)
+
 
     if (!group) {
         const err = new Error("Group does not exist");
@@ -209,7 +209,7 @@ router.put('/:groupId', requireAuth, async (req, res, next) => {
             id: req.params.groupId
         }
     });
-    // console.log(currentGroup)
+
     if (!currentGroup) {
         const err = new Error("Group does not exist");
         err.status = 404;
@@ -297,7 +297,7 @@ router.get('/:groupId/venues', requireAuth, async (req, res, next) => {
         }
     });
 
-    console.log(groupVenues)
+
     res.json({
         Venues: groupVenues
     },)
@@ -382,7 +382,6 @@ router.get('/:groupId/events', async (req, res, next) => {
                 preview: true
             }
         })
-        // console.log(eventImage)
         event.numAttending = numAttending;
         event.previewImage = eventImage.url
 
@@ -585,13 +584,12 @@ router.delete('/:groupId/membership', requireAuth, async (req, res, next) => {
 
     group = group.toJSON();
 
-    console.log(group)
+
 
     let { user } = req;
 
     user = user.toJSON();
 
-    console.log(user)
 
     if (user.id === group.organizerId) {
         const { memberId } = req.body;
@@ -631,9 +629,6 @@ router.delete('/:groupId', requireAuth, async (req, res, next) => {
         }
     });
 
-    // group = group.toJSON();
-
-    // console.log(group)
 
     if (!group) {
         const err = new Error("Group couldn't be found");

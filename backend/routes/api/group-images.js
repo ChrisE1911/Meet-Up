@@ -22,7 +22,7 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
         }
     })
 
-    // console.log(group)
+ 
 
     if (user.id === group.organizerId) {
         let image = await GroupImage.findByPk(req.params.imageId);
@@ -35,7 +35,7 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
             return next(err)
         }
 
-        console.log(image)
+
 
 
         await image.destroy();
