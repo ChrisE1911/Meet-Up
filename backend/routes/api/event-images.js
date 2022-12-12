@@ -22,7 +22,7 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
         }
     })
 
-    // console.log(group)
+
 
     if (user.id === group.organizerId) {
 
