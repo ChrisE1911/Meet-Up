@@ -5,6 +5,7 @@ import ProfileButton from './ProfileButton';
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import DemoUserLoginItem from '../DemoUserLogin';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
@@ -27,6 +28,10 @@ function Navigation({ isLoaded }){
         <OpenModalButton
           buttonText="Sign Up"
           modalComponent={<SignupFormModal />}
+        />
+        <OpenModalButton
+          buttonText="DemoUser"
+          modalComponent={<DemoUserLoginItem />}
         />
       </li>
     );
