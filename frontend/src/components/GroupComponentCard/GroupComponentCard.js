@@ -7,6 +7,7 @@ const GroupComponentCard = ({ group }) => {
     console.log('single group object', group)
     return (
         <Link to={`/groups/${group.id}`} className='group-component-card'>
+            <img src={group.previewImage} alt='Group'></img>
             <h3>{group.name}</h3>
             <p>{group.about}</p>
 

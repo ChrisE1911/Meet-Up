@@ -27,6 +27,7 @@ function GroupsComponent() {
                     return <GroupComponentCard key={group.id} group={group} />
                 })}
             </ul>
+            <Link to={'/groups/new'}>Create Group</Link>
         </>
     )
 }

@@ -5,6 +5,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import GroupsComponent from "./components/GroupsComponent";
 import GroupDetailsComponent from "./components/GroupDetailsComponent";
+import CreateGroupFormComponent from "./components/CreateGroupFromComponent";
 
 
 
@@ -22,6 +23,7 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path='/groups' component={GroupsComponent} />
+          <Route exact path='/groups/new' component={CreateGroupFormComponent} />
           <Route exact path='/groups/:groupId' component={GroupDetailsComponent} />
         </Switch>
       )}
