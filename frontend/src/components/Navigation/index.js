@@ -8,8 +8,10 @@ import SignupFormModal from '../SignupFormModal';
 import DemoUserLoginItem from '../DemoUserLogin';
 import './Navigation.css';
 
-function Navigation({ isLoaded }){
+function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
+
+  const homeTitle = 'M ->Rendezvous<- U';
 
   let sessionLinks;
   if (sessionUser) {
@@ -29,10 +31,7 @@ function Navigation({ isLoaded }){
           buttonText="Sign Up"
           modalComponent={<SignupFormModal />}
         />
-        <OpenModalButton
-          buttonText="DemoUser"
-          modalComponent={<DemoUserLoginItem />}
-        />
+        <DemoUserLoginItem />
       </li>
     );
   }
@@ -40,7 +39,7 @@ function Navigation({ isLoaded }){
   return (
     <ul>
       <li>
-        <NavLink exact to="/">Home</NavLink>
+        <NavLink exact to="/">{homeTitle}</NavLink>
       </li>
       {isLoaded && sessionLinks}
     </ul>
