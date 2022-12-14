@@ -11,24 +11,32 @@ function CreateGroupFormComponent() {
     const [privateGroup, setPrivateGroup] = useState(true);
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
-    // const [previewImage, setPreviewImage] = ('')
+    const [validationErrors, setValidationErrors] = useState([])
+    const [previewImage, setPreviewImage] = useState('')
     const dispatch = useDispatch();
     const history = useHistory()
 
 
     const handleSubmit = (e) => {
-        e.preventdefault();
+        e.preventDefault();
+
+        const errors = []
 
         const group = {
             name,
             about,
             type,
-            privateGroup,
+            private: privateGroup,
             city,
             state
         }
 
-        dispatch(createAGroup(group));
+        const image = {
+            url: previewImage,
+            "preview": true
+        }
+        console.log('Test')
+        dispatch(createAGroup(group, image));
         reset();
 
         history.push('/groups')
@@ -48,6 +56,8 @@ function CreateGroupFormComponent() {
         <div>
             <h1>Create Group</h1>
             <form onSubmit={handleSubmit}>
+                <ul>
+                </ul>
                 <input
                     type='text'
                     onChange={(e) => setName(e.target.value)}
@@ -90,6 +100,13 @@ function CreateGroupFormComponent() {
                     value={type}
                     placeholder='Online or In person'
                     name='Type'
+                />
+                <input
+                    type='text'
+                    onChange={(e) => setPreviewImage(e.target.value)}
+                    value={previewImage}
+                    placeholder='Image'
+                    name='Image'
                 />
                 <button type='submit'>Submit</button>
             </form>

@@ -45,27 +45,30 @@ export const getGroups = () => async (dispatch) => {
 }
 
 //CREATE A GROUP
-export const createAGroup = (payload) => async (dispatch) => {
+export const createAGroup = (groupPayload, imagePayload) => async (dispatch) => {
     const response = await csrfFetch('/api/groups', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(groupPayload)
     })
-
+    console.log(response)
     if (response.ok) {
         const group = await response.json();
+        console.log('Group', group)
         const imageResponse = await csrfFetch(`/api/groups/${group.id}/images`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
+            body: JSON.stringify(imagePayload)
         })
         if (imageResponse.ok) {
             const images = imageResponse.json();
+            console.log('Images', images)
             const newObj = {
                 ...images, ...group
             }
+            dispatch(createGroup(newObj))
+            return newObj
         }
-        dispatch(createGroup(group))
     }
 }
 
@@ -91,9 +94,9 @@ const groupReducer = (state = initialState, action) => {
             newState.allGroups = updatedGroups;
             return newState;
         case GET_ONE_GROUP:
-            return {
-                ...state, singleGroup: action.group
-            }
+            newState = { ...state };
+            newState.singleGroup = action.group
+            return newState
         default:
             return state
     }

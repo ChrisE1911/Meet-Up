@@ -12,9 +12,11 @@ function GroupDetailsComponent() {
 
     const currentGroup = useSelector(state => state.groups.singleGroup)
 
+    console.log(currentGroup)
+
     useEffect(() => {
         dispatch(getOneGroup(groupId))
-    }, [dispatch, groupId])
+    }, [dispatch])
 
 
     return (
