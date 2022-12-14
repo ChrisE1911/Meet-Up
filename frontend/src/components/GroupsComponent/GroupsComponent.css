@@ -1,0 +1,18 @@
+#main {
+    width: 300px
+}
+
+#card-container {
+    width: auto;
+    height: auto;
+    white-space: normal;
+    border: 2px red solid;
+    padding: 50px;
+    margin: 150px;
+}
+
+#toggle-buttons {
+    margin-top: 75px;
+    margin-left: 150px;
+    word-spacing: 4rem;
+}

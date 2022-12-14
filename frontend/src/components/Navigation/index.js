@@ -5,22 +5,23 @@ import ProfileButton from './ProfileButton';
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
-import DemoUserLoginItem from '../DemoUserLogin';
 import './Navigation.css';
 
-function Navigation({ isLoaded }){
+function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
+
+  const homeTitle = 'M Rendezvous U';
 
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <li>
+      <span>
         <ProfileButton user={sessionUser} />
-      </li>
+      </span>
     );
   } else {
     sessionLinks = (
-      <li>
+      <span>
         <OpenModalButton
           buttonText="Log In"
           modalComponent={<LoginFormModal />}
@@ -29,21 +30,17 @@ function Navigation({ isLoaded }){
           buttonText="Sign Up"
           modalComponent={<SignupFormModal />}
         />
-        <OpenModalButton
-          buttonText="DemoUser"
-          modalComponent={<DemoUserLoginItem />}
-        />
-      </li>
+      </span>
     );
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-      </li>
+    <div className='navigation-bar'>
+      <span>
+        <NavLink exact to="/">{homeTitle}</NavLink>
+      </span>
       {isLoaded && sessionLinks}
-    </ul>
+    </div>
   );
 }
 

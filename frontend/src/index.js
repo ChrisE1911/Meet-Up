@@ -7,6 +7,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { ModalProvider, Modal } from './context/Modal';
+import { getGroups } from './store/group';
+import { createAGroup } from './store/group';
 import App from './App';
 
 import configureStore from './store';
@@ -21,6 +23,7 @@ if (process.env.NODE_ENV !== "production") {
   window.csrfFetch = csrfFetch;
   window.store = store;
   window.sessionActions = sessionActions;
+  window.getGroups = getGroups;
 }
 
 // Wrap the application with the Modal provider and render the Modal component

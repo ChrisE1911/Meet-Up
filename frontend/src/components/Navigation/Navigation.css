@@ -3,3 +3,29 @@
 .hidden {
     display: none;
 }
+
+.navigation-bar {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    position: fixed;
+    width: 98%;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.611);
+    color: black;
+    font-family: 'Exo 2', sans-serif;
+    padding: 1em;
+    border-bottom: 5px;
+}
+
+.material-symbols-outlined {
+    background-color: rgba(255, 255, 255, 0.464);
+    border: none
+}
+
+#search-bar{
+    display: flex;
+    width: 800px;
+    background-color: rgba;
+}
