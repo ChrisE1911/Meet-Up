@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 import GroupsComponent from "./components/GroupsComponent";
 import GroupDetailsComponent from "./components/GroupDetailsComponent";
 import CreateGroupFormComponent from "./components/CreateGroupFromComponent";
+import EditGroupFormComponent from "./components/EditGroupFormComponent";
 
 
 
@@ -25,6 +26,7 @@ function App() {
           <Route exact path='/groups' component={GroupsComponent} />
           <Route exact path='/groups/new' component={CreateGroupFormComponent} />
           <Route exact path='/groups/:groupId' component={GroupDetailsComponent} />
+          <Route exact path='/groups/:groupId/edit' component={EditGroupFormComponent} />
         </Switch>
       )}
     </>

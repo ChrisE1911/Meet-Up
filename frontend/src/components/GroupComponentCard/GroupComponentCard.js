@@ -4,10 +4,10 @@ import './GroupComponentCard.css'
 const GroupComponentCard = ({ group }) => {
 
 
-    console.log('single group object', group)
+    // console.log('single group object', group)
     return (
         <Link to={`/groups/${group.id}`} className='group-component-card'>
-            <img src={group.previewImage} alt='Group'></img>
+            <img src={group.previewImage} alt='Group' style={{width: '100px'}} ></img>
             <h3>{group.name}</h3>
             <p>{group.about}</p>
 

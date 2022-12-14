@@ -2,7 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const GET_GROUPS = 'groups/GET_GROUPS';
 const CREATE_GROUP = 'groups/CREATE_GROUP';
-const GET_ONE_GROUP = 'groups/CREATE_ONE_GROUP'
+const GET_ONE_GROUP = 'groups/GET_ONE_GROUP'
 
 export const getAllGroups = (groups) => ({
     type: GET_GROUPS,
@@ -62,7 +62,6 @@ export const createAGroup = (groupPayload, imagePayload) => async (dispatch) => 
         })
         if (imageResponse.ok) {
             const images = imageResponse.json();
-            console.log('Images', images)
             const newObj = {
                 ...images, ...group
             }
@@ -94,9 +93,9 @@ const groupReducer = (state = initialState, action) => {
             newState.allGroups = updatedGroups;
             return newState;
         case GET_ONE_GROUP:
-            newState = { ...state };
-            newState.singleGroup = action.group
-            return newState
+            return {
+                ...state, singleGroup: action.group
+            }
         default:
             return state
     }

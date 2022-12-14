@@ -7,44 +7,37 @@ import { getOneGroup } from '../../store/group.js';
 
 function GroupDetailsComponent() {
     const dispatch = useDispatch()
-
     const { groupId } = useParams();
 
     const currentGroup = useSelector(state => state.groups.singleGroup)
 
-    console.log(currentGroup)
+    const sessionUser = useSelector(state => state.session.user)
+
+    // console.log(currentGroup)
 
     useEffect(() => {
         dispatch(getOneGroup(groupId))
     }, [dispatch])
 
-
     return (
-        <div>
-            <h1>Hello World</h1>
-            {/* // console.log(currentGroup.GroupImages[0].url) */}
-            {currentGroup.GroupImages && <img src={currentGroup.GroupImages[0].url} alt='preview'></img>}
-            <br />
-            <br />
-            <br />
-            <h1>{currentGroup.name}</h1>
-            <h3>{`${currentGroup.numMembers} members ${currentGroup.private ? 'Private' : 'Public'} group`}</h3>
-            <h3>{`Organized by ${currentGroup.Organizer.firstName} ${currentGroup.Organizer.lastName}`}</h3>
-            <br />
-            <br />
-            <br />
-            <br />
-            <h2>What we're about</h2>
-            <p>{currentGroup.about}</p>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <Link to={'/groups/new'}>Start a New Group</Link>
-        </div>
+        <>
+            <div>
+                <br/>
+                <br/>
+                <br/>
+                {currentGroup.GroupImages && <img src={currentGroup.GroupImages[0].url} alt='preview'></img>}
+                <h1>{currentGroup.name}</h1>
+                <h3>{`${currentGroup.numMembers} members ${currentGroup.private ? 'Private' : 'Public'} group`}</h3>
+                {/*Conditional rendering of the Organizer*/}
+                {currentGroup.Organizer && <h3>{`Organized by ${currentGroup.Organizer.firstName} ${currentGroup.Organizer.lastName}`}</h3>}
+                <h2>What we're about</h2>
+                <p>{currentGroup.about}</p>
+                { sessionUser && <Link to={'/groups/new'}>Start a New Group</Link>}
+                <Link to={'/groups'}>Groups</Link>
+                <Link to={'/events'}>Events</Link>
+                {sessionUser && currentGroup.Organizer && sessionUser.id === currentGroup.Organizer.id && <Link to={`/groups/${currentGroup.id}/edit`}>Edit Group</Link>}
+            </div>
+        </>
 
     )
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createAGroup } from '../../store/group.js';
@@ -15,13 +15,19 @@ function CreateGroupFormComponent() {
     const [previewImage, setPreviewImage] = useState('')
     const dispatch = useDispatch();
     const history = useHistory()
+    console.log('validation Errors', validationErrors)
+    useEffect(() => {
+        let errors = [];
+
+        if (name.length < 3) {
+            errors.push('Name must be more than 3 characters')
+        }
+        setValidationErrors((prev) => [...prev, ...errors]);
+    }, [name])
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        const errors = []
-
         const group = {
             name,
             about,
@@ -35,21 +41,21 @@ function CreateGroupFormComponent() {
             url: previewImage,
             "preview": true
         }
-        console.log('Test')
-        dispatch(createAGroup(group, image));
-        reset();
 
-        history.push('/groups')
-    }
+        return dispatch(createAGroup(group, image))
+        .then(()=> history.push('/groups'))
+            .catch( async (res) => {
+                const data = await res.json();
+                console.log('Data', data)
+                if (data && data.errors) {
+                    setValidationErrors((prev) => [...prev, ...data.errors])
+                    console.log('validation Errors in catch block', validationErrors)
+                }
+            }
+        )
 
-    const reset = () => {
-        setName('')
-        setAbout('')
-        setType('In person')
-        setPrivateGroup(true)
-        setCity('')
-        setState('')
-    }
+    };
+
 
 
     return (
@@ -57,6 +63,9 @@ function CreateGroupFormComponent() {
             <h1>Create Group</h1>
             <form onSubmit={handleSubmit}>
                 <ul>
+                    {validationErrors.length > 0 && validationErrors.map((error, idx) => (
+                        <li key={idx}>{error}</li>
+                    ))}
                 </ul>
                 <input
                     type='text'
@@ -108,10 +117,11 @@ function CreateGroupFormComponent() {
                     placeholder='Image'
                     name='Image'
                 />
-                <button type='submit'>Submit</button>
+                <button type='submit' disabled={validationErrors > 0}>Submit</button>
             </form>
         </div>
     );
 }
+
 
 export default CreateGroupFormComponent
