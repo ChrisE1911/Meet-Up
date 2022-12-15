@@ -11,7 +11,7 @@ function EditGroupFormComponent() {
     const [name, setName] = useState(currentGroup.name);
     const [about, setAbout] = useState(currentGroup.about);
     const [type, setType] = useState(currentGroup.type);
-    const [privateGroup, setPrivateGroup] = useState(currentGroup.private);
+    const [privateGroup, setPrivateGroup] = useState(currentGroup.private.toString());
     const [city, setCity] = useState(currentGroup.city);
     const [state, setState] = useState(currentGroup.state);
     const [validationErrors, setValidationErrors] = useState([])
@@ -75,14 +75,27 @@ function EditGroupFormComponent() {
                         value={name}
                         placeholder='Name'
                         name='Name'
-                    />
-                    <input
-                        type='text'
-                        onChange={(e) => setPrivateGroup(e.target.value)}
-                        value={privateGroup}
-                        placeholder='Private or Public Group'
-                        name='Private Group'
-                    />
+                />
+                 <div>
+                    <label>
+                        <input
+                            type='radio'
+                            value={`${true}`}
+                            name='Group'
+                            onChange={(e) => setPrivateGroup(e.target.value)}
+                            checked={privateGroup === `${true}`}
+                        /> Private
+                    </label>
+                    <label>
+                        <input
+                            type='radio'
+                            value={`${false}`}
+                            name='Group'
+                            onChange={(e) => setPrivateGroup(e.target.value)}
+                            checked={privateGroup === `${false}`}
+                        /> Public
+                    </label>
+                </div>
                 <input
                     type='text'
                     onChange={(e) => setCity(e.target.value)}
