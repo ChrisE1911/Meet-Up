@@ -15,16 +15,6 @@ function CreateGroupFormComponent() {
     const [previewImage, setPreviewImage] = useState('')
     const dispatch = useDispatch();
     const history = useHistory()
-    console.log('validation Errors', validationErrors)
-    useEffect(() => {
-        let errors = [];
-
-        if (name.length < 3) {
-            errors.push('Name must be more than 3 characters')
-        }
-        setValidationErrors((prev) => [...prev, ...errors]);
-    }, [name])
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -46,10 +36,8 @@ function CreateGroupFormComponent() {
         .then(()=> history.push('/groups'))
             .catch( async (res) => {
                 const data = await res.json();
-                console.log('Data', data)
                 if (data && data.errors) {
                     setValidationErrors((prev) => [...prev, ...data.errors])
-                    console.log('validation Errors in catch block', validationErrors)
                 }
             }
         )

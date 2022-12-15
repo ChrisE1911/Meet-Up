@@ -40,7 +40,7 @@ router.get('/', async (req, res, next) => {
             raw: true
         })
 
-     
+
 
         group.numMembers = numMembers;
         group.previewImage = groupImage.url;
