@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory, useParams} from 'react-router-dom';
 import { editOneGroup } from '../../store/group';
+import { deleteGroup } from '../../store/group';
 
 
 function EditGroupFormComponent() {
@@ -41,6 +42,9 @@ function EditGroupFormComponent() {
 
     };
 
+    const deleteGrouphandler = (groupId) => {
+        dispatch(deleteGroup(groupId)).then(() => history.push('/groups'))
+    }
 
 
     return (
@@ -99,6 +103,7 @@ function EditGroupFormComponent() {
                     name='Type'
                 />
                 <button type='submit' disabled={validationErrors.length > 0}>Submit</button>
+                <button onClick={() => deleteGrouphandler(groupId)}>Delete Group</button>
             </form>
         </div>
     );
