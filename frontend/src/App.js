@@ -7,6 +7,7 @@ import GroupsComponent from "./components/GroupsComponent";
 import GroupDetailsComponent from "./components/GroupDetailsComponent";
 import CreateGroupFormComponent from "./components/CreateGroupFromComponent";
 import EditGroupFormComponent from "./components/EditGroupFormComponent";
+import EventsComponent from "./components/EventsComponent";
 
 
 
@@ -27,6 +28,8 @@ function App() {
           <Route exact path='/groups/new' component={CreateGroupFormComponent} />
           <Route exact path='/groups/:groupId' component={GroupDetailsComponent} />
           <Route exact path='/groups/:groupId/edit' component={EditGroupFormComponent} />
+          <Route exact path='/events' component={EventsComponent} />
+
         </Switch>
       )}
     </>

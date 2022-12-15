@@ -14,7 +14,6 @@ function GroupsComponent() {
 
     const allGroupsArr = Object.values(allGroups)
 
-    console.log(allGroupsArr)
 
     useEffect(() => {
         dispatch(getGroups(allGroups))
