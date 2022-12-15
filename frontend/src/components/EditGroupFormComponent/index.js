@@ -1,21 +1,31 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams} from 'react-router-dom';
 import { editOneGroup } from '../../store/group';
 import { deleteGroup } from '../../store/group';
+import { getOneGroup } from '../../store/group.js';
 
 
 function EditGroupFormComponent() {
-    const [name, setName] = useState('');
-    const [about, setAbout] = useState('');
-    const [type, setType] = useState('In person');
-    const [privateGroup, setPrivateGroup] = useState(true);
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
+    const currentGroup = useSelector(state => state.groups.singleGroup)
+    const [name, setName] = useState(currentGroup.name);
+    const [about, setAbout] = useState(currentGroup.about);
+    const [type, setType] = useState(currentGroup.type);
+    const [privateGroup, setPrivateGroup] = useState(currentGroup.private);
+    const [city, setCity] = useState(currentGroup.city);
+    const [state, setState] = useState(currentGroup.state);
     const [validationErrors, setValidationErrors] = useState([])
     const dispatch = useDispatch();
     const history = useHistory()
     const { groupId } = useParams();
+
+    console.log(currentGroup)
+
+    useEffect(() => {
+        dispatch(getOneGroup(groupId))
+    }, [dispatch])
+
+
 
 
     const handleSubmit = (e) => {
