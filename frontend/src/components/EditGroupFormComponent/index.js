@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams} from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { editOneGroup } from '../../store/group';
 import { deleteGroup } from '../../store/group';
 import { getOneGroup } from '../../store/group.js';
@@ -23,7 +23,7 @@ function EditGroupFormComponent() {
 
     useEffect(() => {
         dispatch(getOneGroup(groupId))
-    }, [dispatch])
+    }, [dispatch, groupId])
 
 
 
@@ -41,14 +41,14 @@ function EditGroupFormComponent() {
         }
 
         return dispatch(editOneGroup(updatingGroup))
-        .then(()=> history.push(`/groups/${groupId}`))
-        .catch( async (res) => {
-            const data = await res.json();
-            if (data && data.errors) {
-                setValidationErrors(data.errors)
+            .then(() => history.push(`/groups/${groupId}`))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) {
+                    setValidationErrors(data.errors)
+                }
             }
-        }
-        )
+            )
 
     };
 
@@ -59,9 +59,9 @@ function EditGroupFormComponent() {
 
     return (
         <div>
-            <br/>
-            <br/>
-            <br/>
+            <br />
+            <br />
+            <br />
             <h1>Edit Group</h1>
             <form onSubmit={handleSubmit}>
                 <ul>
@@ -69,20 +69,20 @@ function EditGroupFormComponent() {
                         <li key={idx}>{error}</li>
                     ))}
                 </ul>
-                <input
-                    type='text'
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                    placeholder='Name'
-                    name='Name'
-                />
-                <input
-                    type='text'
-                    onChange={(e) => setPrivateGroup(e.target.value)}
-                    value={privateGroup}
-                    placeholder='Private or Public Group?'
-                    name='Group'
-                />
+                    <input
+                        type='text'
+                        onChange={(e) => setName(e.target.value)}
+                        value={name}
+                        placeholder='Name'
+                        name='Name'
+                    />
+                    <input
+                        type='text'
+                        onChange={(e) => setPrivateGroup(e.target.value)}
+                        value={privateGroup}
+                        placeholder='Private or Public Group'
+                        name='Private Group'
+                    />
                 <input
                     type='text'
                     onChange={(e) => setCity(e.target.value)}
@@ -104,14 +104,26 @@ function EditGroupFormComponent() {
                     placeholder='Tell us about your Group'
                     name='Group'
                 />
-
-                <input
-                    type='dropdown'
-                    onChange={(e) => setType(e.target.value)}
-                    value={type}
-                    placeholder='Online or In person'
-                    name='Type'
-                />
+                <div>
+                    <label>
+                        <input
+                            type='radio'
+                            value='Online'
+                            name='Type'
+                            onChange={(e) => setType(e.target.value)}
+                            checked={type === 'Online'}
+                        /> Online
+                    </label>
+                    <label>
+                        <input
+                            type='radio'
+                            value='In person'
+                            name='Type'
+                            onChange={(e) => setType(e.target.value)}
+                            checked={type === 'In person'}
+                        /> In person
+                    </label>
+                </div>
                 <button type='submit' disabled={validationErrors.length > 0}>Submit</button>
                 <button onClick={() => deleteGrouphandler(groupId)}>Delete Group</button>
             </form>
