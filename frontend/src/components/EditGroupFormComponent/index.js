@@ -10,7 +10,7 @@ function EditGroupFormComponent() {
     const currentGroup = useSelector(state => state.groups.singleGroup)
     const [name, setName] = useState(currentGroup.name);
     const [about, setAbout] = useState(currentGroup.about);
-    const [type, setType] = useState(currentGroup.type);
+    const [type, setType] = useState(currentGroup.type.toString());
     const [privateGroup, setPrivateGroup] = useState(currentGroup.private.toString());
     const [city, setCity] = useState(currentGroup.city);
     const [state, setState] = useState(currentGroup.state);
@@ -52,8 +52,15 @@ function EditGroupFormComponent() {
 
     };
 
-    const deleteGrouphandler = (groupId) => {
-        dispatch(deleteGroup(groupId)).then(() => history.push('/groups'))
+    const deleteGrouphandler = async (groupId) => {
+        // console.log(e)
+        // console.log()
+        // id.preventDefault();
+
+
+        await dispatch(deleteGroup(groupId))
+
+        history.push('/groups');
     }
 
 
@@ -69,14 +76,14 @@ function EditGroupFormComponent() {
                         <li key={idx}>{error}</li>
                     ))}
                 </ul>
-                    <input
-                        type='text'
-                        onChange={(e) => setName(e.target.value)}
-                        value={name}
-                        placeholder='Name'
-                        name='Name'
+                <input
+                    type='text'
+                    onChange={(e) => setName(e.target.value)}
+                    value={name}
+                    placeholder='Name'
+                    name='Name'
                 />
-                 <div>
+                <div>
                     <label>
                         <input
                             type='radio'
@@ -138,8 +145,8 @@ function EditGroupFormComponent() {
                     </label>
                 </div>
                 <button type='submit' disabled={validationErrors.length > 0}>Submit</button>
-                <button onClick={() => deleteGrouphandler(groupId)}>Delete Group</button>
             </form>
+                <button onClick={() => deleteGrouphandler(groupId)}>Delete Group</button>
         </div>
     );
 }

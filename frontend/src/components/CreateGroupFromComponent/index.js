@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createAGroup } from '../../store/group.js';
@@ -7,8 +7,8 @@ import { createAGroup } from '../../store/group.js';
 function CreateGroupFormComponent() {
     const [name, setName] = useState('');
     const [about, setAbout] = useState('');
-    const [type, setType] = useState('In person');
-    const [privateGroup, setPrivateGroup] = useState(true);
+    const [type, setType] = useState('');
+    const [privateGroup, setPrivateGroup] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [validationErrors, setValidationErrors] = useState([])
@@ -61,14 +61,27 @@ function CreateGroupFormComponent() {
                         value={name}
                         placeholder='Name'
                         name='Name'
-                    />
-                    <input
-                        type='text'
-                        onChange={(e) => setPrivateGroup(e.target.value)}
-                        value={privateGroup}
-                        placeholder='Private or Public Group'
-                        name='Private Group'
-                    />
+                />
+                 <div>
+                    <label>
+                        <input
+                            type='radio'
+                            value={`${true}`}
+                            name='Group'
+                            onChange={(e) => setPrivateGroup(e.target.value)}
+                            checked={privateGroup === `${true}`}
+                        /> Private
+                    </label>
+                    <label>
+                        <input
+                            type='radio'
+                            value={`${false}`}
+                            name='Group'
+                            onChange={(e) => setPrivateGroup(e.target.value)}
+                            checked={privateGroup === `${false}`}
+                        /> Public
+                    </label>
+                </div>
                 <input
                     type='text'
                     onChange={(e) => setCity(e.target.value)}
