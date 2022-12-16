@@ -7,6 +7,7 @@ import { getGroups } from '../../store/group';
 
 function EventsComponent() {
     const dispatch = useDispatch();
+
     const allEvents = useSelector(state => state.events.allEvents)
 
     const allGroups = useSelector(state => state.groups.allGroups)
@@ -37,6 +38,8 @@ function EventsComponent() {
         dispatch(getGroups(allGroups))
     }, [dispatch])
 
+
+
     return (
         <>
                 <div id='toggle-buttons'>
@@ -50,7 +53,7 @@ function EventsComponent() {
                         return <EventsComponentCard key={event.id} event={event} />
                     })}
                 </ul>
-                { sessionUser && <Link to={`/events/${groupIdObj.id}/new`}>Create Event</Link>}
+                {sessionUser && <Link to={`/events/${groupIdObj.id}/new`}>Create Event</Link>}
             </div>
         </>
     )

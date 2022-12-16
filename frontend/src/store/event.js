@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const GET_EVENTS = 'events/GET_EVENTS';
 const CREATE_EVENT = 'events/CREATE_EVENT';
 const GET_ONE_EVENT = 'events/GET_ONE_EVENT';
+const REMOVE_EVENT = 'events/REMOVE_EVENT';
 
 export const getAllEvents = (events) => ({
     type: GET_EVENTS,
@@ -17,6 +18,11 @@ export const createEvent = (event) => ({
 export const OneEvent = (event) => ({
     type: GET_ONE_EVENT,
     event
+})
+
+export const removeEvent = (eventId) => ({
+    type: REMOVE_EVENT,
+    eventId
 })
 
 //GET ALL EVENTS
@@ -69,6 +75,18 @@ export const createAEvent = (groupId, eventPayload, imagePayload) => async (disp
     }
 }
 
+export const deleteEvent = (eventId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/events/${eventId}`, {
+        method: 'DELETE'
+    });
+
+    if (response.ok) {
+        dispatch(removeEvent(eventId))
+
+    }
+    return response
+}
+
 const initialState = {
     allEvents: {},
     singleEvent: {}
@@ -86,16 +104,20 @@ const eventReducer = (state = initialState, action) => {
             });
             newState.allEvents = newEvents
             return newState;
-            case CREATE_EVENT:
-                newState = { ...state };
-                const updatedEvents = {...state.allEvents, [action.event.id]: action.event}
-                newState.allEvents = updatedEvents;
-                return newState;
+        case CREATE_EVENT:
+            newState = { ...state };
+            const updatedEvents = { ...state.allEvents, [action.event.id]: action.event }
+            newState.allEvents = updatedEvents;
+            return newState;
         case GET_ONE_EVENT:
             console.log(action)
-                return {
-                    ...state, singleEvent: action.event
-                }
+            return {
+                ...state, singleEvent: action.event
+            }
+        case REMOVE_EVENT:
+            newState = { ...state };
+            delete newState[action.eventId];
+            return newState
         default:
             return state
     }

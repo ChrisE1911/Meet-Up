@@ -5,10 +5,13 @@ import { Link } from 'react-router-dom';
 import { getOneEvent } from '../../store/event';
 import { getOneGroup } from '../../store/group';
 import { getGroups } from '../../store/group';
+import { useHistory } from 'react-router-dom';
+import { deleteEvent } from '../../store/event';
 
 
 function EventDetailsComponent() {
     const dispatch = useDispatch()
+    const history = useHistory();
 
     const { eventId } = useParams();
     const currentGroup = useSelector(state => state.groups.singleGroup)
@@ -19,6 +22,8 @@ function EventDetailsComponent() {
     const groupId = allGroupsArr.find((group) => group.organizerId === sessionUser.id)
     let groupIdObj = Object.assign({}, groupId)
 
+    console.log('HEYYYYY', currentGroup)
+
     useEffect(() => {
         console.log('LOOK HERE', currentGroup)
         dispatch(getOneGroup(currentEvent.groupId))
@@ -27,13 +32,18 @@ function EventDetailsComponent() {
     useEffect(() => {
         dispatch(getOneEvent(+eventId))
     }, [dispatch, eventId])
-    
+
     useEffect(() => {
         dispatch(getGroups(allGroups))
     }, [dispatch])
 
 
+    const deleteEventhandler = async (eventId) => {
 
+        await dispatch(deleteEvent(+eventId))
+
+        history.push('/events');
+    }
 
     return (
         <>
@@ -61,6 +71,7 @@ function EventDetailsComponent() {
             <Link to={'/groups'}>Groups</Link>
             <Link to={'/events'}>Events</Link>
             <Link to={`/events/${groupIdObj.id}/new`}>Create New Event</Link>
+            {sessionUser && currentGroup && sessionUser.id === currentGroup.organizerId && <button onClick={() => deleteEventhandler(eventId)}>Delete Event</button>}
         </>
     )
 }
