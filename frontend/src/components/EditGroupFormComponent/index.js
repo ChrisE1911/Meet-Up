@@ -53,11 +53,7 @@ function EditGroupFormComponent() {
     };
 
     const deleteGrouphandler = async (groupId) => {
-        // console.log(e)
-        // console.log()
-        // id.preventDefault();
-
-
+     
         await dispatch(deleteGroup(groupId))
 
         history.push('/groups');
