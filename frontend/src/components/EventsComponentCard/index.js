@@ -6,7 +6,6 @@ const EventsComponentCard = ({ event }) => {
     const newStartDate = new Date(event.startDate).toDateString().split(' ').slice(0, 3)
     const newStartDateTime = new Date(event.startDate).toLocaleString().split(',')[1]
 
-    console.log(newStartDateTime)
 
 
     return (

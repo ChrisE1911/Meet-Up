@@ -15,7 +15,7 @@ function GroupDetailsComponent() {
 
     useEffect(() => {
         dispatch(getOneGroup(groupId))
-    }, [dispatch])
+    }, [dispatch, groupId])
 
     return (
         <>
