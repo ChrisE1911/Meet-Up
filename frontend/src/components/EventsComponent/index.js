@@ -21,10 +21,10 @@ function EventsComponent() {
 
     const groupId = allGroupsArr.find((group) => group.organizerId === sessionUser.id)
 
-    console.log(groupId)
 
     let groupIdObj = Object.assign({}, groupId)
 
+    console.log(groupIdObj)
 
 
 

@@ -18,18 +18,20 @@ function EventDetailsComponent() {
     const allGroupsArr = Object.values(allGroups)
     const groupId = allGroupsArr.find((group) => group.organizerId === sessionUser.id)
     let groupIdObj = Object.assign({}, groupId)
-    useEffect(() => {
-        dispatch(getGroups(allGroups))
-    }, [dispatch])
-
-    useEffect(() => {
-        dispatch(getOneEvent(+eventId))
-    }, [dispatch, eventId])
 
     useEffect(() => {
         console.log('LOOK HERE', currentGroup)
         dispatch(getOneGroup(currentEvent.groupId))
     }, [dispatch, currentEvent.groupId])
+
+    useEffect(() => {
+        dispatch(getOneEvent(+eventId))
+    }, [dispatch, eventId])
+    
+    useEffect(() => {
+        dispatch(getGroups(allGroups))
+    }, [dispatch])
+
 
 
 
