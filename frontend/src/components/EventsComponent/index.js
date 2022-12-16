@@ -2,20 +2,39 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getEvents } from '../../store/event';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import  EventsComponentCard  from '../EventsComponentCard';
+import EventsComponentCard from '../EventsComponentCard';
+import { getGroups } from '../../store/group';
 
 function EventsComponent() {
     const dispatch = useDispatch();
     const allEvents = useSelector(state => state.events.allEvents)
 
+    const allGroups = useSelector(state => state.groups.allGroups)
+
     const sessionUser = useSelector(state => state.session.user)
 
     const allEventsArr = Object.values(allEvents)
+
+    const allGroupsArr = Object.values(allGroups)
+
+    console.log(allGroupsArr)
+
+    const groupId = allGroupsArr.find((group) => group.organizerId === sessionUser.id)
+
+    console.log(groupId)
+
+    let groupIdObj = Object.assign({}, groupId)
+
+
 
 
 
     useEffect(() => {
         dispatch(getEvents(allEvents))
+    }, [dispatch])
+
+    useEffect(() => {
+        dispatch(getGroups(allGroups))
     }, [dispatch])
 
     return (
@@ -31,7 +50,7 @@ function EventsComponent() {
                         return <EventsComponentCard key={event.id} event={event} />
                     })}
                 </ul>
-                { sessionUser && <Link to={`/events/${sessionUser.id}/new`}>Create Event</Link>}
+                { sessionUser && <Link to={`/events/${groupIdObj.id}/new`}>Create Event</Link>}
             </div>
         </>
     )
