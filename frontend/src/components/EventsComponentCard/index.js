@@ -13,8 +13,8 @@ const EventsComponentCard = ({ event }) => {
             <img src={event.previewImage} alt='event' style={{ width: '100px' }} ></img>
             <h3>{`${newStartDate} ${newStartDateTime} CST`}</h3>
             <h3>{event.name}</h3>
-            <p>{event.Group.name}</p>
-            <p>{`${event.Venue.city}, ${event.Venue.state}`}</p>
+            <p>{event.Group?.name}</p>
+            <p>{`${event.Venue?.city}, ${event.Venue?.state}`}</p>
             <p>{ }</p>
 
             <p>{`${event.numAttending} attendees`}</p>

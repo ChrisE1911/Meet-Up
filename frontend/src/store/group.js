@@ -27,6 +27,7 @@ export const removeGroup = (groupId) => ({
 
 //GET ONE GROUP
 export const getOneGroup = (groupId) => async (dispatch) => {
+    console.log(groupId)
     const response = await csrfFetch(`/api/groups/${groupId}`)
 
     console.log(response)

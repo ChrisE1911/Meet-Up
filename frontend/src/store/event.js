@@ -35,6 +35,8 @@ export const getEvents = () => async (dispatch) => {
 export const getOneEvent = (eventId) => async (dispatch) => {
     const response = await csrfFetch(`/api/events/${eventId}`)
 
+    console.log('LOOKK HERE', eventId)
+
     if (response.ok) {
         const event = await response.json();
         dispatch(OneEvent(event))
@@ -43,8 +45,8 @@ export const getOneEvent = (eventId) => async (dispatch) => {
 }
 
 //CREATE A EVENT
-export const createAEvent = (eventPayload, imagePayload) => async (dispatch) => {
-    const response = await csrfFetch('/api/events', {
+export const createAEvent = (groupId, eventPayload, imagePayload) => async (dispatch) => {
+    const response = await csrfFetch(`/api/groups/${groupId}/events`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(eventPayload)
@@ -57,7 +59,7 @@ export const createAEvent = (eventPayload, imagePayload) => async (dispatch) => 
             body: JSON.stringify(imagePayload)
         })
         if (imageResponse.ok) {
-            const images = imageResponse.json();
+            const images = await imageResponse.json();
             const newObj = {
                 ...images, ...event
             }
@@ -89,7 +91,8 @@ const eventReducer = (state = initialState, action) => {
                 const updatedEvents = {...state.allEvents, [action.event.id]: action.event}
                 newState.allEvents = updatedEvents;
                 return newState;
-            case GET_ONE_EVENT:
+        case GET_ONE_EVENT:
+            console.log(action)
                 return {
                     ...state, singleEvent: action.event
                 }
