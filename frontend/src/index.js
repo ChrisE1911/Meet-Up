@@ -8,7 +8,6 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { ModalProvider, Modal } from './context/Modal';
 import { getGroups } from './store/group';
-import { createAGroup } from './store/group';
 import App from './App';
 
 import configureStore from './store';

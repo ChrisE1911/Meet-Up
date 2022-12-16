@@ -13,11 +13,9 @@ function GroupDetailsComponent() {
 
     const sessionUser = useSelector(state => state.session.user)
 
-    // console.log(currentGroup)
-
     useEffect(() => {
         dispatch(getOneGroup(groupId))
-    }, [dispatch])
+    }, [dispatch, groupId])
 
     return (
         <>
@@ -28,6 +26,7 @@ function GroupDetailsComponent() {
                 {currentGroup.GroupImages && <img src={currentGroup.GroupImages[0].url} alt='preview'></img>}
                 <h1>{currentGroup.name}</h1>
                 <h3>{`${currentGroup.numMembers} members ${currentGroup.private ? 'Private' : 'Public'} group`}</h3>
+                <h3>{currentGroup.type}</h3>
                 {/*Conditional rendering of the Organizer*/}
                 {currentGroup.Organizer && <h3>{`Organized by ${currentGroup.Organizer.firstName} ${currentGroup.Organizer.lastName}`}</h3>}
                 <h2>What we're about</h2>

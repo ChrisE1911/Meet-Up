@@ -27,6 +27,7 @@ export const removeGroup = (groupId) => ({
 
 //GET ONE GROUP
 export const getOneGroup = (groupId) => async (dispatch) => {
+    console.log(groupId)
     const response = await csrfFetch(`/api/groups/${groupId}`)
 
     console.log(response)
@@ -85,7 +86,6 @@ export const editOneGroup = (updatingGroup) => async (dispatch) => {
         body: JSON.stringify(updatingGroup)
     })
 
-    // console.log(response)
 
     if (response.ok) {
         const group = await response.json();
@@ -102,9 +102,10 @@ export const deleteGroup = (groupId) => async (dispatch) => {
     });
 
     if (response.ok) {
-        const { id: deletedGroupId } = await response.json();
-        dispatch (removeGroup(deletedGroupId))
+        dispatch(removeGroup(groupId))
+
     }
+    return response
 }
 
 const initialState = {

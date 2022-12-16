@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createAGroup } from '../../store/group.js';
@@ -7,8 +7,8 @@ import { createAGroup } from '../../store/group.js';
 function CreateGroupFormComponent() {
     const [name, setName] = useState('');
     const [about, setAbout] = useState('');
-    const [type, setType] = useState('In person');
-    const [privateGroup, setPrivateGroup] = useState(true);
+    const [type, setType] = useState('');
+    const [privateGroup, setPrivateGroup] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [validationErrors, setValidationErrors] = useState([])
@@ -56,19 +56,32 @@ function CreateGroupFormComponent() {
                     ))}
                 </ul>
                 <input
-                    type='text'
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                    placeholder='Name'
-                    name='Name'
+                        type='text'
+                        onChange={(e) => setName(e.target.value)}
+                        value={name}
+                        placeholder='Name'
+                        name='Name'
                 />
-                <input
-                    type='text'
-                    onChange={(e) => setPrivateGroup(e.target.value)}
-                    value={privateGroup}
-                    placeholder='Private or Public Group?'
-                    name='Group'
-                />
+                 <div>
+                    <label>
+                        <input
+                            type='radio'
+                            value={`${true}`}
+                            name='Group'
+                            onChange={(e) => setPrivateGroup(e.target.value)}
+                            checked={privateGroup === `${true}`}
+                        /> Private
+                    </label>
+                    <label>
+                        <input
+                            type='radio'
+                            value={`${false}`}
+                            name='Group'
+                            onChange={(e) => setPrivateGroup(e.target.value)}
+                            checked={privateGroup === `${false}`}
+                        /> Public
+                    </label>
+                </div>
                 <input
                     type='text'
                     onChange={(e) => setCity(e.target.value)}
@@ -90,14 +103,26 @@ function CreateGroupFormComponent() {
                     placeholder='Tell us about your Group'
                     name='Group'
                 />
-
-                <input
-                    type='text'
-                    onChange={(e) => setType(e.target.value)}
-                    value={type}
-                    placeholder='Online or In person'
-                    name='Type'
-                />
+                <div>
+                    <label>
+                        <input
+                            type='radio'
+                            value='Online'
+                            name='Type'
+                            onChange={(e) => setType(e.target.value)}
+                            checked={type === 'Online'}
+                        /> Online
+                    </label>
+                    <label>
+                        <input
+                            type='radio'
+                            value='In person'
+                            name='Type'
+                            onChange={(e) => setType(e.target.value)}
+                            checked={type === 'In person'}
+                        /> In person
+                    </label>
+                </div>
                 <input
                     type='text'
                     onChange={(e) => setPreviewImage(e.target.value)}

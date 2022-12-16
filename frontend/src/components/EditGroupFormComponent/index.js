@@ -1,21 +1,31 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory, useParams} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import { editOneGroup } from '../../store/group';
 import { deleteGroup } from '../../store/group';
+import { getOneGroup } from '../../store/group.js';
 
 
 function EditGroupFormComponent() {
-    const [name, setName] = useState('');
-    const [about, setAbout] = useState('');
-    const [type, setType] = useState('In person');
-    const [privateGroup, setPrivateGroup] = useState(true);
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
+    const currentGroup = useSelector(state => state.groups.singleGroup)
+    const [name, setName] = useState(currentGroup.name);
+    const [about, setAbout] = useState(currentGroup.about);
+    const [type, setType] = useState(currentGroup.type.toString());
+    const [privateGroup, setPrivateGroup] = useState(currentGroup.private.toString());
+    const [city, setCity] = useState(currentGroup.city);
+    const [state, setState] = useState(currentGroup.state);
     const [validationErrors, setValidationErrors] = useState([])
     const dispatch = useDispatch();
     const history = useHistory()
     const { groupId } = useParams();
+
+    console.log(currentGroup)
+
+    useEffect(() => {
+        dispatch(getOneGroup(groupId))
+    }, [dispatch, groupId])
+
+
 
 
     const handleSubmit = (e) => {
@@ -31,27 +41,30 @@ function EditGroupFormComponent() {
         }
 
         return dispatch(editOneGroup(updatingGroup))
-        .then(()=> history.push(`/groups/${groupId}`))
-        .catch( async (res) => {
-            const data = await res.json();
-            if (data && data.errors) {
-                setValidationErrors(data.errors)
+            .then(() => history.push(`/groups/${groupId}`))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) {
+                    setValidationErrors(data.errors)
+                }
             }
-        }
-        )
+            )
 
     };
 
-    const deleteGrouphandler = (groupId) => {
-        dispatch(deleteGroup(groupId)).then(() => history.push('/groups'))
+    const deleteGrouphandler = async (groupId) => {
+
+        await dispatch(deleteGroup(+groupId))
+
+        history.push('/groups');
     }
 
 
     return (
         <div>
-            <br/>
-            <br/>
-            <br/>
+            <br />
+            <br />
+            <br />
             <h1>Edit Group</h1>
             <form onSubmit={handleSubmit}>
                 <ul>
@@ -66,13 +79,26 @@ function EditGroupFormComponent() {
                     placeholder='Name'
                     name='Name'
                 />
-                <input
-                    type='text'
-                    onChange={(e) => setPrivateGroup(e.target.value)}
-                    value={privateGroup}
-                    placeholder='Private or Public Group?'
-                    name='Group'
-                />
+                <div>
+                    <label>
+                        <input
+                            type='radio'
+                            value={`${true}`}
+                            name='Group'
+                            onChange={(e) => setPrivateGroup(e.target.value)}
+                            checked={privateGroup === `${true}`}
+                        /> Private
+                    </label>
+                    <label>
+                        <input
+                            type='radio'
+                            value={`${false}`}
+                            name='Group'
+                            onChange={(e) => setPrivateGroup(e.target.value)}
+                            checked={privateGroup === `${false}`}
+                        /> Public
+                    </label>
+                </div>
                 <input
                     type='text'
                     onChange={(e) => setCity(e.target.value)}
@@ -94,17 +120,29 @@ function EditGroupFormComponent() {
                     placeholder='Tell us about your Group'
                     name='Group'
                 />
-
-                <input
-                    type='dropdown'
-                    onChange={(e) => setType(e.target.value)}
-                    value={type}
-                    placeholder='Online or In person'
-                    name='Type'
-                />
+                <div>
+                    <label>
+                        <input
+                            type='radio'
+                            value='Online'
+                            name='Type'
+                            onChange={(e) => setType(e.target.value)}
+                            checked={type === 'Online'}
+                        /> Online
+                    </label>
+                    <label>
+                        <input
+                            type='radio'
+                            value='In person'
+                            name='Type'
+                            onChange={(e) => setType(e.target.value)}
+                            checked={type === 'In person'}
+                        /> In person
+                    </label>
+                </div>
                 <button type='submit' disabled={validationErrors.length > 0}>Submit</button>
-                <button onClick={() => deleteGrouphandler(groupId)}>Delete Group</button>
             </form>
+                <button onClick={() => deleteGrouphandler(groupId)}>Delete Group</button>
         </div>
     );
 }
