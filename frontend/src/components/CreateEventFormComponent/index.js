@@ -103,14 +103,14 @@ function CreateEventFormComponent() {
                     name='Description'
                 />
                 <input
-                    type='text'
+                    type='date'
                     onChange={(e) => setStartDate(e.target.value)}
                     value={startDate}
-                    placeholder='State'
-                    name='State'
+                    placeholder='StartDate'
+                    name='StartDate'
                 />
                 <input
-                    type='text'
+                    type='date'
                     onChange={(e) => setEndDate(e.target.value)}
                     value={endDate}
                     placeholder='EndDate'

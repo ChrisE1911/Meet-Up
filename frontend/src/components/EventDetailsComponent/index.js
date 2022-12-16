@@ -36,6 +36,7 @@ function EventDetailsComponent() {
             <Link to={'/groups'}>Groups</Link>
             <Link to={'/events'}>Events</Link>
             {sessionUser && sessionUser.id === currentGroup.organizerId && (<Link to={`/events/${currentEvent.id}/edit`}>Edit Event</Link>)}
+            <Link to={'/events/new'}>Create New Event</Link>
         </>
     )
 }

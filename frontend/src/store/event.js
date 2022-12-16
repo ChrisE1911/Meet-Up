@@ -54,7 +54,7 @@ export const createAEvent = (eventPayload, imagePayload) => async (dispatch) => 
         const imageResponse = await csrfFetch(`/api/events/${event.id}/images`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(eventPayload)
+            body: JSON.stringify(imagePayload)
         })
         if (imageResponse.ok) {
             const images = imageResponse.json();
