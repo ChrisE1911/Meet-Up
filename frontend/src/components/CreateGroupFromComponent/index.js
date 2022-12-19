@@ -1,4 +1,4 @@
-import { useState, } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createAGroup } from '../../store/group.js';
@@ -14,7 +14,38 @@ function CreateGroupFormComponent() {
     const [validationErrors, setValidationErrors] = useState([])
     const [previewImage, setPreviewImage] = useState('')
     const dispatch = useDispatch();
-    const history = useHistory()
+    const history = useHistory();
+
+    useEffect(() => {
+        const errors = [];
+
+        if (name.length > 60) {
+            errors.push('Name must be 60 characters or less')
+        }
+
+        if (state.length !== 2 || !state.toUpperCase()) {
+            errors.push('State must be 2 characters and Uppercase. Ex: NC, TX, CA');
+        }
+
+        if (about.length < 50) {
+            errors.push("About must be 50 characters or more")
+        }
+
+        if (type !== 'Online' && type !== 'In Person') {
+            errors.push("Type must be 'Online' or 'In person'")
+        }
+
+        if (privateGroup !== 'true' && privateGroup !== 'false') {
+            errors.push("Please specify if your group will be Private or Public")
+        }
+
+        if (city.length === 0) {
+            errors.push("City is required")
+        }
+
+        setValidationErrors(errors);
+
+    }, [name, state, about, type, city,  privateGroup])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,15 +64,7 @@ function CreateGroupFormComponent() {
         }
 
         return dispatch(createAGroup(group, image))
-        .then(()=> history.push('/groups'))
-            .catch( async (res) => {
-                const data = await res.json();
-                if (data && data.errors) {
-                    setValidationErrors((prev) => [...prev, ...data.errors])
-                }
-            }
-        )
-
+            .then(() => history.push('/groups'))
     };
 
 
@@ -51,34 +74,37 @@ function CreateGroupFormComponent() {
             <h1>Create Group</h1>
             <form onSubmit={handleSubmit}>
                 <ul>
-                    {validationErrors.length > 0 && validationErrors.map((error, idx) => (
+                    {validationErrors.map((error, idx) => (
                         <li key={idx}>{error}</li>
                     ))}
                 </ul>
                 <input
-                        type='text'
-                        onChange={(e) => setName(e.target.value)}
-                        value={name}
-                        placeholder='Name'
-                        name='Name'
+                    type='text'
+                    onChange={(e) => setName(e.target.value)}
+                    value={name}
+                    placeholder='Name'
+                    name='Name'
+                    required
                 />
-                 <div>
+                <div>
                     <label>
                         <input
                             type='radio'
-                            value={`${true}`}
+                            value='true'
                             name='Group'
                             onChange={(e) => setPrivateGroup(e.target.value)}
                             checked={privateGroup === `${true}`}
+                            required
                         /> Private
                     </label>
                     <label>
                         <input
                             type='radio'
-                            value={`${false}`}
+                            value='false'
                             name='Group'
                             onChange={(e) => setPrivateGroup(e.target.value)}
                             checked={privateGroup === `${false}`}
+                            required
                         /> Public
                     </label>
                 </div>
@@ -88,6 +114,7 @@ function CreateGroupFormComponent() {
                     value={city}
                     placeholder='City'
                     name='City'
+                    required
                 />
                 <input
                     type='text'
@@ -95,6 +122,9 @@ function CreateGroupFormComponent() {
                     value={state}
                     placeholder='State'
                     name='State'
+                    required
+                    pattern='[A-Z]{2}'
+                    maxLength={2}
                 />
                 <input
                     type='text'
@@ -102,6 +132,7 @@ function CreateGroupFormComponent() {
                     value={about}
                     placeholder='Tell us about your Group'
                     name='Group'
+                    required
                 />
                 <div>
                     <label>
@@ -111,26 +142,29 @@ function CreateGroupFormComponent() {
                             name='Type'
                             onChange={(e) => setType(e.target.value)}
                             checked={type === 'Online'}
+                            required
                         /> Online
                     </label>
                     <label>
                         <input
                             type='radio'
-                            value='In person'
+                            value='In Person'
                             name='Type'
                             onChange={(e) => setType(e.target.value)}
-                            checked={type === 'In person'}
+                            checked={type === 'In Person'}
+                            required
                         /> In person
                     </label>
                 </div>
                 <input
-                    type='text'
+                    type='url'
                     onChange={(e) => setPreviewImage(e.target.value)}
                     value={previewImage}
                     placeholder='Image'
                     name='Image'
+                    required
                 />
-                <button type='submit' disabled={validationErrors > 0}>Submit</button>
+                <button type='submit' disabled={validationErrors.length > 0}>Submit</button>
             </form>
         </div>
     );
