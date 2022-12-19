@@ -1,4 +1,4 @@
-import { useState, } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createAEvent } from '../../store/event.js';
@@ -19,6 +19,31 @@ function CreateEventFormComponent() {
     const history = useHistory()
     const { groupId } = useParams();
 
+
+
+    useEffect(() => {
+        const errors = [];
+
+        if (name.length < 5) {
+            errors.push( "Name must be at least 5 characters")
+        }
+
+        if (type !== 'Online' && type !== 'In Person') {
+            errors.push("Type must be 'Online' or 'In person'")
+        }
+
+        if (!Number(capacity)) {
+            errors.push("Capacity must be a number")
+        }
+
+        if (description.length === 0) {
+            errors.push('Description is required')
+        }
+
+        setValidationErrors(errors)
+    }, [name, type, capacity, description, startDate])
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const event = {
@@ -37,14 +62,12 @@ function CreateEventFormComponent() {
         }
 
         return dispatch(createAEvent(groupId, event, image))
-            .then(() => history.push('/events'))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) {
-                    setValidationErrors((prev) => [...prev, ...data.errors])
+            .then(() => history.push('/events')).catch(
+                async (res) => {
+                  const data = await res.json();
+                  if (data && data.errors) setValidationErrors((prev) => [...prev, data.errors]);
                 }
-            }
-            )
+              );
 
     };
 
@@ -63,6 +86,7 @@ function CreateEventFormComponent() {
                     value={name}
                     placeholder='Name of Event'
                     name='Capacity'
+                    required
                 />
                 <div>
                     <label>
@@ -72,6 +96,7 @@ function CreateEventFormComponent() {
                             name='Type'
                             onChange={(e) => setType(e.target.value)}
                             checked={type === 'Online'}
+                            required
                         /> Online
                     </label>
                     <label>
@@ -81,6 +106,7 @@ function CreateEventFormComponent() {
                             name='Type'
                             onChange={(e) => setType(e.target.value)}
                             checked={type === 'In Person'}
+                            required
                         /> In Person
                     </label>
                 </div>
@@ -91,6 +117,7 @@ function CreateEventFormComponent() {
                     placeholder='Expected # of Attendees'
                     name='Capacity'
                     min={0}
+                    required
                 />
                 <input
                     type='number'
@@ -99,6 +126,7 @@ function CreateEventFormComponent() {
                     placeholder='Price'
                     name='Price'
                     min={0}
+                    required
                 />
                 <input
                     type='text'
@@ -106,6 +134,7 @@ function CreateEventFormComponent() {
                     value={description}
                     placeholder='Description'
                     name='Description'
+                    required
                 />
                 <div>
                     <input
@@ -115,6 +144,7 @@ function CreateEventFormComponent() {
                         placeholder='StartDate'
                         pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
                         name='StartDate'
+                        required
                     />
                     <input
                         type='datetime-local'
@@ -123,6 +153,7 @@ function CreateEventFormComponent() {
                         placeholder='EndDate'
                         pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
                         name='EndDate'
+                        required
                     />
                 </div>
                 <input
@@ -131,8 +162,9 @@ function CreateEventFormComponent() {
                     value={previewImage}
                     placeholder='Image'
                     name='Image'
+                    required
                 />
-                <button type='submit' disabled={validationErrors > 0}>Submit</button>
+                <button type='submit' disabled={validationErrors.length > 0}>Submit</button>
             </form>
         </div>
     );
