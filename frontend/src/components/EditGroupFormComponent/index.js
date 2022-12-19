@@ -25,7 +25,36 @@ function EditGroupFormComponent() {
         dispatch(getOneGroup(groupId))
     }, [dispatch, groupId])
 
+    useEffect(() => {
+        const errors = [];
 
+        if (name.length > 60) {
+            errors.push('Name must be 60 characters or less')
+        }
+
+        if (state.length !== 2 || (!state.toUpperCase())) {
+            errors.push('State must be 2 characters and Uppercase. Ex: NC, TX, CA');
+        }
+
+        if (about.length < 50) {
+            errors.push("About must be 50 characters or more")
+        }
+
+        if (type !== 'Online' && type !== 'In Person') {
+            errors.push("Type must be 'Online' or 'In person'")
+        }
+
+        if (privateGroup !== 'true' && privateGroup !== 'false') {
+            errors.push("Please specify if your group will be Private or Public")
+        }
+
+        if (city.length === 0) {
+            errors.push("City is required")
+        }
+
+        setValidationErrors(errors);
+
+    }, [name, state, about, type, city,  privateGroup])
 
 
     const handleSubmit = (e) => {
@@ -42,14 +71,6 @@ function EditGroupFormComponent() {
 
         return dispatch(editOneGroup(updatingGroup))
             .then(() => history.push(`/groups/${groupId}`))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) {
-                    setValidationErrors(data.errors)
-                }
-            }
-            )
-
     };
 
     const deleteGrouphandler = async (groupId) => {
@@ -78,24 +99,27 @@ function EditGroupFormComponent() {
                     value={name}
                     placeholder='Name'
                     name='Name'
+                    required
                 />
                 <div>
                     <label>
                         <input
                             type='radio'
-                            value={`${true}`}
+                            value='true'
                             name='Group'
                             onChange={(e) => setPrivateGroup(e.target.value)}
                             checked={privateGroup === `${true}`}
+                            required
                         /> Private
                     </label>
                     <label>
                         <input
                             type='radio'
-                            value={`${false}`}
+                            value='false'
                             name='Group'
                             onChange={(e) => setPrivateGroup(e.target.value)}
                             checked={privateGroup === `${false}`}
+                            required
                         /> Public
                     </label>
                 </div>
@@ -105,6 +129,7 @@ function EditGroupFormComponent() {
                     value={city}
                     placeholder='City'
                     name='City'
+                    required
                 />
                 <input
                     type='text'
@@ -112,6 +137,9 @@ function EditGroupFormComponent() {
                     value={state}
                     placeholder='State'
                     name='State'
+                    pattern='[A-Z]{2}'
+                    maxLength={2}
+                    required
                 />
                 <input
                     type='text'
@@ -119,6 +147,7 @@ function EditGroupFormComponent() {
                     value={about}
                     placeholder='Tell us about your Group'
                     name='Group'
+                    required
                 />
                 <div>
                     <label>
@@ -128,15 +157,17 @@ function EditGroupFormComponent() {
                             name='Type'
                             onChange={(e) => setType(e.target.value)}
                             checked={type === 'Online'}
+                            required
                         /> Online
                     </label>
                     <label>
                         <input
                             type='radio'
-                            value='In person'
+                            value='In Person'
                             name='Type'
                             onChange={(e) => setType(e.target.value)}
-                            checked={type === 'In person'}
+                            checked={type === 'In Person'}
+                            required
                         /> In person
                     </label>
                 </div>

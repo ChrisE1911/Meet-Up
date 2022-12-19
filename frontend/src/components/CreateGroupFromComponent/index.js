@@ -23,12 +23,20 @@ function CreateGroupFormComponent() {
             errors.push('Name must be 60 characters or less')
         }
 
-        if (state.length !== 2 || (!state.toUpperCase())) {
+        if (state.length !== 2 || !state.toUpperCase()) {
             errors.push('State must be 2 characters and Uppercase. Ex: NC, TX, CA');
         }
 
         if (about.length < 50) {
             errors.push("About must be 50 characters or more")
+        }
+
+        if (type !== 'Online' && type !== 'In Person') {
+            errors.push("Type must be 'Online' or 'In person'")
+        }
+
+        if (privateGroup !== 'true' && privateGroup !== 'false') {
+            errors.push("Please specify if your group will be Private or Public")
         }
 
         if (city.length === 0) {
@@ -37,7 +45,7 @@ function CreateGroupFormComponent() {
 
         setValidationErrors(errors);
 
-    }, [name, state, about, type, city])
+    }, [name, state, about, type, city,  privateGroup])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -82,7 +90,7 @@ function CreateGroupFormComponent() {
                     <label>
                         <input
                             type='radio'
-                            value={`${true}`}
+                            value='true'
                             name='Group'
                             onChange={(e) => setPrivateGroup(e.target.value)}
                             checked={privateGroup === `${true}`}
@@ -92,7 +100,7 @@ function CreateGroupFormComponent() {
                     <label>
                         <input
                             type='radio'
-                            value={`${false}`}
+                            value='false'
                             name='Group'
                             onChange={(e) => setPrivateGroup(e.target.value)}
                             checked={privateGroup === `${false}`}
