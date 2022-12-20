@@ -21,9 +21,18 @@ function GroupsComponent() {
 
     return (
         <>
-                <div id='toggle-buttons'>
-                    <Link to={'/events'}>Events</Link>
-                    <Link to={'/groups'}>Groups</Link>
+            <div id='toggle-buttons'>
+
+                <Link to={'/events'}>
+                    <button>
+                    Events
+                    </button>
+                </Link>
+                <Link to={'/groups'}>
+                    <button>
+                    Groups
+                    </button>
+                </Link>
                 </div>
             <div id='card-container'>
                 {!allGroupsArr && <span>No Groups available right now</span>}
