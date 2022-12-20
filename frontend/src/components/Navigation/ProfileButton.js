@@ -44,7 +44,7 @@ function ProfileButton({ user }) {
   return (
     <>
       <div>
-        <button onClick={() => setOpenProfile((prev) => !prev)}>
+        <button className="profile-button" onClick={() => setOpenProfile((prev) => !prev)}>
           <i className="fas fa-user-circle" />
         </button>
         {openProfile && <div className="profile-dropdown-container">
