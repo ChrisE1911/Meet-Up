@@ -43,8 +43,16 @@ function EventsComponent() {
     return (
         <>
                 <div id='toggle-buttons'>
-                    <Link to={'/events'}>Events</Link>
-                    <Link to={'/groups'}>Groups</Link>
+                <Link to={'/events'}>
+                    <button>
+                    Events
+                    </button>
+                </Link>
+                <Link to={'/groups'}>
+                    <button>
+                    Groups
+                    </button>
+                </Link>
                 </div>
             <div id='card-container'>
                 {!allEventsArr && <span>No Events available right now</span>}
