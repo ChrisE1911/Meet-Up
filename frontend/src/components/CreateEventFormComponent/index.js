@@ -77,7 +77,9 @@ function CreateEventFormComponent() {
             <form onSubmit={handleSubmit}>
                 <ul>
                     {validationErrors.length > 0 && validationErrors.map((error, idx) => (
-                        <li key={idx}>{error}</li>
+                        <ul>
+                            <li key={idx}>{error}</li>
+                        </ul>
                     ))}
                 </ul>
                 <input
@@ -164,7 +166,7 @@ function CreateEventFormComponent() {
                     name='Image'
                     required
                 />
-                <button type='submit' disabled={validationErrors.length > 0}>Submit</button>
+                <button type='submit'>Submit</button>
             </form>
         </div>
     );

@@ -15,13 +15,11 @@ function Navigation({ isLoaded }) {
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <span>
         <ProfileButton user={sessionUser} />
-      </span>
     );
   } else {
     sessionLinks = (
-      <span>
+      <div>
         <OpenModalButton
           buttonText="Log In"
           modalComponent={<LoginFormModal />}
@@ -30,15 +28,15 @@ function Navigation({ isLoaded }) {
           buttonText="Sign Up"
           modalComponent={<SignupFormModal />}
         />
-      </span>
+      </div>
     );
   }
 
   return (
     <div className='navigation-bar'>
-      <span>
+      <div>
         <NavLink exact to="/">{homeTitle}</NavLink>
-      </span>
+      </div>
       {isLoaded && sessionLinks}
     </div>
   );
