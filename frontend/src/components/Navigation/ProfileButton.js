@@ -21,7 +21,7 @@ function ProfileButton({ user }) {
     if (!openProfile) return;
 
     const closeMenu = (e) => {
-      if (!ulRef.current.contains(e.target)) {
+      if (!ulRef?.current?.contains(e.target)) {
         setOpenProfile(false);
       }
     };
@@ -39,6 +39,12 @@ function ProfileButton({ user }) {
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
+  const firstNameString = `${user.firstName}`
+
+  const profileButtonLetter = firstNameString.charAt(0)
+
+  console.log('STRINGGGGG', profileButtonLetter)
+
 
 
   return (
@@ -46,7 +52,7 @@ function ProfileButton({ user }) {
       <div>
         <button className="profile-button" onClick={() => setOpenProfile((prev) => !prev)}>
           {/* <i className="fas fa-user-circle" /> */}
-          {/* <div style={{fontWeight: "600"}}>P</div> */}
+          <div style={{ fontWeight: "600" }}>{profileButtonLetter}</div>
         </button>
         {openProfile && <div className="profile-dropdown-container">
           <ul className={ulClassName} ref={ulRef}>
