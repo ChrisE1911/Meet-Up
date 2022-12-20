@@ -21,6 +21,8 @@ function EventDetailsComponent() {
     const allGroupsArr = Object.values(allGroups)
     const groupId = allGroupsArr.find((group) => group.organizerId === sessionUser.id)
     let groupIdObj = Object.assign({}, groupId)
+    const newStartDate = new Date(currentEvent.startDate).toDateString().split(' ').slice(0, 3)
+    const newStartDateTime = new Date(currentEvent.startDate).toLocaleString().split(',')[1]
 
     console.log('HEYYYYY', currentGroup)
 
@@ -49,6 +51,8 @@ function EventDetailsComponent() {
         <>
             <br />
             <br />
+            <br />
+            <br />
             {currentEvent.EventImages && <img src={currentEvent.EventImages[0]} alt='Event'></img>}
             {currentEvent.name && <h1>{currentEvent.name}</h1>}
             {currentEvent.Group && <p>{`Hosted by ${currentEvent.Group.name}`}</p>}
@@ -64,8 +68,7 @@ function EventDetailsComponent() {
                 {currentEvent.price}
             </h3>
 
-            <h3>{currentEvent.startDate}</h3>
-            <h3>{currentEvent.endDate}</h3>
+            <h3>{`${ newStartDate } at ${newStartDateTime} - end time`}</h3>
 
             {sessionUser && <Link to={'/groups/new'}>Start a New Group</Link>}
             <Link to={'/groups'}>Groups</Link>
