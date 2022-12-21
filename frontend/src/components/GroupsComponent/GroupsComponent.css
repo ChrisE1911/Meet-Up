@@ -3,16 +3,23 @@
 }
 
 #card-container {
-    width: auto;
+    width: 50%;
     height: auto;
     white-space: normal;
     border: 2px red solid;
-    padding: 50px;
-    margin: 150px;
+    padding: 0;
+    margin-left: 10%;
+    margin-top: 10%
+}
+
+#card-container ul {
+    padding: 0;
 }
 
 #toggle-buttons {
-    margin-top: 75px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 80px;
     margin-left: 150px;
     word-spacing: 4rem;
 }
