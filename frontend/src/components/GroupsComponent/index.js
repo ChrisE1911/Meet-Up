@@ -41,8 +41,8 @@ function GroupsComponent() {
                         return <GroupComponentCard key={group.id} group={group} />
                     })}
                 </ul>
-                { sessionUser && <Link to={'/groups/new'}>Create Group</Link>}
             </div>
+                { sessionUser && <Link to={'/groups/new'}>Create Group</Link>}
         </>
     )
 }
