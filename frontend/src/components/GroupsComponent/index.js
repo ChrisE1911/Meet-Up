@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { getGroups } from '../../store/group.js';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import GroupComponentCard from '../GroupComponentCard/GroupComponentCard.js';
 import { Link } from 'react-router-dom';
 import './GroupsComponent.css';
 
 
 function GroupsComponent() {
+    const [selectGroupButton, setSelectGroupButton] = useState(false)
+    const [selectEventButton, setSelectEventButton] = useState(false)
     const dispatch = useDispatch();
     const allGroups = useSelector(state => state.groups.allGroups)
 
@@ -21,19 +23,20 @@ function GroupsComponent() {
 
     return (
         <>
-            <div id='toggle-buttons'>
-
-                <Link to={'/events'}>
-                    <button>
-                    Events
-                    </button>
-                </Link>
-                <Link to={'/groups'}>
-                    <button>
-                    Groups
-                    </button>
-                </Link>
+            <div className='toggle-buttons-container'>
+                <div className='toggle-buttons'>
+                    <Link to={'/events'}>
+                        <button className='events-button'>
+                            Events
+                        </button>
+                    </Link>
+                    <Link to={'/groups'}>
+                        <button className='groups-button'>
+                            Groups
+                        </button>
+                    </Link>
                 </div>
+            </div>
             <div id='card-container'>
                 {!allGroupsArr && <span>No Groups available right now</span>}
                 <ul>
@@ -42,7 +45,7 @@ function GroupsComponent() {
                     })}
                 </ul>
             </div>
-                { sessionUser && <Link to={'/groups/new'}>Create Group</Link>}
+            {sessionUser && <Link to={'/groups/new'}>Create Group</Link>}
         </>
     )
 }

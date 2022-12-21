@@ -15,17 +15,51 @@
     padding: 0;
 }
 
-#toggle-buttons {
+.toggle-buttons-container {
     display: flex;
     flex-direction: row;
-    margin-top: 3%;
+    margin-top: 10%;
     /* margin-left: 150px; */
     word-spacing: 4rem;
     gap: 20px;
     width: 100%;
     position: sticky;
-    top: 6%;
+    top: 7%;
     background-color: white;
     height: 5rem;
     align-items: center;
+}
+
+.toggle-buttons {
+    position: relative;
+    left: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.groups-button {
+    border: none;
+    font-size: 25px;
+    background-color: white;
+    color: Gray
+}
+
+.groups-button:hover {
+    color: Teal;
+    text-decoration-line: underline;
+
+}
+
+.events-button {
+    border: none;
+    font-size: 25px;
+    background-color: white;
+    color: Gray
+}
+
+.events-button:hover {
+    color: Teal;
+    text-decoration-line: underline;
 }
