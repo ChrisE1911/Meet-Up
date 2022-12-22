@@ -12,11 +12,13 @@ const GroupComponentCard = ({ group }) => {
             </div>
             <div className='group-component-card-details'>
                 <div className='name-and-location'>
-                <div style={{fontWeight: '700', style: ''}}>{group.name}</div>
+                <div style={{fontWeight: '700'}}>{group.name}</div>
                 <div className='location'>{`${group.city} ${group.state}`}</div>
                 </div>
                 <div>
-                <p>{group.about}</p>
+                    <p>{group.about}</p>
+                    <br/>
+                    <br/>
                 <p>{`${group.numMembers} members ${group.private ? "Private" : "Public"}`}</p>
                 </div>
             </div>

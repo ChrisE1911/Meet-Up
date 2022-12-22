@@ -9,16 +9,23 @@ const EventsComponentCard = ({ event }) => {
 
 
     return (
-        <Link to={`/events/${event.id}`} className='event-component-card'>
-            <img src={event.previewImage} alt='event' style={{ width: '100px' }} ></img>
-            <h3>{`${newStartDate} ${newStartDateTime} CST`}</h3>
-            <h3>{event.name}</h3>
-            <p>{event.Group?.name}</p>
-            <p>{`${event.Venue?.city}, ${event.Venue?.state}`}</p>
-            <p>{ }</p>
-
-            <p>{`${event.numAttending} attendees`}</p>
-            <p>{`${event.type} event`}</p>
+        <Link to={`/events/${event.id}`} className='group-component-card'>
+            <div className='group-component-card-image'>
+                <img src={event.previewImage} alt='event' className='card-image' ></img>
+            </div>
+            <div className='group-component-card-details'>
+                <div className='name-and-location'>
+                    <div className='location'>{`${newStartDate} ${newStartDateTime} CST`}</div>
+                    <div style={{fontWeight: '700'}}>{event.name}</div>
+                    <div>{`${event.Group?.name}`}</div>
+                    <div>{`${event.Venue?.city}, ${event.Venue?.state}`}</div>
+                </div>
+                <br/>
+                <br />
+                <div>
+                <div>{`${event.numAttending} attendees ${event.type} event`}</div>
+                </div>
+            </div>
         </Link>
     )
 }

@@ -18,16 +18,17 @@
 .toggle-buttons-container {
     display: flex;
     flex-direction: row;
-    margin-top: 10%;
+    margin-top: 12%;
     /* margin-left: 150px; */
     word-spacing: 4rem;
     gap: 20px;
     width: 100%;
     position: sticky;
-    top: 7%;
+    top: 10%;
     background-color: white;
     height: 5rem;
     align-items: center;
+    border-bottom: 1px solid gray;
 }
 
 .toggle-buttons {
