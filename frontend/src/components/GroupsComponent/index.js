@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { getGroups } from '../../store/group.js';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import GroupComponentCard from '../GroupComponentCard/GroupComponentCard.js';
 import { Link } from 'react-router-dom';
 import './GroupsComponent.css';
+import OpenModalButton from '../OpenModalButton';
+import CreateGroupFormComponent from '../CreateGroupFromComponent/index.js';
 
 
 function GroupsComponent() {
-    const [selectGroupButton, setSelectGroupButton] = useState(false)
-    const [selectEventButton, setSelectEventButton] = useState(false)
     const dispatch = useDispatch();
     const allGroups = useSelector(state => state.groups.allGroups)
 
@@ -45,7 +45,9 @@ function GroupsComponent() {
                     })}
                 </ul>
             </div>
-            {sessionUser && <Link to={'/groups/new'}>Create Group</Link>}
+            { sessionUser && <OpenModalButton
+                buttonText="Create Group"
+                modalComponent={<CreateGroupFormComponent />} />}
         </>
     )
 }
