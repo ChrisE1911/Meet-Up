@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getOneGroup } from '../../store/group.js';
+import OpenModalButton from '../OpenModalButton';
+import CreateGroupFormComponent from '../CreateGroupFromComponent/index.js';
 
 
 function GroupDetailsComponent() {
@@ -31,10 +33,14 @@ function GroupDetailsComponent() {
                 {currentGroup.Organizer && <h3>{`Organized by ${currentGroup.Organizer.firstName} ${currentGroup.Organizer.lastName}`}</h3>}
                 <h2>What we're about</h2>
                 <p>{currentGroup.about}</p>
-                { sessionUser && <Link to={'/groups/new'}>Start a New Group</Link>}
+                {sessionUser && <Link to={'/groups/new'}>Start a New Group</Link>}
                 <Link to={'/groups'}>Groups</Link>
                 <Link to={'/events'}>Events</Link>
                 {sessionUser && currentGroup.Organizer && sessionUser.id === currentGroup.Organizer.id && <Link to={`/groups/${currentGroup.id}/edit`}>Edit Group</Link>}
+                { sessionUser && <OpenModalButton
+                    buttonText="Start New Group"
+                    modalComponent={<CreateGroupFormComponent />}
+                />}
             </div>
         </>
 

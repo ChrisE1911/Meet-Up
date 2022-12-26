@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createAGroup } from '../../store/group.js';
+import { useModal } from '../../context/Modal.js';
 
 
 function CreateGroupFormComponent() {
@@ -15,6 +16,7 @@ function CreateGroupFormComponent() {
     const [previewImage, setPreviewImage] = useState('')
     const dispatch = useDispatch();
     const history = useHistory();
+    const { closeModal } = useModal();
 
     useEffect(() => {
         const errors = [];
@@ -64,7 +66,8 @@ function CreateGroupFormComponent() {
         }
 
         return dispatch(createAGroup(group, image))
-            .then(() => history.push('/groups'))
+            .then(closeModal)
+            .then(() => history.push('/groups'));
     };
 
 
