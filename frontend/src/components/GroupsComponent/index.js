@@ -1,11 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { getGroups } from '../../store/group.js';
-import { useEffect } from 'react';
+import { useEffect} from 'react';
 import GroupComponentCard from '../GroupComponentCard/GroupComponentCard.js';
 import { Link } from 'react-router-dom';
 import './GroupsComponent.css';
-import OpenModalButton from '../OpenModalButton';
-import CreateGroupFormComponent from '../CreateGroupFromComponent/index.js';
 
 
 function GroupsComponent() {
@@ -45,9 +43,9 @@ function GroupsComponent() {
                     })}
                 </ul>
             </div>
-            { sessionUser && <OpenModalButton
-                buttonText="Create Group"
-                modalComponent={<CreateGroupFormComponent />} />}
+            {sessionUser && <button>
+                <Link to={'/groups/new'} id='link-button'>Create Group</Link>
+            </button>}
         </>
     )
 }

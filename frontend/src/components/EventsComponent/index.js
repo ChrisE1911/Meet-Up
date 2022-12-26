@@ -63,7 +63,9 @@ function EventsComponent() {
                         return <EventsComponentCard key={event.id} event={event} />
                     })}
                 </ul>
-                {sessionUser && <Link to={`/events/${groupIdObj.id}/new`}>Create Event</Link>}
+                {sessionUser && <button>
+                    <Link to={`/events/${groupIdObj.id}/new`} id='link-button'>Create Event</Link>
+                </button>}
             </div>
         </>
     )

@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createAEvent } from '../../store/event.js';
 import { useParams } from 'react-router-dom';
+import { useModal } from '../../context/Modal.js';
 
 
 function CreateEventFormComponent() {
@@ -18,6 +19,7 @@ function CreateEventFormComponent() {
     const dispatch = useDispatch();
     const history = useHistory()
     const { groupId } = useParams();
+    const { closeModal } = useModal();
 
 
 
@@ -62,6 +64,7 @@ function CreateEventFormComponent() {
         }
 
         return dispatch(createAEvent(groupId, event, image))
+            .then(closeModal)
             .then(() => history.push('/events')).catch(
                 async (res) => {
                   const data = await res.json();
