@@ -24,6 +24,9 @@ function GroupDetailsComponent() {
                 <br />
                 <br />
                 <br />
+                <br />
+                <br />
+                <br />
                 {currentGroup.GroupImages && <img src={currentGroup.GroupImages[0].url} alt='preview'></img>}
                 <h1>{currentGroup.name}</h1>
                 <h3>{`${currentGroup.numMembers} members ${currentGroup.private ? 'Private' : 'Public'} group`}</h3>

@@ -81,9 +81,9 @@ function EventDetailsComponent() {
                     <button>
                         <Link to={'/events'} id='link-button'>Events</Link>
                     </button>
-                    <button>
+                    {sessionUser && <button>
                         <Link to={`/events/${groupIdObj.id}/new`} id='link-button'>Create New Event</Link>
-                    </button>
+                    </button>}
                     {sessionUser && currentGroup && sessionUser.id === currentGroup.organizerId && <button onClick={() => deleteEventhandler(eventId)} id='link-button'>Delete Event</button>}
                 </div>
             </div>
