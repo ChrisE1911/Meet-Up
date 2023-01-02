@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createAGroup } from '../../store/group.js';
 import { useModal } from '../../context/Modal.js';
+import './CreateGroupFormComponent.css';
 
 
 function CreateGroupFormComponent() {
@@ -75,7 +76,7 @@ function CreateGroupFormComponent() {
     return (
         <div>
             <h1>Create Group</h1>
-            <form onSubmit={handleSubmit}>
+            <form id='universal-form-container' onSubmit={handleSubmit}>
                 <ul>
                     {validationErrors.map((error, idx) => (
                         <li key={idx}>{error}</li>

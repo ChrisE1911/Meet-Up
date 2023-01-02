@@ -43,9 +43,6 @@ function GroupsComponent() {
                     })}
                 </ul>
             </div>
-            {sessionUser && <button>
-                <Link to={'/groups/new'} id='link-button'>Create Group</Link>
-            </button>}
         </>
     )
 }

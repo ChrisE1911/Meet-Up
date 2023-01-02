@@ -86,8 +86,8 @@ function EditGroupFormComponent() {
             <br />
             <br />
             <br />
+            <form id='universal-form-container' onSubmit={handleSubmit}>
             <h1>Edit Group</h1>
-            <form onSubmit={handleSubmit}>
                 <ul>
                     {validationErrors.length > 0 && validationErrors.map((error, idx) => (
                         <li key={idx}>{error}</li>

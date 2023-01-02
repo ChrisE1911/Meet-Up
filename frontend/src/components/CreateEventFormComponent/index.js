@@ -77,7 +77,7 @@ function CreateEventFormComponent() {
     return (
         <div>
             <h1>Create Event</h1>
-            <form onSubmit={handleSubmit}>
+            <form id='universal-form-container' onSubmit={handleSubmit}>
                 <ul>
                     {validationErrors.length > 0 && validationErrors.map((error, idx) => (
                         <ul>
