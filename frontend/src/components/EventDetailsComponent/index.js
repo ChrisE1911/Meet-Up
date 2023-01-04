@@ -72,19 +72,19 @@ function EventDetailsComponent() {
 
                 <h3>{`${newStartDate} at ${newStartDateTime} - end time`}</h3>
                 <div className='button-container'>
-                    {sessionUser && <button>
+                    {sessionUser && <button className='button-design'>
                         <Link to={'/groups/new'} id='link-button'>Start a New Group</Link>
                     </button>}
-                    <button>
+                    <button className='button-design'>
                         <Link to={'/groups'} id='link-button'>Groups</Link>
                     </button>
-                    <button>
+                    <button className='button-design'>
                         <Link to={'/events'} id='link-button'>Events</Link>
                     </button>
-                    {sessionUser && <button>
+                    {sessionUser && <button className='button-design'>
                         <Link to={`/events/${groupIdObj.id}/new`} id='link-button'>Create New Event</Link>
                     </button>}
-                    {sessionUser && currentGroup && sessionUser.id === currentGroup.organizerId && <button onClick={() => deleteEventhandler(eventId)} id='link-button'>Delete Event</button>}
+                    {sessionUser && currentGroup && sessionUser.id === currentGroup.organizerId && <button onClick={() => deleteEventhandler(eventId)} className='button-design'>Delete Event</button>}
                 </div>
             </div>
         </>

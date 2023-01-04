@@ -37,17 +37,17 @@ function GroupDetailsComponent() {
                 <p>{currentGroup.about}</p>
                 <div className='button-container'>
                     {sessionUser &&
-                        <button>
+                        <button className='button-design'>
                             <Link to={'/groups/new'} id='link-button'>Start a New Group</Link>
                         </button>}
-                    <button>
+                    <button className='button-design'>
                         <Link to={'/groups'} id='link-button'>Groups</Link>
                     </button>
-                    <button>
+                    <button className='button-design'>
                         <Link to={'/events'} id='link-button'>Events</Link>
                     </button>
                     {sessionUser && currentGroup.Organizer && sessionUser.id === currentGroup.Organizer.id &&
-                        <button>
+                        <button className='button-design'>
                             <Link to={`/groups/${currentGroup.id}/edit`} id='link-button'>Edit Group</Link>
                         </button>}
                 </div>
