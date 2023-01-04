@@ -177,7 +177,7 @@ function CreateGroupFormComponent() {
                         name='Image'
                         required
                     />
-                    <button type='submit' disabled={validationErrors.length > 0}>Submit</button>
+                    <button className='button-design' type='submit' disabled={validationErrors.length > 0}>Submit</button>
                     </fieldset>
                     </div>
             </form>
