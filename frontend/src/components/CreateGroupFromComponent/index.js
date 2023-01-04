@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createAGroup } from '../../store/group.js';
-import { useModal } from '../../context/Modal.js';
 import './CreateGroupFormComponent.css';
 
 
@@ -17,7 +16,6 @@ function CreateGroupFormComponent() {
     const [previewImage, setPreviewImage] = useState('')
     const dispatch = useDispatch();
     const history = useHistory();
-    const { closeModal } = useModal();
 
     useEffect(() => {
         const errors = [];
@@ -48,7 +46,7 @@ function CreateGroupFormComponent() {
 
         setValidationErrors(errors);
 
-    }, [name, state, about, type, city,  privateGroup])
+    }, [name, state, about, type, city, privateGroup])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -67,110 +65,128 @@ function CreateGroupFormComponent() {
         }
 
         return dispatch(createAGroup(group, image))
-            .then(closeModal)
             .then(() => history.push('/groups'));
     };
 
 
 
     return (
-        <div>
-            <h1>Create Group</h1>
+        <>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <form id='universal-form-container' onSubmit={handleSubmit}>
-                <ul>
-                    {validationErrors.map((error, idx) => (
-                        <li key={idx}>{error}</li>
-                    ))}
-                </ul>
-                <input
-                    type='text'
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                    placeholder='Name'
-                    name='Name'
-                    required
-                />
-                <div>
-                    <label>
-                        <input
-                            type='radio'
-                            value='true'
-                            name='Group'
-                            onChange={(e) => setPrivateGroup(e.target.value)}
-                            checked={privateGroup === `${true}`}
-                            required
-                        /> Private
-                    </label>
-                    <label>
-                        <input
-                            type='radio'
-                            value='false'
-                            name='Group'
-                            onChange={(e) => setPrivateGroup(e.target.value)}
-                            checked={privateGroup === `${false}`}
-                            required
-                        /> Public
-                    </label>
-                </div>
-                <input
-                    type='text'
-                    onChange={(e) => setCity(e.target.value)}
-                    value={city}
-                    placeholder='City'
-                    name='City'
-                    required
-                />
-                <input
-                    type='text'
-                    onChange={(e) => setState(e.target.value)}
-                    value={state}
-                    placeholder='State'
-                    name='State'
-                    required
-                    pattern='[A-Z]{2}'
-                    maxLength={2}
-                />
-                <input
-                    type='text'
-                    onChange={(e) => setAbout(e.target.value)}
-                    value={about}
-                    placeholder='Tell us about your Group'
-                    name='Group'
-                    required
-                />
-                <div>
-                    <label>
-                        <input
-                            type='radio'
-                            value='Online'
-                            name='Type'
-                            onChange={(e) => setType(e.target.value)}
-                            checked={type === 'Online'}
-                            required
-                        /> Online
-                    </label>
-                    <label>
-                        <input
-                            type='radio'
-                            value='In Person'
-                            name='Type'
-                            onChange={(e) => setType(e.target.value)}
-                            checked={type === 'In Person'}
-                            required
-                        /> In person
-                    </label>
-                </div>
-                <input
-                    type='url'
-                    onChange={(e) => setPreviewImage(e.target.value)}
-                    value={previewImage}
-                    placeholder='Image'
-                    name='Image'
-                    required
-                />
-                <button type='submit' disabled={validationErrors.length > 0}>Submit</button>
+                <div id='form-container-div'>
+                <fieldset id='form-container-fieldset'>
+                    <h1 id='form-title'>Create Group</h1>
+                    <ul>
+                        {validationErrors.map((error, idx) => (
+                            <li key={idx}>{error}</li>
+                        ))}
+                    </ul>
+                    <input
+                        id='input-field'
+                        type='text'
+                        onChange={(e) => setName(e.target.value)}
+                        value={name}
+                        placeholder='Name'
+                        name='Name'
+                        required
+                    />
+                    <div>
+                        <label>
+                            <input
+                                type='radio'
+                                value='true'
+                                name='Group'
+                                onChange={(e) => setPrivateGroup(e.target.value)}
+                                checked={privateGroup === `${true}`}
+                                required
+                            /> Private
+                        </label>
+                        <label>
+                            <input
+                                type='radio'
+                                value='false'
+                                name='Group'
+                                onChange={(e) => setPrivateGroup(e.target.value)}
+                                checked={privateGroup === `${false}`}
+                                required
+                            /> Public
+                        </label>
+                    </div>
+                    <input
+                        id='input-field'
+                        type='text'
+                        onChange={(e) => setCity(e.target.value)}
+                        value={city}
+                        placeholder='City'
+                        name='City'
+                        required
+                    />
+                    <input
+                        id='input-field'
+                        type='text'
+                        onChange={(e) => setState(e.target.value)}
+                        value={state}
+                        placeholder='State'
+                        name='State'
+                        required
+                        pattern='[A-Z]{2}'
+                        maxLength={2}
+                    />
+                    <input
+                        id='input-field'
+                        type='text'
+                        onChange={(e) => setAbout(e.target.value)}
+                        value={about}
+                        placeholder='Tell us about your Group'
+                        name='Group'
+                        required
+                    />
+                    <div>
+                        <label>
+                            <input
+                                type='radio'
+                                value='Online'
+                                name='Type'
+                                onChange={(e) => setType(e.target.value)}
+                                checked={type === 'Online'}
+                                required
+                            /> Online
+                        </label>
+                        <label>
+                            <input
+                                type='radio'
+                                value='In Person'
+                                name='Type'
+                                onChange={(e) => setType(e.target.value)}
+                                checked={type === 'In Person'}
+                                required
+                            /> In person
+                        </label>
+                    </div>
+                    <input
+                        id='input-field'
+                        type='url'
+                        onChange={(e) => setPreviewImage(e.target.value)}
+                        value={previewImage}
+                        placeholder='Image'
+                        name='Image'
+                        required
+                    />
+                    <button type='submit' disabled={validationErrors.length > 0}>Submit</button>
+                    </fieldset>
+                    </div>
             </form>
-        </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+        </>
     );
 }
 

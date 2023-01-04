@@ -23,7 +23,7 @@ function EditGroupFormComponent() {
 
     useEffect(() => {
         dispatch(getOneGroup(groupId))
-    }, [dispatch, groupId])
+    }, [dispatch])
 
     useEffect(() => {
         const errors = [];
@@ -172,8 +172,8 @@ function EditGroupFormComponent() {
                     </label>
                 </div>
                 <button type='submit' disabled={validationErrors.length > 0}>Submit</button>
-            </form>
                 <button onClick={() => deleteGrouphandler(groupId)}>Delete Group</button>
+            </form>
         </div>
     );
 }
