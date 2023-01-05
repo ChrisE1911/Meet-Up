@@ -55,8 +55,10 @@ function GroupDetailsComponent() {
                             <Link to={`/groups/${currentGroup.id}/edit`} id='link-button'>Edit Group</Link>
                         </button>}
                 </div>
-                <h2>What we're about</h2>
-                <p>{currentGroup.about}</p>
+                <div id='group-description'>
+                    <h3>What we're about</h3>
+                    <p>{currentGroup.about}</p>
+                </div>
             </div>
         </>
 

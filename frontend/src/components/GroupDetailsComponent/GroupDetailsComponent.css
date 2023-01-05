@@ -1,4 +1,4 @@
-#link-button{
+#link-button {
     text-decoration: none;
     color: white;
 }
@@ -19,7 +19,6 @@
     padding: 0;
     height: 10%;
     border-top: 2px solid silver;
-    margin-left: 10%;
 }
 
 .group-container {
@@ -28,6 +27,9 @@
     margin-top: 10px;
     display: flex;
     flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+    overflow: hidden;
 }
 
 #group-information {
@@ -37,12 +39,18 @@
     margin-left: 10%;
     border: 2px solid red;
     margin-right: 10%;
+    gap: 4%
 }
 
 #group-information img {
-    width: 50%;
+    width: 60%;
 }
 
 #group-information-div {
     width: 40%;
+}
+
+#group-description {
+    margin-left: 10%;
+    margin-right: 10%;
 }
