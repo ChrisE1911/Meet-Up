@@ -48,7 +48,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     price: {
       type: DataTypes.DECIMAL(4,2),
-      allowNull: false
+      allowNull: false,
+      validate: {
+        tooLowPrice(value) {
+          if (value < 5) {
+            throw new Error('Price is too low. Please enter amount greater than 5')
+          }
+        }
+      }
     },
     startDate: {
       type: DataTypes.DATE,
@@ -63,7 +70,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         afterStartDate(value) {
           if (value < this.startDate) {
-            throw new Error('Date must be after Start Date')
+            throw new Error('End Date must be after Start Date')
           }
         }
       }

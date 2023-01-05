@@ -13,23 +13,23 @@ function ProfileButton({ user }) {
   const history = useHistory()
 
   const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
+    if (openProfile) return;
+    setOpenProfile(true);
   };
 
   useEffect(() => {
-    if (!showMenu) return;
+    if (!openProfile) return;
 
     const closeMenu = (e) => {
-      if (!ulRef.current.contains(e.target)) {
-        setShowMenu(false);
+      if (!ulRef?.current?.contains(e.target)) {
+        setOpenProfile(false);
       }
     };
 
     document.addEventListener('click', closeMenu);
 
     return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
+  }, [openProfile]);
 
   const logout = (e) => {
     e.preventDefault();
@@ -39,13 +39,20 @@ function ProfileButton({ user }) {
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
+  const firstNameString = `${user.firstName}`
+
+  const profileButtonLetter = firstNameString.charAt(0)
+
+  console.log('STRINGGGGG', profileButtonLetter)
+
 
 
   return (
     <>
       <div>
         <button className="profile-button" onClick={() => setOpenProfile((prev) => !prev)}>
-          <i className="fas fa-user-circle" />
+          {/* <i className="fas fa-user-circle" /> */}
+          <div style={{ fontWeight: "600" }}>{profileButtonLetter}</div>
         </button>
         {openProfile && <div className="profile-dropdown-container">
           <ul className={ulClassName} ref={ulRef}>
@@ -53,7 +60,7 @@ function ProfileButton({ user }) {
             <li>{user.firstName} {user.lastName}</li>
             <li>{user.email}</li>
             <li>
-              <button onClick={logout}>Log Out</button>
+              <button onClick={logout} className='logout-button'>Log Out</button>
             </li>
           </ul>
         </div>}

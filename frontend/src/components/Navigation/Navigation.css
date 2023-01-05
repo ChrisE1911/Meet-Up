@@ -5,20 +5,45 @@
 }
 
 .navigation-bar {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    background-color: white;
+    z-index: 3;
+    height: 10%;
+    border-bottom: #000000b5 1px solid
 }
 
 
 .profile-dropdown-container {
     position: absolute;
-    margin-top: 10px;
-    right: 7px;
+    margin-top: 25px;
+    right: 15px;
     width: 120px;
     border: 1px solid gray;
-    padding: 10px
+    padding: 10px;
+    background-color: white;
+    box-shadow: 10px 5px 5px black;
+    border-radius: 20px;
+}
+
+.profile-dropdown-container ul{
+    gap: 16px;
+    text-decoration-line: underline;
+}
+
+.logout-button{
+    border: none;
+     background-color: white;
+      font-weight: 700;
+      font-size: 20px;
+}
+.logout-button:hover{
+    color: teal
 }
 
 .profile-dropdown {
@@ -33,5 +58,36 @@
 
 .profile-button {
     position: relative;
-    right: 10px
+    right: 25px;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+}
+
+.site-title a{
+    font-family: Arial, Helvetica, sans-serif;
+    color: red;
+    font-weight: 700;
+    position: relative;
+    left: 20px;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+.session-buttons {
+    display: flex;
+    gap: 26px;
+    position: relative;
+    right: 30px;
+}
+
+.session-buttons button {
+    border: none;
+    background-color: white;
+    font-size: large;
+    font-weight: 600;
+}
+
+.session-buttons button:hover {
+    color: teal;
 }

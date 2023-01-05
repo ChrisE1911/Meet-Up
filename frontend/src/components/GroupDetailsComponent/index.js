@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getOneGroup } from '../../store/group.js';
+import './GroupDetailsComponent.css';
 
 
 function GroupDetailsComponent() {
@@ -19,22 +20,45 @@ function GroupDetailsComponent() {
 
     return (
         <>
-            <div>
-                <br/>
-                <br/>
-                <br/>
-                {currentGroup.GroupImages && <img src={currentGroup.GroupImages[0].url} alt='preview'></img>}
-                <h1>{currentGroup.name}</h1>
-                <h3>{`${currentGroup.numMembers} members ${currentGroup.private ? 'Private' : 'Public'} group`}</h3>
-                <h3>{currentGroup.type}</h3>
+            <div className='group-container'>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <div id='group-information'>
+                    {currentGroup.GroupImages && <img src={currentGroup.GroupImages[0].url} alt='preview'></img>}
+                    <div id='group-information-div'>
+                        <h1>{currentGroup.name}</h1>
+                        <h3>{`${currentGroup.numMembers} members ${currentGroup.private ? 'Private' : 'Public'} group`}</h3>
+                        <h3>{currentGroup.type}</h3>
+                        {currentGroup.Organizer && <h3>{`Organized by ${currentGroup.Organizer.firstName} ${currentGroup.Organizer.lastName}`}</h3>}
+                    </div>
+                </div>
                 {/*Conditional rendering of the Organizer*/}
-                {currentGroup.Organizer && <h3>{`Organized by ${currentGroup.Organizer.firstName} ${currentGroup.Organizer.lastName}`}</h3>}
-                <h2>What we're about</h2>
-                <p>{currentGroup.about}</p>
-                { sessionUser && <Link to={'/groups/new'}>Start a New Group</Link>}
-                <Link to={'/groups'}>Groups</Link>
-                <Link to={'/events'}>Events</Link>
-                {sessionUser && currentGroup.Organizer && sessionUser.id === currentGroup.Organizer.id && <Link to={`/groups/${currentGroup.id}/edit`}>Edit Group</Link>}
+                <br />
+                <br />
+                <div className='button-container'>
+                    {sessionUser &&
+                        <button className='button-design'>
+                            <Link to={'/groups/new'} id='link-button'>Start a New Group</Link>
+                        </button>}
+                    <button className='button-design'>
+                        <Link to={'/groups'} id='link-button'>Groups</Link>
+                    </button>
+                    <button className='button-design'>
+                        <Link to={'/events'} id='link-button'>Events</Link>
+                    </button>
+                    {sessionUser && currentGroup.Organizer && sessionUser.id === currentGroup.Organizer.id &&
+                        <button className='button-design'>
+                            <Link to={`/groups/${currentGroup.id}/edit`} id='link-button'>Edit Group</Link>
+                        </button>}
+                </div>
+                <div id='group-description'>
+                    <h3>What we're about</h3>
+                    <p>{currentGroup.about}</p>
+                </div>
             </div>
         </>
 

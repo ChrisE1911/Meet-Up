@@ -34,14 +34,16 @@ function SignupFormModal() {
 
   return (
     <>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
+      <h1 id="log-in">Sign Up</h1>
+      <div className="sign-up-input-fields">
+      <form id='sign-up-form-container' onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
         <label>
           Email
           <input
+            id="username-pass-input-field"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -51,6 +53,7 @@ function SignupFormModal() {
         <label>
           Username
           <input
+            id="username-pass-input-field"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -60,6 +63,7 @@ function SignupFormModal() {
         <label>
           First Name
           <input
+            id="username-pass-input-field"
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
@@ -69,6 +73,7 @@ function SignupFormModal() {
         <label>
           Last Name
           <input
+            id="username-pass-input-field"
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
@@ -78,6 +83,7 @@ function SignupFormModal() {
         <label>
           Password
           <input
+            id="username-pass-input-field"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -87,14 +93,16 @@ function SignupFormModal() {
         <label>
           Confirm Password
           <input
+            id="username-pass-input-field"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <button className="button-design" type="submit">Sign Up</button>
       </form>
+      </div>
     </>
   );
 }

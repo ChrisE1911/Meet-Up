@@ -30,7 +30,7 @@ function DemoUserLoginItem() {
 
   return (
     <>
-      <button onClick={handleSubmit}>
+      <button className='button-design' onClick={handleSubmit}>
       Demo User
       </button>
       {/* <h1>Demo User</h1>
