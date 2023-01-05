@@ -7,6 +7,7 @@ import { getOneGroup } from '../../store/group';
 import { getGroups } from '../../store/group';
 import { useHistory } from 'react-router-dom';
 import { deleteEvent } from '../../store/event';
+import './EventDetailsComponent.css';
 
 
 function EventDetailsComponent() {
@@ -49,28 +50,32 @@ function EventDetailsComponent() {
 
     return (
         <>
-            <div>
-
+            <div className='event-container'>
+                <div id='event-container-title'>
+                    {currentEvent.name && <h1>{currentEvent.name}</h1>}
+                    <div>Hosted By</div>
+                    {currentEvent.Group && <h4>{`${currentEvent.Group.name}`}</h4>}
+                </div>
                 <br />
                 <br />
                 <br />
-                <br />
-                {currentEvent.EventImages && <img src={currentEvent.EventImages[0].url} alt='Event'></img>}
-                {currentEvent.name && <h1>{currentEvent.name}</h1>}
-                {currentEvent.Group && <p>{`Hosted by ${currentEvent.Group.name}`}</p>}
-                <p>Details</p>
-                <p>{currentEvent.description}</p>
-                <p>{currentEvent.type}</p>
-                <p>{currentEvent.capacity}</p>
-                <p>
-                    {currentEvent.numAttending && <h3>{currentEvent.numAttending}</h3>}
-                </p>
-                {currentEvent.Venue && <h3>{`${currentEvent.Venue.city} ${currentEvent.Venue.state}`}</h3>}
-                <h3>
-                    {currentEvent.price}
-                </h3>
-
-                <h3>{`${newStartDate} at ${newStartDateTime} - end time`}</h3>
+                <div id='event-container-information'>
+                    <div id='event-details'>
+                        {currentEvent.EventImages && <img src={currentEvent.EventImages[0].url} alt='Event'></img>}
+                        <h3>Details</h3>
+                        <p>{currentEvent.description}</p>
+                        <p>
+                            {currentEvent?.numAttending === 0 ? <h3>No one is attending this event yet</h3> : <h3>{`Attendees: ${currentEvent.numAttending}`}</h3>}
+                        </p>
+                        <h3>{` Price: $${currentEvent.price}`}</h3>
+                        <p>{`Event Capacity: ${currentEvent.capacity}`}</p>
+                    </div>
+                    <div id='event-information'>
+                        <p>{`${newStartDate} at ${newStartDateTime} - end time`}</p>
+                        {currentEvent.Venue ? <h4>{`Location of Venue: ${currentEvent.Venue.address}, ${currentEvent.Venue.city}, ${currentEvent.Venue.state}`}</h4> : <h4>'Location will be updated soon'</h4>}
+                        <p>{`Type of Event: ${currentEvent.type}`}</p>
+                    </div>
+                </div>
                 <div className='button-container'>
                     {sessionUser && <button className='button-design'>
                         <Link to={'/groups/new'} id='link-button'>Start a New Group</Link>

@@ -1,0 +1,36 @@
+.event-container {
+    width: 80vw;
+    height: 100vh;
+    margin: 8% 10%;
+    display: flex;
+    flex-direction: column;
+}
+
+#event-container-information {
+       display: flex;
+    flex-direction: row;
+    height: 100vh;
+    gap: 11%;
+}
+
+#event-container-title {
+    border-bottom: 2px solid darkgray;
+}
+
+#event-details {
+        width: 50%;
+    height: 100%;
+}
+
+#event-details img{
+    width: 115%;
+    border-radius: 10px;
+}
+
+#event-information {
+        height: 49%;
+    border: 2px solid red;
+    border-radius: 12px;
+    /* margin: 0px; */
+    padding: 2%;
+}
