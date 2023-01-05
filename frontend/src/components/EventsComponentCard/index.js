@@ -18,7 +18,7 @@ const EventsComponentCard = ({ event }) => {
                     <div className='location'>{`${newStartDate} ${newStartDateTime} CST`}</div>
                     <p style={{fontWeight: '700'}}>{event.name}</p>
                     <p>{`${event.Group?.name}`}</p>
-                    <p>{`${event.Venue?.city}, ${event.Venue?.state}`}</p>
+                    <p>{event.Venue ? `${event.Venue?.city}, ${event.Venue?.state}`: `No Location at this time`}</p>
                 </div>
                 <br/>
                 <br />
