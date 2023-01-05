@@ -21,8 +21,10 @@ body {
 .group-component-card-image {
     display: flex;
     flex-direction: row;
-    width: 30%;
-    padding-right: 5%
+    width: 40%;
+    margin-bottom: 13%;
+    height: 100%;
+    padding-right: 5%;
 }
 
 .group-component-card-details {
@@ -43,4 +45,5 @@ body {
 
 .location{
     color: tan;
+    font-weight: 700;
 }
