@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { getGroups } from '../../store/group.js';
-import { useEffect } from 'react';
+import { useEffect} from 'react';
 import GroupComponentCard from '../GroupComponentCard/GroupComponentCard.js';
 import { Link } from 'react-router-dom';
 import './GroupsComponent.css';
@@ -21,19 +21,20 @@ function GroupsComponent() {
 
     return (
         <>
-            <div id='toggle-buttons'>
-
-                <Link to={'/events'}>
-                    <button>
-                    Events
-                    </button>
-                </Link>
-                <Link to={'/groups'}>
-                    <button>
-                    Groups
-                    </button>
-                </Link>
+            <div className='toggle-buttons-container'>
+                <div className='toggle-buttons'>
+                    <Link to={'/events'}>
+                        <button className='events-button'>
+                            Events
+                        </button>
+                    </Link>
+                    <Link to={'/groups'}>
+                        <button className='groups-button'>
+                            Groups
+                        </button>
+                    </Link>
                 </div>
+            </div>
             <div id='card-container'>
                 {!allGroupsArr && <span>No Groups available right now</span>}
                 <ul>
@@ -41,7 +42,6 @@ function GroupsComponent() {
                         return <GroupComponentCard key={group.id} group={group} />
                     })}
                 </ul>
-                { sessionUser && <Link to={'/groups/new'}>Create Group</Link>}
             </div>
         </>
     )

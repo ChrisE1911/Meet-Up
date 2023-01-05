@@ -23,7 +23,7 @@ function EditGroupFormComponent() {
 
     useEffect(() => {
         dispatch(getOneGroup(groupId))
-    }, [dispatch, groupId])
+    }, [dispatch])
 
     useEffect(() => {
         const errors = [];
@@ -54,7 +54,7 @@ function EditGroupFormComponent() {
 
         setValidationErrors(errors);
 
-    }, [name, state, about, type, city,  privateGroup])
+    }, [name, state, about, type, city, privateGroup])
 
 
     const handleSubmit = (e) => {
@@ -82,99 +82,106 @@ function EditGroupFormComponent() {
 
 
     return (
-        <div>
+        <>
             <br />
-            <br />
-            <br />
-            <h1>Edit Group</h1>
-            <form onSubmit={handleSubmit}>
-                <ul>
-                    {validationErrors.length > 0 && validationErrors.map((error, idx) => (
-                        <li key={idx}>{error}</li>
-                    ))}
-                </ul>
-                <input
-                    type='text'
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                    placeholder='Name'
-                    name='Name'
-                    required
-                />
-                <div>
-                    <label>
+            <form id='universal-form-container' onSubmit={handleSubmit}>
+                <div id='form-container-div'>
+                    <fieldset id='form-container-fieldset'>
+
+                        <h1 id='form-title'>Edit Group</h1>
+                        <ul>
+                            {validationErrors.length > 0 && validationErrors.map((error, idx) => (
+                                <li key={idx}>{error}</li>
+                            ))}
+                        </ul>
                         <input
-                            type='radio'
-                            value='true'
+                             id='input-field'
+                            type='text'
+                            onChange={(e) => setName(e.target.value)}
+                            value={name}
+                            placeholder='Name'
+                            name='Name'
+                            required
+                        />
+                        <div>
+                            <label>
+                                <input
+                                    type='radio'
+                                    value='true'
+                                    name='Group'
+                                    onChange={(e) => setPrivateGroup(e.target.value)}
+                                    checked={privateGroup === `${true}`}
+                                    required
+                                /> Private
+                            </label>
+                            <label>
+                                <input
+                                    type='radio'
+                                    value='false'
+                                    name='Group'
+                                    onChange={(e) => setPrivateGroup(e.target.value)}
+                                    checked={privateGroup === `${false}`}
+                                    required
+                                /> Public
+                            </label>
+                        </div>
+                        <input
+                             id='input-field'
+                            type='text'
+                            onChange={(e) => setCity(e.target.value)}
+                            value={city}
+                            placeholder='City'
+                            name='City'
+                            required
+                        />
+                        <input
+                             id='input-field'
+                            type='text'
+                            onChange={(e) => setState(e.target.value)}
+                            value={state}
+                            placeholder='State'
+                            name='State'
+                            pattern='[A-Z]{2}'
+                            maxLength={2}
+                            required
+                        />
+                        <input
+                             id='input-field'
+                            type='text'
+                            onChange={(e) => setAbout(e.target.value)}
+                            value={about}
+                            placeholder='Tell us about your Group'
                             name='Group'
-                            onChange={(e) => setPrivateGroup(e.target.value)}
-                            checked={privateGroup === `${true}`}
                             required
-                        /> Private
-                    </label>
-                    <label>
-                        <input
-                            type='radio'
-                            value='false'
-                            name='Group'
-                            onChange={(e) => setPrivateGroup(e.target.value)}
-                            checked={privateGroup === `${false}`}
-                            required
-                        /> Public
-                    </label>
+                        />
+                        <div>
+                            <label>
+                                <input
+                                    type='radio'
+                                    value='Online'
+                                    name='Type'
+                                    onChange={(e) => setType(e.target.value)}
+                                    checked={type === 'Online'}
+                                    required
+                                /> Online
+                            </label>
+                            <label>
+                                <input
+                                    type='radio'
+                                    value='In Person'
+                                    name='Type'
+                                    onChange={(e) => setType(e.target.value)}
+                                    checked={type === 'In Person'}
+                                    required
+                                /> In person
+                            </label>
+                        </div>
+                        <button className='button-design' type='submit' disabled={validationErrors.length > 0}>Submit</button>
+                        <button className='button-design' onClick={() => deleteGrouphandler(groupId)}>Delete Group</button>
+                    </fieldset>
                 </div>
-                <input
-                    type='text'
-                    onChange={(e) => setCity(e.target.value)}
-                    value={city}
-                    placeholder='City'
-                    name='City'
-                    required
-                />
-                <input
-                    type='text'
-                    onChange={(e) => setState(e.target.value)}
-                    value={state}
-                    placeholder='State'
-                    name='State'
-                    pattern='[A-Z]{2}'
-                    maxLength={2}
-                    required
-                />
-                <input
-                    type='text'
-                    onChange={(e) => setAbout(e.target.value)}
-                    value={about}
-                    placeholder='Tell us about your Group'
-                    name='Group'
-                    required
-                />
-                <div>
-                    <label>
-                        <input
-                            type='radio'
-                            value='Online'
-                            name='Type'
-                            onChange={(e) => setType(e.target.value)}
-                            checked={type === 'Online'}
-                            required
-                        /> Online
-                    </label>
-                    <label>
-                        <input
-                            type='radio'
-                            value='In Person'
-                            name='Type'
-                            onChange={(e) => setType(e.target.value)}
-                            checked={type === 'In Person'}
-                            required
-                        /> In person
-                    </label>
-                </div>
-                <button type='submit' disabled={validationErrors.length > 0}>Submit</button>
             </form>
-                <button onClick={() => deleteGrouphandler(groupId)}>Delete Group</button>
-        </div>
+        </>
     );
 }
 

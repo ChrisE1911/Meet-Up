@@ -1,0 +1,57 @@
+#link-button {
+    text-decoration: none;
+    color: white;
+}
+
+#link-button:hover {
+    color: teal;
+}
+
+.modal-button {
+    color: teal
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    height: 10%;
+    border-top: 2px solid silver;
+}
+
+.group-container {
+    width: 100vw;
+    height: 100vh;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+    overflow: hidden;
+}
+
+#group-information {
+    display: flex;
+    justify-content: space-around;
+    height: 45%;
+    margin-left: 10%;
+    border: 2px solid red;
+    margin-right: 10%;
+    gap: 4%
+}
+
+#group-information img {
+    width: 60%;
+    border-radius: 10px;
+}
+
+#group-information-div {
+    width: 40%;
+}
+
+#group-description {
+    margin-left: 10%;
+    margin-right: 10%;
+}
