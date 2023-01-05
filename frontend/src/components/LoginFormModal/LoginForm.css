@@ -74,6 +74,10 @@
     font-weight: 700;
 }
 
+.button-design:hover {
+    color: teal;
+}
+
 #sign-up-form-container {
     display: flex;
     flex-direction: column;

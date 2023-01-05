@@ -20,21 +20,25 @@ function GroupDetailsComponent() {
 
     return (
         <>
-            <div>
+            <div className='group-container'>
                 <br />
                 <br />
                 <br />
                 <br />
                 <br />
                 <br />
-                {currentGroup.GroupImages && <img src={currentGroup.GroupImages[0].url} alt='preview'></img>}
-                <h1>{currentGroup.name}</h1>
-                <h3>{`${currentGroup.numMembers} members ${currentGroup.private ? 'Private' : 'Public'} group`}</h3>
-                <h3>{currentGroup.type}</h3>
+                <div id='group-information'>
+                    {currentGroup.GroupImages && <img src={currentGroup.GroupImages[0].url} alt='preview'></img>}
+                    <div id='group-information-div'>
+                        <h1>{currentGroup.name}</h1>
+                        <h3>{`${currentGroup.numMembers} members ${currentGroup.private ? 'Private' : 'Public'} group`}</h3>
+                        <h3>{currentGroup.type}</h3>
+                        {currentGroup.Organizer && <h3>{`Organized by ${currentGroup.Organizer.firstName} ${currentGroup.Organizer.lastName}`}</h3>}
+                    </div>
+                </div>
                 {/*Conditional rendering of the Organizer*/}
-                {currentGroup.Organizer && <h3>{`Organized by ${currentGroup.Organizer.firstName} ${currentGroup.Organizer.lastName}`}</h3>}
-                <h2>What we're about</h2>
-                <p>{currentGroup.about}</p>
+                <br />
+                <br />
                 <div className='button-container'>
                     {sessionUser &&
                         <button className='button-design'>
@@ -51,6 +55,8 @@ function GroupDetailsComponent() {
                             <Link to={`/groups/${currentGroup.id}/edit`} id='link-button'>Edit Group</Link>
                         </button>}
                 </div>
+                <h2>What we're about</h2>
+                <p>{currentGroup.about}</p>
             </div>
         </>
 

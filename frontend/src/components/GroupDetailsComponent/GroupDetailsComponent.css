@@ -17,5 +17,32 @@
     justify-content: space-around;
     align-items: center;
     padding: 0;
-    margin: 0;
+    height: 10%;
+    border-top: 2px solid silver;
+    margin-left: 10%;
+}
+
+.group-container {
+    width: 100vw;
+    height: 100vh;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#group-information {
+    display: flex;
+    justify-content: space-around;
+    height: 45%;
+    margin-left: 10%;
+    border: 2px solid red;
+    margin-right: 10%;
+}
+
+#group-information img {
+    width: 50%;
+}
+
+#group-information-div {
+    width: 40%;
 }

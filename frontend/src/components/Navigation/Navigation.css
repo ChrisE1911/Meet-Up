@@ -28,6 +28,7 @@
     padding: 10px;
     background-color: white;
     box-shadow: 10px 5px 5px black;
+    border-radius: 20px;
 }
 
 .profile-dropdown-container ul{
