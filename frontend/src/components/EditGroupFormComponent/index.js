@@ -73,6 +73,8 @@ function EditGroupFormComponent() {
             .then(() => history.push(`/groups/${groupId}`))
     };
 
+
+  
     const deleteGrouphandler = async (groupId) => {
 
         await dispatch(deleteGroup(+groupId))
@@ -177,7 +179,7 @@ function EditGroupFormComponent() {
                             </label>
                         </div>
                         <button className='button-design' type='submit' disabled={validationErrors.length > 0}>Submit</button>
-                        <button className='button-design' onClick={() => deleteGrouphandler(groupId)}>Delete Group</button>
+                        <button className='button-design' onClick={() => deleteGrouphandler(currentGroup.id)}>Delete Group</button>
                     </fieldset>
                 </div>
             </form>

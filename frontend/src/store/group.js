@@ -94,7 +94,7 @@ export const editOneGroup = (updatingGroup) => async (dispatch) => {
     }
 }
 
-//DELETE A GROUP
+//DELETE A GROUP 
 
 export const deleteGroup = (groupId) => async (dispatch) => {
     const response = await csrfFetch(`/api/groups/${groupId}`, {

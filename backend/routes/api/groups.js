@@ -621,10 +621,13 @@ router.delete('/:groupId/membership', requireAuth, async (req, res, next) => {
 router.delete('/:groupId', requireAuth, async (req, res, next) => {
     let { user } = req;
 
+    let selectedGroup = req.params.groupId;
+
     user = user.toJSON()
 
     let group = await Group.findOne({
         where: {
+            id: selectedGroup,
             organizerId: user.id
         }
     });
