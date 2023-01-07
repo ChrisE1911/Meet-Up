@@ -38,6 +38,10 @@ function GroupDetailsComponent() {
                 </div>
                 {/*Conditional rendering of the Organizer*/}
                 <br />
+                <div id='group-description'>
+                    <h3>What we're about</h3>
+                    <p>{currentGroup.about}</p>
+                </div>
                 <br />
                 <div className='button-container'>
                     {sessionUser &&
@@ -54,10 +58,6 @@ function GroupDetailsComponent() {
                         <button className='button-design'>
                             <Link to={`/groups/${currentGroup.id}/edit`} id='link-button'>Edit Group</Link>
                         </button>}
-                </div>
-                <div id='group-description'>
-                    <h3>What we're about</h3>
-                    <p>{currentGroup.about}</p>
                 </div>
             </div>
         </>
