@@ -70,8 +70,10 @@
     color: white;
     border-radius: 5px;
     height: 39px;
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 700;
+    border: none;
+    padding: 10px
 }
 
 .button-design:hover {

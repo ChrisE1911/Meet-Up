@@ -69,14 +69,16 @@ function EventDetailsComponent() {
                         <p>
                             {currentEvent?.numAttending === 0 ? <h3>No one is attending this event yet</h3> : <h3>{`Attendees: ${currentEvent.numAttending}`}</h3>}
                         </p>
-                        <h3>{` Price: $${currentEvent.price}`}</h3>
-                        <p>{`Event Capacity: ${currentEvent.capacity}`}</p>
                     </div>
                     <div id='event-information'>
 
-                        <p>{`${newStartDate} at ${newStartDateTime} - ${newEndDate} at ${newEndDateTime}`}</p>
-                        {currentEvent.Venue ? <h4>{`Location of Venue: ${currentEvent.Venue.address}, ${currentEvent.Venue.city}, ${currentEvent.Venue.state}`}</h4> : <h4>'Location will be updated soon'</h4>}
+                        {currentEvent.Venue ? <p>{`Location of Venue: ${currentEvent.Venue.address}, ${currentEvent.Venue.city}, ${currentEvent.Venue.state}`}</p> : <h4>'Location will be updated soon'</h4>}
+                        <p>{` Price: $${currentEvent.price}`}</p>
+                        <p>{`Event Capacity: ${currentEvent.capacity}`}</p>
+
+                        <p>{`Time of Event: ${newStartDate} at ${newStartDateTime} - ${newEndDate} at ${newEndDateTime}`}</p>
                         <p>{`Type of Event: ${currentEvent.type}`}</p>
+
                     </div>
                 </div>
                 <div className='button-container'>

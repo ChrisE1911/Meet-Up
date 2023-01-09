@@ -31,9 +31,10 @@ function GroupDetailsComponent() {
                     {currentGroup.GroupImages && <img src={currentGroup.GroupImages[0].url} alt='preview'></img>}
                     <div id='group-information-div'>
                         <h1>{currentGroup.name}</h1>
-                        <h3>{`${currentGroup.numMembers} members ${currentGroup.private ? 'Private' : 'Public'} group`}</h3>
-                        <h3>{currentGroup.type}</h3>
-                        {currentGroup.Organizer && <h3>{`Organized by ${currentGroup.Organizer.firstName} ${currentGroup.Organizer.lastName}`}</h3>}
+                        <p>{`${currentGroup.city}, ${currentGroup.state}`}</p>
+                        <p>{`${currentGroup.numMembers} members ${currentGroup.private ? 'Private' : 'Public'} group`}</p>
+                        <p>{currentGroup.type}</p>
+                        {currentGroup.Organizer && <p>{`Organized by ${currentGroup.Organizer.firstName} ${currentGroup.Organizer.lastName}`}</p>}
                     </div>
                 </div>
                 {/*Conditional rendering of the Organizer*/}
