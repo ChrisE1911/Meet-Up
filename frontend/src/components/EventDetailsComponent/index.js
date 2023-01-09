@@ -71,13 +71,26 @@ function EventDetailsComponent() {
                         </p>
                     </div>
                     <div id='event-information'>
-
+                        <div id='icon-container'>
+                        <i class="fa-solid fa-location-pin"></i>
                         {currentEvent.Venue ? <p>{`Location of Venue: ${currentEvent.Venue.address}, ${currentEvent.Venue.city}, ${currentEvent.Venue.state}`}</p> : <h4>'Location will be updated soon'</h4>}
+                        </div>
+                        <div id='icon-container'>
+                        <i class="fa-regular fa-credit-card"></i>
                         <p>{` Price: $${currentEvent.price}`}</p>
+                        </div>
+                        <div id='icon-container'>
+                        <i class="fa-solid fa-person"></i>
                         <p>{`Event Capacity: ${currentEvent.capacity}`}</p>
-
+                        </div>
+                        <div  id='icon-container'>
+                            <i class="fa-regular fa-clock"></i>
                         <p>{`Time of Event: ${newStartDate} at ${newStartDateTime} - ${newEndDate} at ${newEndDateTime}`}</p>
+                        </div>
+                        <div id='icon-container'>
+                        <i class="fa-regular fa-calendar-days"></i>
                         <p>{`Type of Event: ${currentEvent.type}`}</p>
+                        </div>
 
                     </div>
                 </div>
