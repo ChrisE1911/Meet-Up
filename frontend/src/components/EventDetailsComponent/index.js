@@ -24,6 +24,8 @@ function EventDetailsComponent() {
     let groupIdObj = Object.assign({}, groupId)
     const newStartDate = new Date(currentEvent.startDate).toDateString().split(' ').slice(0, 3)
     const newStartDateTime = new Date(currentEvent.startDate).toLocaleString().split(',')[1]
+    const newEndDate = new Date(currentEvent.endDate).toDateString().split(' ').slice(0, 3)
+    const newEndDateTime = new Date(currentEvent.endDate).toLocaleString().split(',')[1]
 
     console.log('HEYYYYY', currentGroup)
 
@@ -71,7 +73,8 @@ function EventDetailsComponent() {
                         <p>{`Event Capacity: ${currentEvent.capacity}`}</p>
                     </div>
                     <div id='event-information'>
-                        <p>{`${newStartDate} at ${newStartDateTime} - end time`}</p>
+
+                        <p>{`${newStartDate} at ${newStartDateTime} - ${newEndDate} at ${newEndDateTime}`}</p>
                         {currentEvent.Venue ? <h4>{`Location of Venue: ${currentEvent.Venue.address}, ${currentEvent.Venue.city}, ${currentEvent.Venue.state}`}</h4> : <h4>'Location will be updated soon'</h4>}
                         <p>{`Type of Event: ${currentEvent.type}`}</p>
                     </div>
