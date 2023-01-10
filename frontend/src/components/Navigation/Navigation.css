@@ -91,3 +91,7 @@
 .session-buttons button:hover {
     color: teal;
 }
+
+#nav-title {
+    font-family: 'Dancing Script', cursive;
+}
