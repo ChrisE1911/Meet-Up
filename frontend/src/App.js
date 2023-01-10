@@ -10,6 +10,7 @@ import EditGroupFormComponent from "./components/EditGroupFormComponent";
 import EventsComponent from "./components/EventsComponent";
 import EventDetailsComponent from "./components/EventDetailsComponent";
 import CreateEventFormComponent from "./components/CreateEventFormComponent";
+import SplashPageComponent from "./components/SplashPageComponent";
 
 
 
@@ -26,6 +27,7 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path='/' component={SplashPageComponent} />
           <Route exact path='/groups' component={GroupsComponent} />
           <Route exact path='/groups/new' component={CreateGroupFormComponent} />
           <Route exact path='/groups/:groupId' component={GroupDetailsComponent} />
