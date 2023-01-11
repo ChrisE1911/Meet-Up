@@ -16,9 +16,9 @@ const EventsComponentCard = ({ event }) => {
             <div className='group-component-card-details'>
                 <div className='name-and-location'>
                     <div className='location'>{`${newStartDate} ${newStartDateTime} CST`}</div>
-                    <div style={{fontWeight: '700'}}>{event.name}</div>
-                    <div>{`${event.Group?.name}`}</div>
-                    <div>{`${event.Venue?.city}, ${event.Venue?.state}`}</div>
+                    <p style={{fontWeight: '700'}}>{event.name}</p>
+                    <p>{`${event.Group?.name}`}</p>
+                    <p>{event.Venue ? `${event.Venue?.city}, ${event.Venue?.state}`: `No Location at this time`}</p>
                 </div>
                 <br/>
                 <br />

@@ -1,3 +1,9 @@
+body {
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
 .event-container {
     width: 80vw;
     height: 100vh;
@@ -18,19 +24,39 @@
 }
 
 #event-details {
-        width: 50%;
+    width: 50%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 #event-details img{
     width: 115%;
+    height: 50%;
     border-radius: 10px;
 }
 
 #event-information {
-        height: 49%;
-    border: 2px solid red;
+    height: 50%;
     border-radius: 12px;
     /* margin: 0px; */
     padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#icon-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6%;
+}
+
+#divider {
+     width: 130%;
+    border-bottom: 2px solid lightgray;
+    position: relative;
+    right: 13%;
 }

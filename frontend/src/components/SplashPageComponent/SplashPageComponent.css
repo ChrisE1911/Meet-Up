@@ -1,0 +1,33 @@
+#splash-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.splash-container {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('https://cdn.wallpapersafari.com/58/66/4exNis.jpg');
+    background-size: cover;
+}
+
+#splash-title-and-picture {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 39%;
+    gap: 5%;
+}
+
+#splash-title-and-picture a {
+    text-decoration-line: none;
+    color: teal
+}
+
+#splash-title-and-picture a:hover {
+    font-weight: 700;
+    text-decoration-line: underline;
+}

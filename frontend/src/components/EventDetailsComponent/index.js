@@ -24,6 +24,8 @@ function EventDetailsComponent() {
     let groupIdObj = Object.assign({}, groupId)
     const newStartDate = new Date(currentEvent.startDate).toDateString().split(' ').slice(0, 3)
     const newStartDateTime = new Date(currentEvent.startDate).toLocaleString().split(',')[1]
+    const newEndDate = new Date(currentEvent.endDate).toDateString().split(' ').slice(0, 3)
+    const newEndDateTime = new Date(currentEvent.endDate).toLocaleString().split(',')[1]
 
     console.log('HEYYYYY', currentGroup)
 
@@ -47,53 +49,73 @@ function EventDetailsComponent() {
 
         history.push('/events');
     }
+    if (!currentEvent) return null
+    else {
+        return (
+            <>
+                <div className='event-container'>
+                    <div id='event-container-title'>
+                        {currentEvent.name && <h1>{currentEvent.name}</h1>}
+                        <div>Hosted By</div>
+                        {currentEvent.Group && <h4>{`${currentEvent.Group.name}`}</h4>}
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <div id='event-container-information'>
+                        <div id='event-details'>
+                            {currentEvent.EventImages && <img src={currentEvent.EventImages[0].url} alt='Event'></img>}
+                            <h3>Details</h3>
+                            <p>{currentEvent.description}</p>
+                            <p>
+                                {currentEvent.numAttending === 0 ? <h3>No one is attending this event yet</h3> : <h3>{`Attendees: ${currentEvent.numAttending}`}</h3>}
+                            </p>
+                        </div>
+                        <div id='event-information'>
+                            <div id='icon-container'>
+                                <i class="fa-solid fa-location-pin"></i>
+                                {currentEvent.Venue ? <p>{`Location of Venue: ${currentEvent.Venue.address}, ${currentEvent.Venue.city}, ${currentEvent.Venue.state}`}</p> : <h4>Location will be updated soon</h4>}
+                            </div>
+                            <div id='icon-container'>
+                                <i class="fa-regular fa-credit-card"></i>
+                                <p>{` Price: $${currentEvent.price}`}</p>
+                            </div>
+                            <div id='icon-container'>
+                                <i class="fa-solid fa-person"></i>
+                                <p>{`Event Capacity: ${currentEvent.capacity}`}</p>
+                            </div>
+                            <div id='icon-container'>
+                                <i class="fa-regular fa-clock"></i>
+                                <p>{`Time of Event: ${newStartDate} at ${newStartDateTime} - ${newEndDate} at ${newEndDateTime}`}</p>
+                            </div>
+                            <div id='icon-container'>
+                                <i class="fa-regular fa-calendar-days"></i>
+                                <p>{`Type of Event: ${currentEvent.type}`}</p>
+                            </div>
 
-    return (
-        <>
-            <div className='event-container'>
-                <div id='event-container-title'>
-                    {currentEvent.name && <h1>{currentEvent.name}</h1>}
-                    <div>Hosted By</div>
-                    {currentEvent.Group && <h4>{`${currentEvent.Group.name}`}</h4>}
-                </div>
-                <br />
-                <br />
-                <br />
-                <div id='event-container-information'>
-                    <div id='event-details'>
-                        {currentEvent.EventImages && <img src={currentEvent.EventImages[0].url} alt='Event'></img>}
-                        <h3>Details</h3>
-                        <p>{currentEvent.description}</p>
-                        <p>
-                            {currentEvent?.numAttending === 0 ? <h3>No one is attending this event yet</h3> : <h3>{`Attendees: ${currentEvent.numAttending}`}</h3>}
-                        </p>
-                        <h3>{` Price: $${currentEvent.price}`}</h3>
-                        <p>{`Event Capacity: ${currentEvent.capacity}`}</p>
+                        </div>
                     </div>
-                    <div id='event-information'>
-                        <p>{`${newStartDate} at ${newStartDateTime} - end time`}</p>
-                        {currentEvent.Venue ? <h4>{`Location of Venue: ${currentEvent.Venue.address}, ${currentEvent.Venue.city}, ${currentEvent.Venue.state}`}</h4> : <h4>'Location will be updated soon'</h4>}
-                        <p>{`Type of Event: ${currentEvent.type}`}</p>
+                    <div id='divider'></div>
+                    <br/>
+                    <div className='button-container'>
+                        {sessionUser && <button className='button-design'>
+                            <Link to={'/groups/new'} id='link-button'>Start a New Group</Link>
+                        </button>}
+                        <button className='button-design'>
+                            <Link to={'/groups'} id='link-button'>Groups</Link>
+                        </button>
+                        <button className='button-design'>
+                            <Link to={'/events'} id='link-button'>Events</Link>
+                        </button>
+                        {sessionUser && <button className='button-design'>
+                            <Link to={`/events/${groupIdObj.id}/new`} id='link-button'>Create New Event</Link>
+                        </button>}
+                        {sessionUser && currentGroup && sessionUser.id === currentGroup.organizerId && <button onClick={() => deleteEventhandler(eventId)} className='button-design'>Delete Event</button>}
                     </div>
                 </div>
-                <div className='button-container'>
-                    {sessionUser && <button className='button-design'>
-                        <Link to={'/groups/new'} id='link-button'>Start a New Group</Link>
-                    </button>}
-                    <button className='button-design'>
-                        <Link to={'/groups'} id='link-button'>Groups</Link>
-                    </button>
-                    <button className='button-design'>
-                        <Link to={'/events'} id='link-button'>Events</Link>
-                    </button>
-                    {sessionUser && <button className='button-design'>
-                        <Link to={`/events/${groupIdObj.id}/new`} id='link-button'>Create New Event</Link>
-                    </button>}
-                    {sessionUser && currentGroup && sessionUser.id === currentGroup.organizerId && <button onClick={() => deleteEventhandler(eventId)} className='button-design'>Delete Event</button>}
-                </div>
-            </div>
-        </>
-    )
+            </>
+        )
+    }
 }
 
 export default EventDetailsComponent
