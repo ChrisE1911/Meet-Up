@@ -54,8 +54,10 @@
     display: flex;
     flex-direction: column;
     /* justify-content: unset; */
-    gap: 60px;
-    width: 76%
+    gap: 27px;
+    width: 76%;
+    height: auto;
+    margin-bottom: 10%;
 }
 
 .login-signup-button-container {
@@ -82,8 +84,8 @@
 #sign-up-form-container {
     display: flex;
     flex-direction: column;
-    width: 76%;
-    gap: 12px;
+    width: 75%;
+    gap: 1%;
     margin-bottom: 35px;
 }
 
