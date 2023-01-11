@@ -18,52 +18,65 @@ function GroupDetailsComponent() {
         dispatch(getOneGroup(groupId))
     }, [dispatch, groupId])
 
-    return (
-        <>
-            <div className='group-container'>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <div id='group-information'>
-                    {currentGroup.GroupImages && <img src={currentGroup.GroupImages[0].url} alt='preview'></img>}
-                    <div id='group-information-div'>
-                        <h1>{currentGroup.name}</h1>
-                        <p>{`${currentGroup.city}, ${currentGroup.state}`}</p>
-                        <p>{`${currentGroup.numMembers} members ${currentGroup.private ? 'Private' : 'Public'} group`}</p>
-                        <p>{currentGroup.type}</p>
-                        {currentGroup.Organizer && <p>{`Organized by ${currentGroup.Organizer.firstName} ${currentGroup.Organizer.lastName}`}</p>}
+    if (!currentGroup) return null
+    else {
+
+        return (
+            <>
+                <div className='group-container'>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <div id='group-information'>
+                        {currentGroup.GroupImages && <img src={currentGroup.GroupImages[0].url} alt='preview'></img>}
+                        <div id='group-information-div'>
+                            <h1>{currentGroup.name}</h1>
+                            <div id='icon-container'>
+                                <i class="fa-solid fa-location-pin"></i>
+                                <p>{`${currentGroup.city}, ${currentGroup.state}`}</p>
+                            </div>
+                            <div id='icon-container'>
+                                <i class="fa-solid fa-person"></i>
+                                <p>{`${currentGroup.numMembers} members - ${currentGroup.private ? 'Private' : 'Public'} - ${currentGroup.type} group`}</p>
+                            </div>
+                            <div id='icon-container'>
+                                <i class="fa-regular fa-face-smile"></i>
+                                {currentGroup.Organizer && <p>{`Organized by ${currentGroup.Organizer.firstName} ${currentGroup.Organizer.lastName}`}</p>}
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div id='group-description'>
+                        <h3>What we're about</h3>
+                        <p>{currentGroup.about}</p>
+                    </div>
+                    <br />
+                    <div id='divider'></div>
+                    <br />
+                    <div className='button-container'>
+                        {sessionUser &&
+                            <button className='button-design'>
+                                <Link to={'/groups/new'} id='link-button'>Start a New Group</Link>
+                            </button>}
+                        <button className='button-design'>
+                            <Link to={'/groups'} id='link-button'>Groups</Link>
+                        </button>
+                        <button className='button-design'>
+                            <Link to={'/events'} id='link-button'>Events</Link>
+                        </button>
+                        {sessionUser && currentGroup.Organizer && sessionUser.id === currentGroup.Organizer.id &&
+                            <button className='button-design'>
+                                <Link to={`/groups/${currentGroup.id}/edit`} id='link-button'>Edit Group</Link>
+                            </button>}
                     </div>
                 </div>
-                {/*Conditional rendering of the Organizer*/}
-                <br />
-                <div id='group-description'>
-                    <h3>What we're about</h3>
-                    <p>{currentGroup.about}</p>
-                </div>
-                <br />
-                <div className='button-container'>
-                    {sessionUser &&
-                        <button className='button-design'>
-                            <Link to={'/groups/new'} id='link-button'>Start a New Group</Link>
-                        </button>}
-                    <button className='button-design'>
-                        <Link to={'/groups'} id='link-button'>Groups</Link>
-                    </button>
-                    <button className='button-design'>
-                        <Link to={'/events'} id='link-button'>Events</Link>
-                    </button>
-                    {sessionUser && currentGroup.Organizer && sessionUser.id === currentGroup.Organizer.id &&
-                        <button className='button-design'>
-                            <Link to={`/groups/${currentGroup.id}/edit`} id='link-button'>Edit Group</Link>
-                        </button>}
-                </div>
-            </div>
-        </>
+            </>
 
-    )
+        )
+    }
 }
 
 export default GroupDetailsComponent

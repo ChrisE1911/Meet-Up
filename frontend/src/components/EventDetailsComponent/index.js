@@ -74,7 +74,7 @@ function EventDetailsComponent() {
                         <div id='event-information'>
                             <div id='icon-container'>
                                 <i class="fa-solid fa-location-pin"></i>
-                                {currentEvent.Venue ? <p>{`Location of Venue: ${currentEvent.Venue.address}, ${currentEvent.Venue.city}, ${currentEvent.Venue.state}`}</p> : <h4>'Location will be updated soon'</h4>}
+                                {currentEvent.Venue ? <p>{`Location of Venue: ${currentEvent.Venue.address}, ${currentEvent.Venue.city}, ${currentEvent.Venue.state}`}</p> : <h4>Location will be updated soon</h4>}
                             </div>
                             <div id='icon-container'>
                                 <i class="fa-regular fa-credit-card"></i>
@@ -95,6 +95,8 @@ function EventDetailsComponent() {
 
                         </div>
                     </div>
+                    <div id='divider'></div>
+                    <br/>
                     <div className='button-container'>
                         {sessionUser && <button className='button-design'>
                             <Link to={'/groups/new'} id='link-button'>Start a New Group</Link>

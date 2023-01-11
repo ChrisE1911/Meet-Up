@@ -1,5 +1,7 @@
 body {
     margin: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .event-container {
@@ -50,4 +52,11 @@ body {
     flex-direction: row;
     align-items: center;
     gap: 6%;
+}
+
+#divider {
+     width: 130%;
+    border-bottom: 2px solid lightgray;
+    position: relative;
+    right: 13%;
 }
