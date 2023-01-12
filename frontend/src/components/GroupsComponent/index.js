@@ -19,8 +19,7 @@ function GroupsComponent() {
         dispatch(getGroups(allGroups))
     }, [dispatch])
 
-    if (!allGroups) return null
-    else {
+
         return (
             <>
                 <div className='toggle-buttons-container'>
@@ -47,7 +46,6 @@ function GroupsComponent() {
                 </div>
             </>
         )
-    }
 }
 
 export default GroupsComponent;

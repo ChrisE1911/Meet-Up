@@ -22,7 +22,6 @@ function SignupFormModal() {
     if (password === confirmPassword) {
       setErrors([]);
       return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
-
         .then(() => {
           history.push('/groups');
           closeModal();

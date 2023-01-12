@@ -49,8 +49,7 @@ function EventDetailsComponent() {
 
         history.push('/events');
     }
-    if (!currentEvent) return null
-    else {
+    
         return (
             <>
                 <div className='event-container'>
@@ -115,7 +114,6 @@ function EventDetailsComponent() {
                 </div>
             </>
         )
-    }
 }
 
 export default EventDetailsComponent

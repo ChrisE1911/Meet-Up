@@ -18,8 +18,6 @@ function GroupDetailsComponent() {
         dispatch(getOneGroup(groupId))
     }, [dispatch, groupId])
 
-    if (!currentGroup) return null
-    else {
 
         return (
             <>
@@ -76,7 +74,7 @@ function GroupDetailsComponent() {
             </>
 
         )
-    }
+
 }
 
 export default GroupDetailsComponent
