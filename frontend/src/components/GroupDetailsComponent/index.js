@@ -33,15 +33,15 @@ function GroupDetailsComponent() {
                         <div id='group-information-div'>
                             <h1>{currentGroup.name}</h1>
                             <div id='icon-container'>
-                                <i class="fa-solid fa-location-pin"></i>
+                                <i className="fa-solid fa-location-pin"></i>
                                 <p>{`${currentGroup.city}, ${currentGroup.state}`}</p>
                             </div>
                             <div id='icon-container'>
-                                <i class="fa-solid fa-person"></i>
+                                <i className="fa-solid fa-person"></i>
                                 <p>{`${currentGroup.numMembers} members - ${currentGroup.private ? 'Private' : 'Public'} - ${currentGroup.type} group`}</p>
                             </div>
                             <div id='icon-container'>
-                                <i class="fa-regular fa-face-smile"></i>
+                                <i className="fa-regular fa-face-smile"></i>
                                 {currentGroup.Organizer && <p>{`Organized by ${currentGroup.Organizer.firstName} ${currentGroup.Organizer.lastName}`}</p>}
                             </div>
                         </div>

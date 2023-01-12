@@ -41,7 +41,6 @@ export const getEvents = () => async (dispatch) => {
 export const getOneEvent = (eventId) => async (dispatch) => {
     const response = await csrfFetch(`/api/events/${eventId}`)
 
-    console.log('LOOKK HERE', eventId)
 
     if (response.ok) {
         const event = await response.json();
@@ -102,7 +101,8 @@ const eventReducer = (state = initialState, action) => {
             action.events.Events.forEach(event => {
                 newEvents[event.id] = event
             });
-            newState.allEvents = newEvents
+            newState.allEvents = newEvents;
+            newState.singleEvent = {};
             return newState;
         case CREATE_EVENT:
             newState = { ...state };
@@ -110,7 +110,7 @@ const eventReducer = (state = initialState, action) => {
             newState.allEvents = updatedEvents;
             return newState;
         case GET_ONE_EVENT:
-            console.log(action)
+            console.log('ACTION', action)
             return {
                 ...state, singleEvent: action.event
             }

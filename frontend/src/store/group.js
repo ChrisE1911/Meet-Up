@@ -27,7 +27,7 @@ export const removeGroup = (groupId) => ({
 
 //GET ONE GROUP
 export const getOneGroup = (groupId) => async (dispatch) => {
-    console.log(groupId)
+    // console.log('GROUP ID', groupId)
     const response = await csrfFetch(`/api/groups/${groupId}`)
 
     console.log(response)
@@ -94,7 +94,7 @@ export const editOneGroup = (updatingGroup) => async (dispatch) => {
     }
 }
 
-//DELETE A GROUP 
+//DELETE A GROUP
 
 export const deleteGroup = (groupId) => async (dispatch) => {
     const response = await csrfFetch(`/api/groups/${groupId}`, {
@@ -122,6 +122,7 @@ const groupReducer = (state = initialState, action) => {
                 newGroups[group.id] = group
             });
             newState.allGroups = newGroups;
+            newState.singleGroup = {};
             return newState;
         case CREATE_GROUP:
             newState = { ...state };
