@@ -11,6 +11,7 @@ function GroupDetailsComponent() {
     const { groupId } = useParams();
 
     const currentGroup = useSelector(state => state.groups.singleGroup)
+    const currentGroupArr = Object.values(currentGroup)
 
     const sessionUser = useSelector(state => state.session.user)
 
@@ -18,9 +19,9 @@ function GroupDetailsComponent() {
         dispatch(getOneGroup(groupId))
     }, [dispatch, groupId])
 
-    if (!currentGroup) return null
-    else {
 
+    if (currentGroupArr.length === 0) return null;
+    else {
         return (
             <>
                 <div className='group-container'>
@@ -35,15 +36,15 @@ function GroupDetailsComponent() {
                         <div id='group-information-div'>
                             <h1>{currentGroup.name}</h1>
                             <div id='icon-container'>
-                                <i class="fa-solid fa-location-pin"></i>
+                                <i className="fa-solid fa-location-pin"></i>
                                 <p>{`${currentGroup.city}, ${currentGroup.state}`}</p>
                             </div>
                             <div id='icon-container'>
-                                <i class="fa-solid fa-person"></i>
+                                <i className="fa-solid fa-person"></i>
                                 <p>{`${currentGroup.numMembers} members - ${currentGroup.private ? 'Private' : 'Public'} - ${currentGroup.type} group`}</p>
                             </div>
                             <div id='icon-container'>
-                                <i class="fa-regular fa-face-smile"></i>
+                                <i className="fa-regular fa-face-smile"></i>
                                 {currentGroup.Organizer && <p>{`Organized by ${currentGroup.Organizer.firstName} ${currentGroup.Organizer.lastName}`}</p>}
                             </div>
                         </div>

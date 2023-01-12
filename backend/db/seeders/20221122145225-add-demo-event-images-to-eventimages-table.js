@@ -13,22 +13,22 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         eventId: 1,
-        url: 'eventimage1.png',
+        url: 'https://pikwizard.com/photos/2469a7bfd623afbe3536bcfd411245ce-m.jpg',
         preview: true
       },
       {
         eventId: 2,
-        url: 'eventimage2.png',
+        url: 'https://static.businessworld.in/article/article_extra_large_image/1598015126_YvTjER_banquet_hall.jpg',
         preview: true
       },
       {
         eventId: 3,
-        url: 'eventimage3.png',
+        url: 'https://embed.widencdn.net/img/veritas/peirxsbt7a/1200x630px/golf-ball-putting-range.jpeg',
         preview: true
       },
       {
         eventId: 4,
-        url: 'eventimage4.png',
+        url: 'https://i.pinimg.com/originals/04/4b/aa/044baaf2eb8b3041ce6adec6c99226de.jpg',
         preview: true
       }
     ], {});

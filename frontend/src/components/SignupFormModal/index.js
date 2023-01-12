@@ -21,21 +21,23 @@ function SignupFormModal() {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
-      history.push('/groups')
       return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
-        .then(closeModal)
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        });
+        .then(() => {
+          history.push('/groups');
+          closeModal();
+        })
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      });
     }
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
   return (
     <>
-      <h1 id="log-in">Sign Up</h1>
       <div className="sign-up-input-fields">
+      <h1 id="log-in">Sign Up</h1>
       <form id='sign-up-form-container' onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}

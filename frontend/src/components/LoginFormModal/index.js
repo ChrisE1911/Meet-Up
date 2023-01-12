@@ -20,9 +20,11 @@ function LoginFormModal() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    history.push('/groups')
     return dispatch(sessionActions.login({ credential, password }))
-      .then(closeModal)
+    .then(() => {
+      history.push('/groups');
+        closeModal();
+      })
       .catch(
         async (res) => {
           const data = await res.json();
@@ -34,8 +36,8 @@ function LoginFormModal() {
 
   return (
     <>
-      <h1 id='log-in'>Log In</h1>
       <div className="input-fields">
+      <h1>Log In</h1>
         <form id='form-container' onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (

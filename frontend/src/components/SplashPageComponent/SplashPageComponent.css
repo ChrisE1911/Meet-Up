@@ -27,6 +27,10 @@
     color: teal
 }
 
+#splash-title-and-picture img {
+    mix-blend-mode: multiply;
+}
+
 #splash-title-and-picture a:hover {
     font-weight: 700;
     text-decoration-line: underline;

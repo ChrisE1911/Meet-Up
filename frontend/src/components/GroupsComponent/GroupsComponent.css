@@ -29,6 +29,7 @@
     height: 5rem;
     align-items: center;
     border-bottom: 1px solid gray;
+    /* z-index: -1 */
 }
 
 .toggle-buttons {

@@ -5,7 +5,6 @@
 }
 
 .navigation-bar {
-    /* border: 2px solid red; */
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -13,9 +12,9 @@
     position: fixed;
     top: 0;
     background-color: white;
-    z-index: 3;
     height: 10%;
-    border-bottom: #000000b5 1px solid
+    border-bottom: #000000b5 1px solid;
+    z-index: 5;
 }
 
 
@@ -23,7 +22,7 @@
     position: absolute;
     margin-top: 25px;
     right: 15px;
-    width: 120px;
+    width: auto;
     border: 1px solid gray;
     padding: 10px;
     background-color: white;

@@ -1,11 +1,11 @@
 /* todo */
 
 #modal-content {
-    position: absolute;
     background-color: white;
     height: 77%;
     width: 35%;
     border-radius: 30px;
+    height: auto;
 }
 
 #log-in {
@@ -13,8 +13,7 @@
     align-items: center;
     width: 100%;
     justify-content: center;
-    position: absolute;
-    top: 7%;
+    padding: 0;
 }
 
 .input-fields {
@@ -28,7 +27,7 @@
 
 #username-pass-input-field {
     width: 96%;
-    height: 36px;
+    height: 18px;
 }
 
 #username-label {
@@ -55,8 +54,10 @@
     display: flex;
     flex-direction: column;
     /* justify-content: unset; */
-    gap: 60px;
-    width: 76%
+    gap: 27px;
+    width: 76%;
+    height: auto;
+    margin-bottom: 10%;
 }
 
 .login-signup-button-container {
@@ -83,11 +84,9 @@
 #sign-up-form-container {
     display: flex;
     flex-direction: column;
-    /* justify-content: unset; */
+    width: 75%;
     gap: 8px;
-    width: 76%;
-    position: relative;
-    top: 25px
+    margin-bottom: 25px;
 }
 
 .sign-up-input-fields {
@@ -96,5 +95,8 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 98%;
+}
+
+#modal {
+    z-index: 1000
 }
