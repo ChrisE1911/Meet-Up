@@ -13,22 +13,22 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         groupId: 1,
-        url: 'groupimage1.png',
+         url: 'https://americanprofile.com/wp-content/uploads/2007/04/running_across_america.jpg',
         preview: true
       },
       {
         groupId: 2,
-        url: 'groupimage2.png',
+        url: 'http://www.assemblyltd.com/media/cache/22/be/22be9ec00ec5a962ef597398ce06154d.jpg',
         preview: true
       },
       {
         groupId: 3,
-        url: 'groupimage3.png',
+        url: 'https://www.slideteam.net/media/catalog/product/cache/960x720/1/1/1114_red_3d_man_running_fast_for_victory_stock_photo_Slide01.jpg',
         preview: true
       },
       {
         groupId: 4,
-        url: 'groupimage4.png',
+        url: 'https://clipartmag.com/images/people-running-images-50.jpg',
         preview: true
       }
     ], {})

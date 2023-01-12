@@ -18,15 +18,10 @@ function EventsComponent() {
 
     const allGroupsArr = Object.values(allGroups)
 
-    console.log(allGroupsArr)
-
     const groupId = allGroupsArr.find((group) => group.organizerId === sessionUser?.id)
 
 
     let groupIdObj = Object.assign({}, groupId)
-
-    console.log(groupIdObj)
-
 
 
 
