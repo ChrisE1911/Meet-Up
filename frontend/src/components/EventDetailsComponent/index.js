@@ -17,7 +17,14 @@ function EventDetailsComponent() {
     const currentEventArr = Object.values(currentEvent);
     const sessionUser = useSelector(state => state.session.user)
     const allGroups = useSelector(state => state.groups.allGroups)
-    const currentGroup = useSelector(state => state.groups.allGroups[currentEvent.groupId])
+    const allGroupsArr = Object.values(allGroups);
+    const groupForCreatingEvent = allGroupsArr.find(group => sessionUser.id === group.organizerId)
+    const currentGroup = useSelector(state => state.groups.allGroups[currentEvent.id])
+
+
+    console.log('CURRENT GROUP', currentGroup)
+    console.log('CURRENT EVENT', currentEvent)
+    console.log('SESSION USER', sessionUser)
 
 
 
@@ -102,7 +109,7 @@ function EventDetailsComponent() {
                             <Link to={'/events'} id='link-button'>Events</Link>
                         </button>
                         {sessionUser && currentGroup && <button className='button-design'>
-                            <Link to={`/events/${''}/new`} id='link-button'>Create New Event</Link>
+                            <Link to={`/events/${groupForCreatingEvent.id}/new`} id='link-button'>Create New Event</Link>
                         </button>}
                         {sessionUser.id === currentGroup?.organizerId && <button onClick={() => deleteEventhandler(eventId)} className='button-design'>Delete Event</button>}
                     </div>
