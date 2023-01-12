@@ -22,7 +22,6 @@ function GroupDetailsComponent() {
 
     if (currentGroupArr.length === 0) return null;
     else {
-
         return (
             <>
                 <div className='group-container'>
