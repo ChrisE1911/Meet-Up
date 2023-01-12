@@ -8,8 +8,8 @@ import "./DemoUser.css";
 
 function DemoUserLoginItem() {
   const dispatch = useDispatch();
-  const [credential, setCredential] = useState("Demo-lition");
-  const [password, setPassword] = useState("password");
+  const [credential, setCredential] = useState("FakeUser3");
+  const [password, setPassword] = useState("password5");
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
   const history = useHistory();
