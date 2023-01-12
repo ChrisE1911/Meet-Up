@@ -11,6 +11,7 @@ function GroupDetailsComponent() {
     const { groupId } = useParams();
 
     const currentGroup = useSelector(state => state.groups.singleGroup)
+    const currentGroupArr = Object.values(currentGroup)
 
     const sessionUser = useSelector(state => state.session.user)
 
@@ -18,6 +19,9 @@ function GroupDetailsComponent() {
         dispatch(getOneGroup(groupId))
     }, [dispatch, groupId])
 
+
+    if (currentGroupArr.length === 0) return null;
+    else {
 
         return (
             <>
@@ -74,7 +78,7 @@ function GroupDetailsComponent() {
             </>
 
         )
-
+    }
 }
 
 export default GroupDetailsComponent
