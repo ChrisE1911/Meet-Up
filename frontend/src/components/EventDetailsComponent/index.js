@@ -1,9 +1,8 @@
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getOneEvent } from '../../store/event';
-import { getOneGroup } from '../../store/group';
 import { getGroups } from '../../store/group';
 import { useHistory } from 'react-router-dom';
 import { deleteEvent } from '../../store/event';
@@ -15,12 +14,11 @@ function EventDetailsComponent() {
     const history = useHistory();
     const { eventId } = useParams();
     const currentEvent = useSelector(state => state.events.singleEvent)
-    const currentGroup = useSelector(state => state.events.singleEvent.groupId)
+    const currentEventArr = Object.values(currentEvent);
     const sessionUser = useSelector(state => state.session.user)
     const allGroups = useSelector(state => state.groups.allGroups)
-    const allGroupsArr = Object.values(allGroups)
-    const groupId = allGroupsArr.find((group) => group?.organizerId === sessionUser?.id)
-    let groupIdObj = Object.assign({}, groupId)
+    const currentGroup = useSelector(state => state.groups.allGroups[currentEvent.groupId])
+
 
 
     const newStartDate = new Date(currentEvent.startDate).toDateString().split(' ').slice(0, 3)
@@ -28,20 +26,12 @@ function EventDetailsComponent() {
     const newEndDate = new Date(currentEvent.endDate).toDateString().split(' ').slice(0, 3)
     const newEndDateTime = new Date(currentEvent.endDate).toLocaleString().split(',')[1]
 
-    // console.log('CURRENT GROUP', currentGroup)
-
-    console.log('CURRENT EVENT GROUP ID', currentGroup)
-
     useEffect(() => {
         dispatch(getOneEvent(+eventId))
     }, [dispatch])
 
     useEffect(() => {
         dispatch(getGroups(allGroups))
-    }, [dispatch])
-
-    useEffect(() => {
-        dispatch(getOneGroup(currentGroup))
     }, [dispatch])
 
 
@@ -53,7 +43,7 @@ function EventDetailsComponent() {
         history.push('/events');
     }
 
-    if (!currentEvent) return null;
+    if (currentEventArr.length === 0) return null;
     else {
         return (
             <>
@@ -111,10 +101,10 @@ function EventDetailsComponent() {
                         <button className='button-design'>
                             <Link to={'/events'} id='link-button'>Events</Link>
                         </button>
-                        {sessionUser && <button className='button-design'>
-                            <Link to={`/events/${groupIdObj.id}/new`} id='link-button'>Create New Event</Link>
+                        {sessionUser && currentGroup && <button className='button-design'>
+                            <Link to={`/events/${''}/new`} id='link-button'>Create New Event</Link>
                         </button>}
-                        {sessionUser && currentGroup && sessionUser.id === currentGroup.organizerId && <button onClick={() => deleteEventhandler(eventId)} className='button-design'>Delete Event</button>}
+                        {sessionUser.id === currentGroup?.organizerId && <button onClick={() => deleteEventhandler(eventId)} className='button-design'>Delete Event</button>}
                     </div>
                 </div>
             </>
@@ -122,4 +112,4 @@ function EventDetailsComponent() {
     }
 }
 
-    export default EventDetailsComponent
+export default EventDetailsComponent
