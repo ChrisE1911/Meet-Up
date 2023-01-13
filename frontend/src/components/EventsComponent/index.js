@@ -21,9 +21,6 @@ function EventsComponent() {
     const groupId = allGroupsArr.find((group) => group.organizerId === sessionUser?.id)
 
 
-    let groupIdObj = Object.assign({}, groupId)
-
-
 
     useEffect(() => {
         dispatch(getEvents(allEvents))
