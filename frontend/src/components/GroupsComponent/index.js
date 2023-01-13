@@ -20,6 +20,8 @@ function GroupsComponent() {
     }, [dispatch])
 
 
+    if (allGroupsArr.length === 0) return null;
+    else {
         return (
             <>
                 <div className='toggle-buttons-container'>
@@ -46,6 +48,7 @@ function GroupsComponent() {
                 </div>
             </>
         )
+    }
 }
 
 export default GroupsComponent;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import OpenModalButton from '../OpenModalButton';
@@ -15,7 +15,10 @@ function Navigation({ isLoaded }) {
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
+      <div id='profile-button-container'>
+         <Link className='nav-group-button' to="/groups/new">Start a new group!</Link>
         <ProfileButton user={sessionUser} />
+      </div>
     );
   } else {
     sessionLinks = (

@@ -177,7 +177,8 @@ function CreateGroupFormComponent() {
                         name='Image'
                         required
                     />
-                    <button className='button-design' type='submit' disabled={validationErrors.length > 0}>Submit</button>
+                        <button className='button-design' type='submit' disabled={validationErrors.length > 0}>Submit</button>
+                        <button className='button-design' onClick={() => history.push('/groups')}>Go back to Groups</button>
                     </fieldset>
                     </div>
             </form>

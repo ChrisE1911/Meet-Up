@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { editOneGroup } from '../../store/group';
-import { deleteGroup } from '../../store/group';
 import { getOneGroup } from '../../store/group.js';
 
 
@@ -73,14 +72,6 @@ function EditGroupFormComponent() {
             .then(() => history.push(`/groups/${groupId}`))
     };
 
-
-  
-    const deleteGrouphandler = async (groupId) => {
-
-        await dispatch(deleteGroup(+groupId))
-
-        history.push('/groups');
-    }
 
 
     return (
@@ -179,7 +170,6 @@ function EditGroupFormComponent() {
                             </label>
                         </div>
                         <button className='button-design' type='submit' disabled={validationErrors.length > 0}>Submit</button>
-                        <button className='button-design' onClick={() => deleteGrouphandler(currentGroup.id)}>Delete Group</button>
                     </fieldset>
                 </div>
             </form>

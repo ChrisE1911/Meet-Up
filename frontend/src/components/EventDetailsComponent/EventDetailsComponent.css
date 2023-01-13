@@ -13,9 +13,9 @@ body {
 }
 
 #event-container-information {
-       display: flex;
+    display: flex;
     flex-direction: row;
-    height: 100vh;
+    height: auto;
     gap: 11%;
 }
 

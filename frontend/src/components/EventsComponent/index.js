@@ -21,9 +21,6 @@ function EventsComponent() {
     const groupId = allGroupsArr.find((group) => group.organizerId === sessionUser?.id)
 
 
-    let groupIdObj = Object.assign({}, groupId)
-
-
 
     useEffect(() => {
         dispatch(getEvents(allEvents))
@@ -34,33 +31,35 @@ function EventsComponent() {
     }, [dispatch])
 
 
-
-    return (
-        <>
-            <div className='toggle-buttons-container'>
-                <div className='toggle-buttons'>
-                <Link to={'/events'}>
-                    <button className='events-button'>
-                    Events
-                    </button>
-                </Link>
-                <Link to={'/groups'}>
-                    <button className='groups-button'>
-                    Groups
-                    </button>
-                </Link>
+    if (allEventsArr.length === 0) return null;
+    else {
+        return (
+            <>
+                <div className='toggle-buttons-container'>
+                    <div className='toggle-buttons'>
+                        <Link to={'/events'}>
+                            <button className='events-button'>
+                                Events
+                            </button>
+                        </Link>
+                        <Link to={'/groups'}>
+                            <button className='groups-button'>
+                                Groups
+                            </button>
+                        </Link>
+                    </div>
                 </div>
+                <div id='card-container'>
+                    {!allEventsArr && <span>No Events available right now</span>}
+                    <ul>
+                        {allEventsArr.map((event) => {
+                            return <EventsComponentCard key={event.id} event={event} />
+                        })}
+                    </ul>
                 </div>
-            <div id='card-container'>
-                {!allEventsArr && <span>No Events available right now</span>}
-                <ul>
-                    {allEventsArr.map((event) => {
-                        return <EventsComponentCard key={event.id} event={event} />
-                    })}
-                </ul>
-            </div>
-        </>
-    )
+            </>
+        )
+    }
 }
 
 export default EventsComponent
