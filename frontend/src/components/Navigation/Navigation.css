@@ -94,3 +94,21 @@
 #nav-title {
     font-family: 'Dancing Script', cursive;
 }
+
+
+#profile-button-container {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+    align-items: center;
+}
+
+.nav-group-button {
+    text-decoration-line: none;
+    color: black;
+    font-weight: 700;
+}
+
+.nav-group-button:hover {
+    color: teal
+}
