@@ -1,14 +1,16 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getOneGroup } from '../../store/group.js';
+import { deleteGroup } from '../../store/group.js';
 import './GroupDetailsComponent.css';
 
 
 function GroupDetailsComponent() {
     const dispatch = useDispatch()
     const { groupId } = useParams();
+    const history = useHistory()
 
     const currentGroup = useSelector(state => state.groups.singleGroup)
     const currentGroupArr = Object.values(currentGroup)
@@ -18,6 +20,13 @@ function GroupDetailsComponent() {
     useEffect(() => {
         dispatch(getOneGroup(groupId))
     }, [dispatch, groupId])
+
+    const deleteGrouphandler = async (groupId) => {
+
+        await dispatch(deleteGroup(+groupId))
+
+        history.push('/groups');
+    }
 
 
     if (currentGroupArr.length === 0) return null;
@@ -69,9 +78,13 @@ function GroupDetailsComponent() {
                             <Link to={'/events'} id='link-button'>Events</Link>
                         </button>
                         {sessionUser && currentGroup.Organizer && sessionUser.id === currentGroup.Organizer.id &&
-                            <button className='button-design'>
-                                <Link to={`/groups/${currentGroup.id}/edit`} id='link-button'>Edit Group</Link>
-                            </button>}
+                                <button className='button-design'>
+                                    <Link to={`/groups/${currentGroup.id}/edit`} id='link-button'>Edit Group</Link>
+                                </button>
+                            }
+                        {sessionUser && currentGroup.Organizer && sessionUser.id === currentGroup.Organizer.id &&
+                                 <button className='button-design' onClick={() => deleteGrouphandler(currentGroup.id)}>Delete Group</button>
+                            }
                     </div>
                 </div>
             </>
