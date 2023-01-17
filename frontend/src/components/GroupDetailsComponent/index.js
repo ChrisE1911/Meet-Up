@@ -26,6 +26,8 @@ function GroupDetailsComponent() {
         await dispatch(deleteGroup(+groupId))
 
         history.push('/groups');
+
+        alert('Group successfully deleted');
     }
 
 

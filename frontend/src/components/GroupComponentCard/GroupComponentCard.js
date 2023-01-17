@@ -4,7 +4,6 @@ import './GroupComponentCard.css'
 const GroupComponentCard = ({ group }) => {
 
 
-    // console.log('single group object', group)
     return (
         <Link to={`/groups/${group.id}`} className='group-component-card'>
             <div className='group-component-card-image'>
