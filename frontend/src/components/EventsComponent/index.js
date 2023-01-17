@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { getEvents } from '../../store/event';
 import { useEffect } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import EventsComponentCard from '../EventsComponentCard';
 import { getGroups } from '../../store/group';
 
 function EventsComponent() {
     const dispatch = useDispatch();
+
+    const history = useHistory();
 
     const allEvents = useSelector(state => state.events.allEvents)
 
@@ -50,6 +52,7 @@ function EventsComponent() {
                     </div>
                 </div>
                 <div id='card-container'>
+            <h2>Explore our upcoming events. If you like what you see, click on the <button className='button-design' disabled={true}>Create Event</button> to create your own!</h2>
                     {!allEventsArr && <span>No Events available right now</span>}
                     <ul>
                         {allEventsArr.map((event) => {
