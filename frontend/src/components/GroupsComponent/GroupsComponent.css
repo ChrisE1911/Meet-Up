@@ -50,7 +50,6 @@
 
 .groups-button:hover {
     color: Teal;
-    text-decoration-line: underline;
 
 }
 
@@ -63,5 +62,4 @@
 
 .events-button:hover {
     color: Teal;
-    text-decoration-line: underline;
 }
