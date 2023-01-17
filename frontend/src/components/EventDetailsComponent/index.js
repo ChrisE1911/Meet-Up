@@ -41,9 +41,11 @@ function EventDetailsComponent() {
 
     const deleteEventhandler = async (eventId) => {
 
-        await dispatch(deleteEvent(+eventId))
+        await dispatch(deleteEvent(+eventId));
 
         history.push('/events');
+
+        alert('Event successfully deleted');
     }
 
     if (currentEventArr.length === 0) return null;

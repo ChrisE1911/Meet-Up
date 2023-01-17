@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getGroups } from '../../store/group.js';
 import { useEffect } from 'react';
 import GroupComponentCard from '../GroupComponentCard/GroupComponentCard.js';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './GroupsComponent.css';
 
 
@@ -26,16 +26,16 @@ function GroupsComponent() {
             <>
                 <div className='toggle-buttons-container'>
                     <div className='toggle-buttons'>
-                        <Link to={'/events'}>
+                        <Link to={'/events'} activeStyle={{ color: 'teal', fontSize: '25px'}}>
                             <button className='events-button'>
                                 Events
                             </button>
                         </Link>
-                        <Link to={'/groups'}>
-                            <button className='groups-button'>
+                        <NavLink to={'/groups'} activeStyle={{ color: 'teal', fontSize: '25px'}}>
+                            {/* <button className='groups-button'> */}
                                 Groups
-                            </button>
-                        </Link>
+                            {/* </button> */}
+                        </NavLink>
                     </div>
                 </div>
                 <div id='card-container'>

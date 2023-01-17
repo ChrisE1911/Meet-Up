@@ -51,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         tooLowPrice(value) {
-          if (value < 5) {
+          if (value <= 5) {
             throw new Error('Price is too low. Please enter amount greater than 5')
           }
         }

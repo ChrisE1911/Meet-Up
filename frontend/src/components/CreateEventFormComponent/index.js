@@ -178,6 +178,7 @@ function CreateEventFormComponent() {
                             required
                         />
                         <button className='button-design' type='submit'>Submit</button>
+                        <button className='button-design' onClick={() => history.push('/events')}>Go back to Events</button>
                     </fieldset>
                 </div>
             </form>

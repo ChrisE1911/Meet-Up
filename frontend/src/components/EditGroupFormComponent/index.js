@@ -170,6 +170,7 @@ function EditGroupFormComponent() {
                             </label>
                         </div>
                         <button className='button-design' type='submit' disabled={validationErrors.length > 0}>Submit</button>
+                        <button className='button-design' onClick={() => history.push(`/groups/${groupId}`)}>Go back to Group Details Page</button>
                     </fieldset>
                 </div>
             </form>
