@@ -52,7 +52,7 @@ function EventsComponent() {
                     </div>
                 </div>
                 <div id='card-container'>
-            <h2>Explore our upcoming events. If you like what you see, click on the <button className='button-design' disabled={true}>Create Event</button> button to create your own!</h2>
+            <h2>Explore our upcoming events. Click on an event below to view details and more! </h2>
                     {!allEventsArr && <span>No Events available right now</span>}
                     <ul>
                         {allEventsArr.map((event) => {
