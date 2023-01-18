@@ -23,7 +23,6 @@ function EventsComponent() {
     const groupId = allGroupsArr.find((group) => group.organizerId === sessionUser?.id)
 
 
-
     useEffect(() => {
         dispatch(getEvents(allEvents))
     }, [dispatch])
@@ -52,7 +51,8 @@ function EventsComponent() {
                     </div>
                 </div>
                 <div id='card-container'>
-            <h2>Explore our upcoming events. Click on an event below to view details and more! </h2>
+                    <h2>Explore our upcoming events. Click on an event below to view details and more! </h2>
+                    {groupId && groupId !== undefined ? <h3>If you're ready to create an event, click here <button className='button-design' onClick={() => history.push(`events/${groupId.id}/new`)}>Create New Event</button></h3>: <h3>Please create a group before you create an event.</h3>}
                     {!allEventsArr && <span>No Events available right now</span>}
                     <ul>
                         {allEventsArr.map((event) => {
