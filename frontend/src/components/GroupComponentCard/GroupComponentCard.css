@@ -14,7 +14,7 @@ body {
     color: black;
     border-top: 1px solid;
     text-decoration: none;
-    padding: 4% 0 3% 0;
+    padding: 3% 0 3% 0;
     gap: 0%;
 }
 
@@ -22,7 +22,7 @@ body {
     display: flex;
     flex-direction: row;
     width: 40%;
-    margin-bottom: 13%;
+    margin-bottom: 0%;
     height: 100%;
     padding-right: 5%;
 }
