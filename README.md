@@ -43,16 +43,12 @@ Please see the following project Wiki links below:
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -73,9 +69,16 @@ M Rendezvous U is a web application inspired by MeetUp, that provides a platform
 
 * ***React***
 * ***Redux***
-* ***Re***
-* ***React***
-* ***React***
+* ***JavaScript***
+* ***HTML5***
+* ***CSS***
+* ***Node.js***
+* ***Express.js***
+
+### Deployed With
+
+* ***Render***
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -88,28 +91,24 @@ M Rendezvous U is a web application inspired by MeetUp, that provides a platform
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+Here are some instructions on how to set up locally.
+
+1. Create a folder to hold the repo.
+
+2. Click on the green button above that says ***CODE*** and copy the repo url.
+
+3. Open up your terminal and navigate to the created folder used to hold the repo.
+
+4. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/ChrisE1911/Meet-Up.git
    ```
-3. Install NPM packages
+5. Install NPM packages
    ```sh
    npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -119,9 +118,11 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Here is some examples of the functionality within the site:
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -130,32 +131,14 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+Here are a few features that I look forward to implementing in the future.
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+-  Memberships - Users will soon be able to see the members apart of the group and owners of those groups will be able to add, edit, and delete memberships from groups.
+- Venues - User will soon be able to add a venue to their group
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
