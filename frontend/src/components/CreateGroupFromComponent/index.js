@@ -64,13 +64,13 @@ function CreateGroupFormComponent() {
             "preview": true
         }
 
-        const newGroupDispatch = async () => dispatch(createAGroup(group, image));
+        const newGroupDispatch = await dispatch(createAGroup(group, image));
 
-        const newObj = await newGroupDispatch();
+        // const newObj = await newGroupDispatch();
 
-        console.log(newObj.id)
+        // console.log(newGroupDispatch.id)
 
-        history.push(`/groups/${newObj.id}`)
+        history.push(`/groups/${newGroupDispatch.id}`)
 
     };
 
