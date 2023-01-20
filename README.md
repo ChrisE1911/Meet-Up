@@ -43,16 +43,12 @@ Please see the following project Wiki links below:
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -73,9 +69,16 @@ M Rendezvous U is a web application inspired by MeetUp, that provides a platform
 
 * ***React***
 * ***Redux***
-* ***Re***
-* ***React***
-* ***React***
+* ***JavaScript***
+* ***HTML5***
+* ***CSS***
+* ***Node.js***
+* ***Express.js***
+
+### Deployed With
+
+* ***Render***
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -85,31 +88,26 @@ M Rendezvous U is a web application inspired by MeetUp, that provides a platform
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+Here are instructions on how to gain this repo as a local copy of your own:
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+Here are some instructions on how to set up locally.
+
+1. Create a folder to hold the repo.
+
+2. Click on the green button above that says ***CODE*** and copy the repo url.
+
+3. Open up your terminal and navigate to the created folder used to hold the repo.
+
+4. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/ChrisE1911/Meet-Up.git
    ```
-3. Install NPM packages
+5. Install NPM packages
    ```sh
    npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -119,9 +117,29 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Here is some examples of the functionality within the site:
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+### Logging in
+Users will be able to log in with a previous account (if signed up in the past) or sign up and create a brand new account
+![M Rendezvous U][log-in]
+
+### Groups/Events Pages
+
+Once logged in, users will be able to navigate through the events and groups pages to see the different groups and activities to offer.
+![M Rendezvous U][groups-page]
+![M Rendezvous U][events-page]
+
+### Creating a Group and an Event (once group is created)
+
+Once a user is ready to create a group, clicking on ***Start a new group!*** at the top of the page will take you to a form. Once the form is complete and every input field is valid, it will allow you to submit and create your own group.
+
+Once your group is created you will be navigated to the page to view/edit details as you like. You will also be allowed access to create an event once your group is created.
+![M Rendezvous U][create-group]
+![M Rendezvous U][group-created]
+
+
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -130,32 +148,14 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+Here are a few features that I look forward to implementing in the near future.
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+-  Memberships - Users will soon be able to see the members apart of the group and owners of those groups will be able to add, edit, and delete memberships from groups.
+- Venues - User will soon be able to add a venue to their group
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -204,3 +204,8 @@ Project Link: [https://github.com/ChrisE1911/Meet-up](https://github.com/ChrisE1
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com
 [meetup-screenshot]: ./meetup-screenshot.png
+[create-group]: ./create-group-sshot.png
+[events-page]: ./events-sshot.png
+[group-created]: ./group-creation-example-sshot.png
+[groups-page]: ./groups-sshot.png
+[log-in]: ./log-in-sshot.png
