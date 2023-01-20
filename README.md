@@ -88,8 +88,7 @@ M Rendezvous U is a web application inspired by MeetUp, that provides a platform
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+Here are instructions on how to gain this repo as a local copy of your own:
 
 
 ### Installation
@@ -120,6 +119,24 @@ Here are some instructions on how to set up locally.
 
 Here is some examples of the functionality within the site:
 
+### Logging in
+Users will be able to log in with a previous account (if signed up in the past) or sign up and create a brand new account
+![M Rendezvous U][log-in]
+
+### Groups/Events Pages
+
+Once logged in, users will be able to navigate through the events and groups pages to see the different groups and activities to offer.
+![M Rendezvous U][groups-page]
+![M Rendezvous U][events-page]
+
+### Creating a Group and an Event (once group is created)
+
+Once a user is ready to create a group, clicking on ***Start a new group!*** at the top of the page will take you to a form. Once the form is complete and every input field is valid, it will allow you to submit and create your own group.
+
+Once your group is created you will be navigated to the page to view/edit details as you like. You will also be allowed access to create an event once your group is created.
+![M Rendezvous U][create-group]
+![M Rendezvous U][group-created]
+
 
 
 
@@ -131,7 +148,7 @@ Here is some examples of the functionality within the site:
 <!-- ROADMAP -->
 ## Roadmap
 
-Here are a few features that I look forward to implementing in the future.
+Here are a few features that I look forward to implementing in the near future.
 
 -  Memberships - Users will soon be able to see the members apart of the group and owners of those groups will be able to add, edit, and delete memberships from groups.
 - Venues - User will soon be able to add a venue to their group
@@ -187,3 +204,8 @@ Project Link: [https://github.com/ChrisE1911/Meet-up](https://github.com/ChrisE1
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com
 [meetup-screenshot]: ./meetup-screenshot.png
+[create-group]: ./create-group-sshot.png
+[events-page]: ./events-sshot.png
+[group-created]: ./group-creation-example-sshot.png
+[groups-page]: ./groups-sshot.png
+[log-in]: ./log-in-sshot.png
