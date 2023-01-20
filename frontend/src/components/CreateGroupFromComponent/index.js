@@ -48,7 +48,7 @@ function CreateGroupFormComponent() {
 
     }, [name, state, about, type, city, privateGroup])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const group = {
             name,
@@ -64,14 +64,20 @@ function CreateGroupFormComponent() {
             "preview": true
         }
 
-        return dispatch(createAGroup(group, image))
-            .then(() => history.push('/groups'));
-    };
+        const newGroupDispatch = await dispatch(createAGroup(group, image));
 
+        // const newObj = await newGroupDispatch();
+
+        // console.log(newGroupDispatch.id)
+
+        history.push(`/groups/${newGroupDispatch.id}`)
+
+    };
 
 
     return (
         <>
+            <br/>
             <br/>
             <br/>
             <br/>
@@ -182,6 +188,7 @@ function CreateGroupFormComponent() {
                     </fieldset>
                     </div>
             </form>
+            <br/>
             <br/>
             <br/>
             <br/>

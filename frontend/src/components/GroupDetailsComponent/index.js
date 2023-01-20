@@ -87,6 +87,9 @@ function GroupDetailsComponent() {
                         {sessionUser && currentGroup.Organizer && sessionUser.id === currentGroup.Organizer.id &&
                                  <button className='button-design' onClick={() => deleteGrouphandler(currentGroup.id)}>Delete Group</button>
                             }
+                        {sessionUser && currentGroup.Organizer && sessionUser.id === currentGroup.Organizer.id &&
+                                 <button className='button-design' onClick={() => history.push(`/events/${currentGroup.id}/new`)}>Create Event</button>
+                            }
                     </div>
                 </div>
             </>
