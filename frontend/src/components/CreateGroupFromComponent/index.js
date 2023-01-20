@@ -82,6 +82,7 @@ function CreateGroupFormComponent() {
             <br/>
             <br/>
             <br/>
+            <br/>
             <form id='universal-form-container' onSubmit={handleSubmit}>
                 <div id='form-container-div'>
                 <fieldset id='form-container-fieldset'>
@@ -187,6 +188,7 @@ function CreateGroupFormComponent() {
                     </fieldset>
                     </div>
             </form>
+            <br/>
             <br/>
             <br/>
             <br/>
