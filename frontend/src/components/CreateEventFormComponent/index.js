@@ -65,8 +65,8 @@ function CreateEventFormComponent() {
             capacity,
             price,
             description,
-            startDate,
-            endDate
+            startDate: new Date(startDate).toUTCString(),
+            endDate: new Date(endDate).toUTCString()
         }
 
         const image = {
