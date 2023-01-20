@@ -25,9 +25,11 @@ function EventDetailsComponent() {
 
 
     const newStartDate = new Date(currentEvent.startDate).toDateString().split(' ').slice(0, 3)
-    const newStartDateTime = new Date(currentEvent.startDate).toLocaleString().split(',')[1]
+    const newStartDateTime = new Date(currentEvent.startDate).toLocaleTimeString()
     const newEndDate = new Date(currentEvent.endDate).toDateString().split(' ').slice(0, 3)
-    const newEndDateTime = new Date(currentEvent.endDate).toLocaleString().split(',')[1]
+    const newEndDateTime = new Date(currentEvent.endDate).toLocaleTimeString();
+
+    console.log('DATE', new Date(currentEvent.startDate).toLocaleTimeString())
 
     useEffect(() => {
         dispatch(getOneEvent(+eventId))
