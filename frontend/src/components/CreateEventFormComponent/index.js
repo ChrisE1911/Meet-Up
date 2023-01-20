@@ -40,12 +40,21 @@ function CreateEventFormComponent() {
             errors.push("Capacity must be a number")
         }
 
+        if (new Date((startDate)) <= new Date(Date.now())) {
+            errors.push('Start Date must be future date'
+            )
+        }
+
+        if (new Date(startDate) > new Date(endDate)) {
+            errors.push('End date must be after Start Date')
+        }
+
         if (description.length === 0) {
             errors.push('Description is required')
         }
 
         setValidationErrors(errors)
-    }, [name, type, price, capacity, description, startDate])
+    }, [name, type, price, capacity, description, startDate, endDate])
 
 
     const handleSubmit = async (e) => {
@@ -190,7 +199,7 @@ function CreateEventFormComponent() {
                             name='Image'
                             required
                         />
-                        <button className='button-design' type='submit'>Submit</button>
+                        <button className='button-design' type='submit' disabled={validationErrors.length > 0}>Submit</button>
                         <button className='button-design' onClick={() => history.push('/events')}>Go back to Events</button>
                     </fieldset>
                 </div>
