@@ -5,6 +5,8 @@
     height: 100vh;
     align-items: center;
     justify-content: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 #form-container-fieldset {
@@ -30,6 +32,4 @@
 #form-container-div {
     height: 97%;
     width: 40%;
-    position: fixed;
-    top: 12.5%;
 }

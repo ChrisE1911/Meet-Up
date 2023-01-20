@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { createAEvent } from '../../store/event.js';
 import { useParams } from 'react-router-dom';
-import { useModal } from '../../context/Modal.js';
 
 
 function CreateEventFormComponent() {
@@ -19,7 +18,6 @@ function CreateEventFormComponent() {
     const dispatch = useDispatch();
     const history = useHistory()
     const { groupId } = useParams();
-    const { closeModal } = useModal();
 
 
 
@@ -34,8 +32,21 @@ function CreateEventFormComponent() {
             errors.push("Type must be 'Online' or 'In person'")
         }
 
+        if (price <= 5) {
+            errors.push('Price is less than $5. Please choose an amount greater than 5')
+        }
+
         if (!Number(capacity)) {
             errors.push("Capacity must be a number")
+        }
+
+        if (new Date((startDate)) <= new Date(Date.now())) {
+            errors.push('Start Date must be future date'
+            )
+        }
+
+        if (new Date(startDate) > new Date(endDate)) {
+            errors.push('End date must be after Start Date')
         }
 
         if (description.length === 0) {
@@ -43,10 +54,10 @@ function CreateEventFormComponent() {
         }
 
         setValidationErrors(errors)
-    }, [name, type, capacity, description, startDate])
+    }, [name, type, price, capacity, description, startDate, endDate])
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const event = {
             name,
@@ -63,19 +74,31 @@ function CreateEventFormComponent() {
             "preview": true
         }
 
-        return dispatch(createAEvent(groupId, event, image))
-            .then(closeModal)
-            .then(() => history.push('/events')).catch(
-                async (res) => {
-                    const data = await res.json();
-                    if (data && data.errors) setValidationErrors((prev) => [...prev, data.errors]);
-                }
-            );
+        const newEventDispatch = await dispatch(createAEvent(groupId, event, image));
+
+        // const newObj = await newEventDispatch
+
+        console.log(newEventDispatch.id)
+
+        history.push(`/events/${newEventDispatch.id}`)
+
+            // .then(() => history.push('/events')).catch(
+            //     async (res) => {
+            //         const data = await res.json();
+            //         if (data && data.errors) setValidationErrors((prev) => [...prev, data.errors]);
+            //     }
+            // );
 
     };
 
     return (
         <>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <form id='universal-form-container' onSubmit={handleSubmit}>
                 <div id='form-container-div'>
                     <fieldset id='form-container-fieldset'>
@@ -177,11 +200,17 @@ function CreateEventFormComponent() {
                             name='Image'
                             required
                         />
-                        <button className='button-design' type='submit'>Submit</button>
+                        <button className='button-design' type='submit' disabled={validationErrors.length > 0}>Submit</button>
                         <button className='button-design' onClick={() => history.push('/events')}>Go back to Events</button>
                     </fieldset>
                 </div>
             </form>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
         </>
     );
 }
