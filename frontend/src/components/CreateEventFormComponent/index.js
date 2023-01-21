@@ -193,7 +193,7 @@ function CreateEventFormComponent() {
                         </div>
                         <input
                             id='input-field'
-                            type='text'
+                            type='url'
                             onChange={(e) => setPreviewImage(e.target.value)}
                             value={previewImage}
                             placeholder='Image'
