@@ -52,7 +52,7 @@ router.post(
 
     delete user['createdAt']
     delete user['updatedAt']
- 
+
 
     return res.json({
       user: user

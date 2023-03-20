@@ -10,7 +10,7 @@ import DemoUserLoginItem from '../DemoUserLogin';
 function LoginFormModal() {
   const dispatch = useDispatch();
   const history = useHistory()
-  const [credential, setCredential] = useState("");
+  const [ credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
 
 
