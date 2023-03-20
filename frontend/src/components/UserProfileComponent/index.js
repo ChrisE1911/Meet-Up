@@ -22,11 +22,14 @@ function UserProfileComponent() {
     return (
         <div className="profile-container">
             <div id='main-profile-info'>
-                <img alt='profile-pic'></img>
+                <img alt={sessionUser}></img>
                 <div id='user-information'>
-                <h1>{`${sessionUser.firstName} ${sessionUser.lastName}`}</h1>
+                    <h1>{`${sessionUser.firstName} ${sessionUser.lastName}`}</h1>
                     <h3>{`Member since ${sessionUser.createdAt}`}</h3>
-                    <h4>{`Attended ___ events` }</h4>
+                    <div id='user-profile-numEvents'>
+                    <i className="fa-solid fa-person"></i>
+                    <h5>{`Attended ___ events` }</h5>
+                    </div>
                 </div>
             </div>
             <div id='middle-bar'>
