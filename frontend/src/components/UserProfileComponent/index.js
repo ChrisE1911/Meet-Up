@@ -1,9 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getGroups } from '../../store/group';
+import ProfileGroupCard from '../ProfileGroupCard';
 import './UserProfile.css'
 
 function UserProfileComponent() {
-
+    const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
+    const allGroups = useSelector(state => state.groups.allGroups)
+    const allGroupsArr = Object.values(allGroups)
+    const userGroups = allGroupsArr.filter(group => group.organizerId === sessionUser.id)
+
+    console.log(userGroups)
+
+
+    useEffect(() => {
+        dispatch(getGroups())
+    }, [dispatch])
 
 
     return (
@@ -27,7 +40,12 @@ function UserProfileComponent() {
             </div>
             <div id='seperation-line'></div>
             <div id='profile-groups-info'>
-            <h1>Groups</h1>
+                <h1>Groups</h1>
+                <div id='user-groups'>
+                    {userGroups.map((group) => {
+                        return <ProfileGroupCard key={group.id} group={group} />
+                    })}
+                </div>
             </div>
             <div id='seperation-line'></div>
             <div id='profile-events-info'>
