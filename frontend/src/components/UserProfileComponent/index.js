@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getGroups } from '../../store/group';
 import { getCurrentUserGroups } from '../../store/group';
+import { getCurrentUserEvents } from '../../store/event';
 import ProfileGroupCard from '../ProfileGroupCard';
 import './UserProfile.css'
 
@@ -12,10 +13,12 @@ function UserProfileComponent() {
     const sessionUser = useSelector(state => state.session.user)
     const allGroups = useSelector(state => state.groups.allGroups)
     const allGroupsArr = Object.values(allGroups)
+    
     const userGroups = useSelector(state => state.groups.currentUserGroups)
     const userGroupsArr = Object.values(userGroups)
 
-    console.log('USER GROUPS', userGroups)
+
+    console.log('USER GROUPS', userGroupsArr)
 
 
     useEffect(() => {

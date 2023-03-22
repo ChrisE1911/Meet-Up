@@ -32,6 +32,7 @@ export const currentUserGroupsAC = (data) => ({
 })
 
 
+
 //GET CURRENT USER GROUPS
 
 export const getCurrentUserGroups = () => async (dispatch) => {
@@ -133,7 +134,7 @@ export const deleteGroup = (groupId) => async (dispatch) => {
 const initialState = {
     allGroups: {},
     singleGroup: {},
-    currentUserGroups: {}
+    currentUserGroups: {},
 };
 const groupReducer = (state = initialState, action) => {
     let newState;
@@ -163,7 +164,7 @@ const groupReducer = (state = initialState, action) => {
             return newState
         case GET_CURRENT_GROUPS:
             newState = { ...state };
-            console.log('ACTION', action)
+            // console.log('ACTION', action)
             const currentGroups = {}
             action.payload.Groups.forEach(group => {
                 currentGroups[group.id] = group
