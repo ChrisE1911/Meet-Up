@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const GET_GROUPS = 'groups/GET_GROUPS';
 const CREATE_GROUP = 'groups/CREATE_GROUP';
+const GET_CURRENT_GROUPS = 'groups/GET_CURRENT_GROUPS'
 const GET_ONE_GROUP = 'groups/GET_ONE_GROUP';
 const REMOVE_GROUP = 'groups/REMOVE_GROUP';
 
@@ -24,6 +25,28 @@ export const removeGroup = (groupId) => ({
     type: REMOVE_GROUP,
     groupId
 })
+
+export const currentUserGroupsAC = (data) => ({
+    type: GET_CURRENT_GROUPS,
+    payload: data
+})
+
+
+
+//GET CURRENT USER GROUPS
+
+export const getCurrentUserGroups = () => async (dispatch) => {
+    const response = await csrfFetch('/api/groups/current')
+
+    console.log(response)
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(currentUserGroupsAC(data))
+        return data
+    }
+}
+
 
 //GET ONE GROUP
 export const getOneGroup = (groupId) => async (dispatch) => {
@@ -110,7 +133,8 @@ export const deleteGroup = (groupId) => async (dispatch) => {
 
 const initialState = {
     allGroups: {},
-    singleGroup: {}
+    singleGroup: {},
+    currentUserGroups: {},
 };
 const groupReducer = (state = initialState, action) => {
     let newState;
@@ -137,6 +161,15 @@ const groupReducer = (state = initialState, action) => {
             newState = { ...state };
             delete newState.allGroups[action.groupId];
             newState.singleGroup = {};
+            return newState
+        case GET_CURRENT_GROUPS:
+            newState = { ...state };
+            // console.log('ACTION', action)
+            const currentGroups = {}
+            action.payload.Groups.forEach(group => {
+                currentGroups[group.id] = group
+            });
+            newState.currentUserGroups = currentGroups
             return newState
         default:
             return state

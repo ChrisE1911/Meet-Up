@@ -11,6 +11,8 @@ import EventsComponent from "./components/EventsComponent";
 import EventDetailsComponent from "./components/EventDetailsComponent";
 import CreateEventFormComponent from "./components/CreateEventFormComponent";
 import SplashPageComponent from "./components/SplashPageComponent";
+import UserProfileComponent from "./components/UserProfileComponent";
+import EditProfileComponent from "./components/EditProfileComponent";
 
 
 
@@ -35,6 +37,8 @@ function App() {
           <Route exact path='/events' component={EventsComponent} />
           <Route exact path='/events/:groupId/new' component={CreateEventFormComponent} />
           <Route exact path='/events/:eventId' component={EventDetailsComponent} />
+          <Route exact path='/my-profile' component={UserProfileComponent} />
+          <Route exact path='/my-profile/edit' component={EditProfileComponent} />
           {/* <Route exact path='/events/:eventId/edit' component={EditEventFormComponent} /> */}
         </Switch>
       )}

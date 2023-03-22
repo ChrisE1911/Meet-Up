@@ -35,7 +35,7 @@ router.post(
 
       user = user.toJSON();
 
-      delete user['createdAt'];
+      // delete user['createdAt'];
       delete user['updatedAt'];
       // delete user['username'];
 
@@ -74,7 +74,7 @@ router.get(
     if (user) {
       user = user.toJSON();
 
-      delete user['createdAt'];
+      // delete user['createdAt'];
       delete user['updatedAt']
     }
 
