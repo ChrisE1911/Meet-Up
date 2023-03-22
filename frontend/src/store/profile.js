@@ -2,17 +2,23 @@ import { csrfFetch } from "./csrf";
 
 const ADD_IMAGE = 'profile/ADD_IMAGE';
 const GET_IMAGE = 'profile/GET_IMAGE';
+const EDIT_PROFILE = 'profile/EDIT_PROFILE';
 
 export const addImageActionCreator = (image) => ({
     type: ADD_IMAGE,
     payload: image
 })
 
+export const editProfileActionCreator = (data) => ({
+    type: EDIT_PROFILE,
+    payload: data
+})
+
 
 //CREATE/ADD IMAGE
 
 export const addImageThunk = (image) => async (dispatch) => {
-    const response = await csrfFetch(`/api/profile`, {
+    const response = await csrfFetch(`/api/profile/images`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(image)
@@ -25,8 +31,22 @@ export const addImageThunk = (image) => async (dispatch) => {
     }
 }
 
+export const editProfileThunk = (editedProfile) => async (dispatch) => {
+    const response = await csrfFetch(`api/profile/edit`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(editedProfile)
+    })
+
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(editProfileActionCreator(data));
+        return data
+    }
+}
 
 const initialState = {
+    userProfile: {},
     allPictures: {}
 }
 
@@ -45,6 +65,11 @@ const profileImageReducer = (state = initialState, action) => {
                 newImages[image.id] = image
             });
             newState.allImages = newImages;
+            return newState;
+        case EDIT_PROFILE:
+            newState = { ...state };
+            const updatedProfile = action.payload
+            newState.userProfile = updatedProfile;
             return newState;
         default:
             return state
