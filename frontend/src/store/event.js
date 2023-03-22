@@ -3,11 +3,17 @@ import { csrfFetch } from "./csrf";
 const GET_EVENTS = 'events/GET_EVENTS';
 const CREATE_EVENT = 'events/CREATE_EVENT';
 const GET_ONE_EVENT = 'events/GET_ONE_EVENT';
+const GET_CURRENT_EVENTS = 'groups/GET_CURRENT_EVENTS'
 const REMOVE_EVENT = 'events/REMOVE_EVENT';
 
 export const getAllEvents = (events) => ({
     type: GET_EVENTS,
     events
+})
+
+export const currentUserEventsAC = (data) => ({
+    type: GET_CURRENT_EVENTS,
+    payload: data
 })
 
 export const createEvent = (event) => ({
@@ -35,6 +41,21 @@ export const getEvents = () => async (dispatch) => {
         return events
     }
 }
+
+//GET CURRENT EVENTS
+
+export const getCurrentUserEvents = (groupId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/groups/${groupId}/events`)
+
+    console.log(response)
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(currentUserEventsAC(data))
+        return data
+    }
+}
+
 
 //GET ONE EVENT
 
@@ -88,7 +109,8 @@ export const deleteEvent = (eventId) => async (dispatch) => {
 
 const initialState = {
     allEvents: {},
-    singleEvent: {}
+    singleEvent: {},
+    currentUserEvents: {}
 }
 
 
@@ -114,6 +136,15 @@ const eventReducer = (state = initialState, action) => {
             return {
                 ...state, singleEvent: action.event
             }
+        case GET_CURRENT_EVENTS:
+            newState = { ...state };
+            // console.log('ACTION', action)
+            const currentEvents = {}
+            action.payload.Groups.forEach(events => {
+                currentEvents[events.id] = events
+            });
+            newState.currentUserEvents = currentEvents
+            return newState
         case REMOVE_EVENT:
             newState = { ...state };
             delete newState.allEvents[action.eventId];

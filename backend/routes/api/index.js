@@ -7,6 +7,7 @@ const venuesRouter = require('./venue.js');
 const eventsRouter = require('./events.js');
 const groupImagesRouter = require('./group-images.js');
 const eventImagesRouter = require('./event-images.js')
+const profileImagesRouter = require('./profile-images.js')
 
 
 router.use(restoreUser);
@@ -24,6 +25,8 @@ router.use('/events', eventsRouter);
 router.use('/group-images', groupImagesRouter);
 
 router.use('/event-images', eventImagesRouter);
+
+router.use('/profile-images', profileImagesRouter);
 
 router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });

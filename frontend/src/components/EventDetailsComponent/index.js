@@ -65,7 +65,7 @@ function EventDetailsComponent() {
                     <br />
                     <div id='event-container-information'>
                         <div id='event-details'>
-                            {currentEvent.EventImages && <img src={currentEvent.EventImages[0].url} alt='Event'></img>}
+                            {currentEvent.EventImages ? <img src={currentEvent.EventImages[0].url} alt='Event'></img> : <img src='https://geodash.gov.bd/uploaded/people_group/default_group.png' alt='default-pic'></img>}
                             <h3>Details</h3>
                             <p>{currentEvent.description}</p>
                             <p>
