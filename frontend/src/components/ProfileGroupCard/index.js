@@ -5,13 +5,10 @@ function ProfileGroupCard({ group }) {
 
     return (
         <>
-
-            <div id="group-card">
-                <Link to={`/groups/${group.id}`}>
+                <Link to={`/groups/${group.id}`} id="group-card">
                     <img src={group.previewImage} style={{ width: '100px', height: '100px' }}></img>
                     <div>{group.name}</div>
-                </Link >
-            </div>
+                </Link>
         </>
     )
 }
