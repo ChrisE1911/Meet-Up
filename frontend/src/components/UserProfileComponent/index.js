@@ -64,13 +64,17 @@ function UserProfileComponent() {
             <div id='seperation-line'></div>
             <div id='profile-events-info'>
                 <h1>Events</h1>
-                <div id='user-groups'>
+                <div>
                     {userGroupsArr.map((group) => (
                         <>
-                        <Link to={`groups/${group.id}`}>{group.name}</Link>
+                            <Link to={`groups/${group.id}`}>{group.name}</Link>
+                            <br/>
+                            <br />
+                            <div id='event-card-container'>
                             {allEventsArr.filter((event) => event.groupId === group.id).map((filteredEvent) => {
                                 return <EventCardComponent key={filteredEvent.id} event={filteredEvent} />
                             })}
+                            </div>
                         </>
                     ))}
                 </div>

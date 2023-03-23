@@ -42,12 +42,32 @@
     margin-left: 10vw;
     margin-right: 10vw;
     width: 80vw;
-    height: 20vw;
+    height: auto;
+    padding-bottom: 3%;
 }
 
 #profile-events-info {
     margin-left: 10vw;
     margin-right: 10vw;
     width: 80vw;
-    height: 20vw;
+    height: auto;
+    padding-bottom: 3%
+}
+
+
+#event-card-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 2vw;
+    margin-bottom: 4%;
+    overflow: scroll;
+}
+
+#user-groups {
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+    width: 100%;
+    overflow: scroll;
 }
