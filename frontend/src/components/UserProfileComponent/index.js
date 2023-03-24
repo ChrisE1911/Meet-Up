@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory, Link, NavLink } from 'react-router-dom';
+import { useRef } from 'react';
 import { getGroups } from '../../store/group';
 import { getCurrentUserGroups } from '../../store/group';
 import { getCurrentUserEvents } from '../../store/event';
@@ -10,6 +11,15 @@ import EventCardComponent from '../EventCardComponent';
 import './UserProfile.css'
 
 function UserProfileComponent() {
+    const groups = useRef(null)
+    const events = useRef(null)
+
+    const scrollToSection = (elementRef) => {
+        window.scrollTo({
+            top: elementRef.current.offsetTop,
+            behavior: 'smooth'
+        })
+    }
     const dispatch = useDispatch()
     const history = useHistory()
     const sessionUser = useSelector(state => state.session.user)
@@ -41,8 +51,8 @@ function UserProfileComponent() {
             </div>
             <div id='middle-bar'>
                 <div id='profile-subtitles'>
-                    <div>Groups</div>
-                    <div>Events</div>
+                    <Link onClick={() => scrollToSection(groups)}>Groups</Link>
+                    <Link onClick={() => scrollToSection(events)}>Events</Link>
                 </div>
                 <div id='profile-edit-button'>
                     <button className='button-design' onClick={() => history.push('/my-profile/edit')}>Edit Profile</button>
@@ -50,7 +60,7 @@ function UserProfileComponent() {
             </div>
             <div id='seperation-line'></div>
             <div id='profile-groups-info'>
-                <h1>Groups</h1>
+                <h1 ref={groups}>Groups</h1>
                 <div id='user-groups'>
                     {userGroupsArr.map((group) => {
                         return <ProfileGroupCard key={group.id} group={group} />
@@ -59,7 +69,7 @@ function UserProfileComponent() {
             </div>
             <div id='seperation-line'></div>
             <div id='profile-events-info'>
-                <h1>Events</h1>
+                <h1 ref={events}>Events</h1>
                 <div>
                     {userGroupsArr.map((group) => (
                         <>
