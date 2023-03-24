@@ -29,6 +29,17 @@
     justify-content: row;
     flex-direction: row;
     gap: 30%;
+    width: 12%;
+}
+
+#profile-subtitles a {
+    text-decoration-line: none;
+    color: black;
+    font-weight: 700;
+}
+
+#profile-subtitles a:hover {
+    color: teal
 }
 
 #seperation-line {
@@ -42,12 +53,58 @@
     margin-left: 10vw;
     margin-right: 10vw;
     width: 80vw;
-    height: 20vw;
+    height: auto;
+    padding-bottom: 3%;
 }
 
 #profile-events-info {
     margin-left: 10vw;
     margin-right: 10vw;
     width: 80vw;
-    height: 20vw;
+    height: auto;
+    padding-bottom: 3%
+}
+
+
+#event-card-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 2vw;
+    margin-bottom: 4%;
+    overflow: scroll;
+}
+
+#user-groups {
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+    width: 100%;
+    overflow: scroll;
+}
+
+
+#ref-groups {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12%;
+}
+
+#ref-events {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12%;
+}
+
+#circle-number {
+    background: teal;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

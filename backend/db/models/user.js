@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     toSafeObject() {
       const { id, firstName, lastName, username, email } = this; // context will be the User instance
-      return { id, firstName, lastName, email};
+      return { id, firstName, lastName, email };
     };
 
     validatePassword(password) {
@@ -33,14 +33,15 @@ module.exports = (sequelize, DataTypes) => {
       }
     };
 
-    static async signup({ firstName, lastName, username, email, password }) {
+    static async signup({ firstName, lastName, username, email, password, picture_url }) {
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
         firstName,
         lastName,
         username,
         email,
-        hashedPassword
+        hashedPassword,
+        picture_url
       });
       return await User.scope('currentUser').findByPk(user.id);
     };
@@ -51,10 +52,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasMany(models.Attendance, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true});
+      User.hasMany(models.Attendance, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true });
       User.hasMany(models.Membership, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true });
       User.hasMany(models.ProfileImage, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true });
-      User.hasMany(models.Group, { foreignKey: 'organizerId'});
+      User.hasMany(models.Group, { foreignKey: 'organizerId' });
     }
   };
 
@@ -102,6 +103,10 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           len: [60, 60]
         }
+      },
+      picture_url: {
+        type: DataTypes.STRING,
+        allowNull: false
       }
     },
     {
@@ -109,7 +114,7 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
       defaultScope: {
         attributes: {
-          exclude: ["hashedPassword", "email", "createdAt", "updatedAt"]
+          exclude: ["hashedPassword", "email", "updatedAt"]
         }
       },
       scopes: {

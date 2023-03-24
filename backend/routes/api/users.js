@@ -43,14 +43,15 @@ router.post(
   '/',
   validateSignup,
   async (req, res) => {
-    const { firstName, lastName, email, password, username } = req.body;
-    let user = await User.signup({ firstName, lastName, email, username, password });
+    const { firstName, lastName, email, password, username, picture_url } = req.body;
+    let user = await User.signup({ firstName, lastName, email, username, password, picture_url });
 
    await setTokenCookie(res, user);
 
     user = user.toJSON();
 
-    delete user['createdAt']
+    console.log('USER IN ROUTE', user)
+
     delete user['updatedAt']
 
 
@@ -59,5 +60,25 @@ router.post(
     });
   }
 );
+
+
+//Add an image to profile
+
+router.post('/edit', requireAuth, async (req, res, next) => {
+  let { user } = req;
+
+  const { url, preview } = req.body;
+
+  let newImage = await ProfileImage.create({
+      preview,
+      url,
+      userId: user.id
+  })
+
+  newImage = newImage.toJSON();
+
+  res.json(newImage)
+})
+
 
 module.exports = router;
