@@ -6,7 +6,7 @@ function EventCardComponent({ event }) {
         <>
                 <Link to={`/events/${event.id}`} id="group-card">
                     <img src={event.previewImage} style={{ width: '100px', height: '100px' }}></img>
-                    <div>{event.name}</div>
+                    <div id="bold-description">{event.name}</div>
                 </Link>
         </>
     )
