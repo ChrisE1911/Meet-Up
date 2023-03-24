@@ -43,12 +43,14 @@ router.post(
   '/',
   validateSignup,
   async (req, res) => {
-    const { firstName, lastName, email, password, username } = req.body;
-    let user = await User.signup({ firstName, lastName, email, username, password });
+    const { firstName, lastName, email, password, username, picture_url } = req.body;
+    let user = await User.signup({ firstName, lastName, email, username, password, picture_url });
 
    await setTokenCookie(res, user);
 
     user = user.toJSON();
+
+    console.log('USER IN ROUTE', user)
 
     delete user['createdAt']
     delete user['updatedAt']

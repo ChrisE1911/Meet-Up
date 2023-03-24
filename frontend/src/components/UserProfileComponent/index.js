@@ -33,14 +33,10 @@ function UserProfileComponent() {
     return (
         <div className="profile-container">
             <div id='main-profile-info'>
-                {<img src='https://tse3.mm.bing.net/th?id=OIP.7i35GvRSp092_L3KWHr4jgAAAA&pid=Api&P=0' alt='profile-pic'></img>}
+                {<img src={sessionUser.picture_url} style={{width: '300px', height: '300px', borderRadius: '50%'}} alt='profile-pic'></img>}
                 <div id='user-information'>
                     <h1>{`${sessionUser.firstName} ${sessionUser.lastName}`}</h1>
                     <h3>{`Member since ${memberDate}`}</h3>
-                    <div id='user-profile-numEvents'>
-                        <i className="fa-solid fa-person"></i>
-                        <h5>{`Attended ___ events`}</h5>
-                    </div>
                 </div>
             </div>
             <div id='middle-bar'>

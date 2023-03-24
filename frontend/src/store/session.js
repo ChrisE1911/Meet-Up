@@ -44,7 +44,9 @@ export const restoreUser = () => async dispatch => {
 // frontend/src/store/session.js
 // ...
 export const signup = (user) => async (dispatch) => {
-  const { username, firstName, lastName, email, password } = user;
+  const { username, firstName, lastName, email, password} = user;
+
+  console.log(user)
   const response = await csrfFetch("/api/users", {
     method: "POST",
     body: JSON.stringify({
@@ -53,6 +55,7 @@ export const signup = (user) => async (dispatch) => {
       lastName,
       email,
       password,
+      picture_url: 'https://www.pngfind.com/pngs/m/676-6764065_default-profile-picture-transparent-hd-png-download.png'
     }),
   });
   const data = await response.json();
