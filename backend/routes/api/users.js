@@ -60,4 +60,24 @@ router.post(
   }
 );
 
+
+//Add an image to profile
+
+router.post('/edit', requireAuth, async (req, res, next) => {
+  let { user } = req;
+
+  const { url, preview } = req.body;
+
+  let newImage = await ProfileImage.create({
+      preview,
+      url,
+      userId: user.id
+  })
+
+  newImage = newImage.toJSON();
+
+  res.json(newImage)
+})
+
+
 module.exports = router;
