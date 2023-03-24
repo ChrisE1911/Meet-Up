@@ -52,7 +52,6 @@ router.post(
 
     console.log('USER IN ROUTE', user)
 
-    delete user['createdAt']
     delete user['updatedAt']
 
 
