@@ -31,7 +31,8 @@ function UserProfileComponent() {
     const userGroups = useSelector(state => state.groups.currentUserGroups)
     const userGroupsArr = Object.values(userGroups)
 
-    const zero = 0
+    let numberOfEventsArr = []
+    let eventsNumber = 0
 
     const memberDate = new Date(sessionUser.createdAt).toDateString().split(' ').slice(1, 4).join(' ')
     // console.log('DATE', memberDate.toDateString().split(' ').slice(1, 4).join(' '))
@@ -62,11 +63,14 @@ function UserProfileComponent() {
                     <div id='ref-events'>
                         <Link onClick={() => scrollToSection(events)}>Events</Link>
                         <div id='circle-number'>
-                            {userGroupsArr.length !== 0 ? userGroupsArr.map((group) => (
+                            {userGroupsArr.map((group) => (
                                 <>
-                                    {allEventsArr.filter((event) => event.groupId === group.id).length}
+                                    {allEventsArr.filter((event) => event.groupId === group.id).map((filteredEvent) => {
+                                        numberOfEventsArr.push(filteredEvent);
+                                    })}
                                 </>
-                            )) : <div>{zero}</div>}
+                            ))}
+                            <div>{numberOfEventsArr.length}</div>
                         </div>
                     </div>
                 </div>
@@ -89,11 +93,12 @@ function UserProfileComponent() {
                 <div ref={events}>
                     {userGroupsArr.map((group) => (
                         <>
-                            <Link to={`groups/${group.id}`}>{group.name}</Link>
+                            <Link to={`groups/${group.id}`} id='bold-description-group'>{group.name}</Link>
                             <br />
                             <br />
                             <div id='event-card-container'>
                                 {allEventsArr.filter((event) => event.groupId === group.id).map((filteredEvent) => {
+
                                     return <EventCardComponent key={filteredEvent.id} event={filteredEvent} />
                                 })}
                             </div>

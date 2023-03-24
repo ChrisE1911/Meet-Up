@@ -9,9 +9,27 @@
     border: 2px solid black;
     padding: 20px;
     border-radius: 10px;
+    text-decoration-line: none;
 }
 
 #group-card:hover {
     transition: 0.3s;
     background-color: gray;
+}
+
+#bold-description {
+    color: black;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+#bold-description-group {
+    color: black;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+#bold-description-group:hover {
+    color: teal;
+    text-decoration: underline;
 }

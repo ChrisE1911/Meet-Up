@@ -102,6 +102,9 @@
     background: teal;
     color: white;
     border-radius: 50%;
-    width: auto;
+    width: 30px;
     height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
