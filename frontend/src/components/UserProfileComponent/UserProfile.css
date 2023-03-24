@@ -29,6 +29,17 @@
     justify-content: row;
     flex-direction: row;
     gap: 30%;
+    width: 12%;
+}
+
+#profile-subtitles a {
+    text-decoration-line: none;
+    color: black;
+    font-weight: 700;
+}
+
+#profile-subtitles a:hover {
+    color: teal
 }
 
 #seperation-line {
@@ -72,3 +83,25 @@
     overflow: scroll;
 }
 
+
+#ref-groups {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12%;
+}
+
+#ref-events {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12%;
+}
+
+#circle-number {
+    background: teal;
+    color: white;
+    border-radius: 50%;
+    width: auto;
+    height: auto;
+}

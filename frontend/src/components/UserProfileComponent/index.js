@@ -31,6 +31,8 @@ function UserProfileComponent() {
     const userGroups = useSelector(state => state.groups.currentUserGroups)
     const userGroupsArr = Object.values(userGroups)
 
+    const zero = 0
+
     const memberDate = new Date(sessionUser.createdAt).toDateString().split(' ').slice(1, 4).join(' ')
     // console.log('DATE', memberDate.toDateString().split(' ').slice(1, 4).join(' '))
 
@@ -39,11 +41,11 @@ function UserProfileComponent() {
         dispatch(getGroups()).then(dispatch(getEvents())).then(dispatch(getCurrentUserGroups()))
     }, [dispatch])
 
-
+    if (!sessionUser) return null;
     return (
         <div className="profile-container">
             <div id='main-profile-info'>
-                {<img src={sessionUser.picture_url} style={{width: '300px', height: '300px', borderRadius: '50%'}} alt='profile-pic'></img>}
+                {<img src={sessionUser.picture_url} style={{ width: '300px', height: '300px', borderRadius: '50%' }} alt='profile-pic'></img>}
                 <div id='user-information'>
                     <h1>{`${sessionUser.firstName} ${sessionUser.lastName}`}</h1>
                     <h3>{`Member since ${memberDate}`}</h3>
@@ -51,8 +53,22 @@ function UserProfileComponent() {
             </div>
             <div id='middle-bar'>
                 <div id='profile-subtitles'>
-                    <Link onClick={() => scrollToSection(groups)}>Groups</Link>
-                    <Link onClick={() => scrollToSection(events)}>Events</Link>
+                    <div id='ref-groups'>
+                        <Link onClick={() => scrollToSection(groups)}>Groups</Link>
+                        <div id='circle-number'>
+                            {userGroupsArr.length}
+                        </div>
+                    </div>
+                    <div id='ref-events'>
+                        <Link onClick={() => scrollToSection(events)}>Events</Link>
+                        <div id='circle-number'>
+                            {userGroupsArr.length !== 0 ? userGroupsArr.map((group) => (
+                                <>
+                                    {allEventsArr.filter((event) => event.groupId === group.id).length}
+                                </>
+                            )) : <div>{zero}</div>}
+                        </div>
+                    </div>
                 </div>
                 <div id='profile-edit-button'>
                     <button className='button-design' onClick={() => history.push('/my-profile/edit')}>Edit Profile</button>
@@ -60,8 +76,8 @@ function UserProfileComponent() {
             </div>
             <div id='seperation-line'></div>
             <div id='profile-groups-info'>
-                <h1 ref={groups}>Groups</h1>
-                <div id='user-groups'>
+                <h1 >Groups</h1>
+                <div ref={groups} id='user-groups'>
                     {userGroupsArr.map((group) => {
                         return <ProfileGroupCard key={group.id} group={group} />
                     })}
@@ -69,17 +85,17 @@ function UserProfileComponent() {
             </div>
             <div id='seperation-line'></div>
             <div id='profile-events-info'>
-                <h1 ref={events}>Events</h1>
-                <div>
+                <h1>Events</h1>
+                <div ref={events}>
                     {userGroupsArr.map((group) => (
                         <>
                             <Link to={`groups/${group.id}`}>{group.name}</Link>
-                            <br/>
+                            <br />
                             <br />
                             <div id='event-card-container'>
-                            {allEventsArr.filter((event) => event.groupId === group.id).map((filteredEvent) => {
-                                return <EventCardComponent key={filteredEvent.id} event={filteredEvent} />
-                            })}
+                                {allEventsArr.filter((event) => event.groupId === group.id).map((filteredEvent) => {
+                                    return <EventCardComponent key={filteredEvent.id} event={filteredEvent} />
+                                })}
                             </div>
                         </>
                     ))}
