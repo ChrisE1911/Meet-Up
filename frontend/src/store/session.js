@@ -44,7 +44,7 @@ export const restoreUser = () => async dispatch => {
 // frontend/src/store/session.js
 // ...
 export const signup = (user) => async (dispatch) => {
-  const { username, firstName, lastName, email, password} = user;
+  const { username, firstName, lastName, email, password } = user;
 
   console.log(user)
   const response = await csrfFetch("/api/users", {

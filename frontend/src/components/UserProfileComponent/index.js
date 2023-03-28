@@ -55,13 +55,13 @@ function UserProfileComponent() {
             <div id='middle-bar'>
                 <div id='profile-subtitles'>
                     <div id='ref-groups'>
-                        <Link onClick={() => scrollToSection(groups)}>Groups</Link>
+                        <button id='user-profile-button' onClick={() => scrollToSection(groups)}>Groups</button>
                         <div id='circle-number'>
                             {userGroupsArr.length}
                         </div>
                     </div>
                     <div id='ref-events'>
-                        <Link onClick={() => scrollToSection(events)}>Events</Link>
+                        <button id='user-profile-button' onClick={() => scrollToSection(events)}>Events</button>
                         <div id='circle-number'>
                             {userGroupsArr.map((group) => (
                                 <>
