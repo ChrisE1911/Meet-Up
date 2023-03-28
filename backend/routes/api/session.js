@@ -114,6 +114,21 @@ router.put('/edit', requireAuth, async (req, res, next) => {
   res.json(await user)
 })
 
+//DELETE USER
+
+router.delete('/delete-user', requireAuth, async (req, res, next) => {
+  let { user } = req;
+
+  if (user) {
+    await user.destroy();
+  }
+
+  res.json({
+    message: 'Successfully deleted User',
+    statusCode: 200
+  })
+})
+
 const validateLogin = [
   check('credential')
     .exists({ checkFalsy: true })

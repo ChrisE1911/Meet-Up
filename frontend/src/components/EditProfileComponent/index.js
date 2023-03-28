@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { editUserThunk } from '../../store/session';
+import OpenModalButton from '../OpenModalButton';
+import DeleteUserModal from '../DeleteUserModal';
 import './EditProfileComponent.css'
 
 
@@ -26,6 +28,8 @@ function EditProfileComponent() {
         return dispatch(editUserThunk(updateProfile))
             .then(() => history.push('/my-profile'))
     }
+
+    if (sessionUser === null) history.push('/')
     return (
         <div className='edit-profile-container'>
             <br />
@@ -82,6 +86,10 @@ function EditProfileComponent() {
                     </fieldset>
                 </div>
             </form>
+                        <OpenModalButton
+                            buttonText='Delete Account'
+                            modalComponent={<DeleteUserModal />}
+                        />
         </div>
     )
 }
