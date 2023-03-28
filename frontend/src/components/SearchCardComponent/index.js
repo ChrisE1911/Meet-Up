@@ -1,7 +1,12 @@
+import { Link } from "react-router-dom"
+
+
 function SearchCardComponent({ item }) {
 
     return (
-        <h1>{item.name}</h1>
+        <Link to={`/events/${item.id}`}>
+        {item.name}
+        </Link>
     )
 }
 
