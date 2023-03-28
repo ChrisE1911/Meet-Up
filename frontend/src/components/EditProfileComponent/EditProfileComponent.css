@@ -1,0 +1,39 @@
+.edit-profile-container {
+    width: 80vw;
+    height: 86vh;
+    margin-top: 14vh;
+    display: flex;
+    justify-content: center;
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
+
+#label-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.profile-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3vh;
+}
+
+.delete-button button {
+    background-color: #ff0000ba;
+    color: white;
+    border-radius: 5px;
+    height: 39px;
+    font-size: 14px;
+    font-weight: 700;
+    border: none;
+    padding: 10px;
+    width: 100%
+}
+
+.delete-button button:hover {
+    color: teal
+}
