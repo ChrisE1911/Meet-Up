@@ -15,6 +15,7 @@ function UserProfileComponent() {
     const events = useRef(null)
 
     const scrollToSection = (elementRef) => {
+        console.log(elementRef)
         window.scrollTo({
             top: elementRef.current.offsetTop,
             behavior: 'smooth'
@@ -32,7 +33,7 @@ function UserProfileComponent() {
     const userGroupsArr = Object.values(userGroups)
 
     let numberOfEventsArr = []
-    let eventsNumber = 0
+    // let eventsNumber = 0
 
     const memberDate = new Date(sessionUser.createdAt).toDateString().split(' ').slice(1, 4).join(' ')
     // console.log('DATE', memberDate.toDateString().split(' ').slice(1, 4).join(' '))
@@ -42,7 +43,7 @@ function UserProfileComponent() {
         dispatch(getGroups()).then(dispatch(getEvents())).then(dispatch(getCurrentUserGroups()))
     }, [dispatch])
 
-    if (!sessionUser) return null;
+    if (!sessionUser) return () => history.push('/') ;
     return (
         <div className="profile-container">
             <div id='main-profile-info'>
@@ -55,13 +56,13 @@ function UserProfileComponent() {
             <div id='middle-bar'>
                 <div id='profile-subtitles'>
                     <div id='ref-groups'>
-                        <Link onClick={() => scrollToSection(groups)}>Groups</Link>
+                        <button id='user-profile-button' onClick={() => scrollToSection(groups)}>Groups</button>
                         <div id='circle-number'>
                             {userGroupsArr.length}
                         </div>
                     </div>
                     <div id='ref-events'>
-                        <Link onClick={() => scrollToSection(events)}>Events</Link>
+                        <button id='user-profile-button' onClick={() => scrollToSection(events)}>Events</button>
                         <div id='circle-number'>
                             {userGroupsArr.map((group) => (
                                 <>
@@ -80,8 +81,8 @@ function UserProfileComponent() {
             </div>
             <div id='seperation-line'></div>
             <div id='profile-groups-info'>
-                <h1 >Groups</h1>
-                <div ref={groups} id='user-groups'>
+                <h1 ref={groups}>Groups</h1>
+                <div id='user-groups'>
                     {userGroupsArr.map((group) => {
                         return <ProfileGroupCard key={group.id} group={group} />
                     })}
@@ -89,8 +90,8 @@ function UserProfileComponent() {
             </div>
             <div id='seperation-line'></div>
             <div id='profile-events-info'>
-                <h1>Events</h1>
-                <div ref={events}>
+                <h1  ref={events}>Events</h1>
+                <div>
                     {userGroupsArr.map((group) => (
                         <>
                             <Link to={`groups/${group.id}`} id='bold-description-group'>{group.name}</Link>
