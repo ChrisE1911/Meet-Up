@@ -17,34 +17,34 @@ const router = express.Router();
 
 // Log in
 router.post(
-    '/',
-    async (req, res, next) => {
-      const { credential, password } = req.body;
+  '/',
+  async (req, res, next) => {
+    const { credential, password } = req.body;
 
-      let user = await User.login({ credential, password });
+    let user = await User.login({ credential, password });
 
-      if (!user) {
-        const err = new Error('Login failed');
-        err.status = 401;
-        err.title = 'Login failed';
-        err.errors = ['The provided credentials were invalid.'];
-        return next(err);
-      }
-
-      await setTokenCookie(res, user);
-
-      user = user.toJSON();
-
-      // delete user['createdAt'];
-      delete user['updatedAt'];
-      // delete user['username'];
-
-      // user.token = token;
-
-      return res.json({
-        user: user
-      });
+    if (!user) {
+      const err = new Error('Login failed');
+      err.status = 401;
+      err.title = 'Login failed';
+      err.errors = ['The provided credentials were invalid.'];
+      return next(err);
     }
+
+    await setTokenCookie(res, user);
+
+    user = user.toJSON();
+
+    // delete user['createdAt'];
+    delete user['updatedAt'];
+    // delete user['username'];
+
+    // user.token = token;
+
+    return res.json({
+      user: user
+    });
+  }
 );
 
 // backend/routes/api/session.js
@@ -52,24 +52,24 @@ router.post(
 
 // Log out
 router.delete(
-    '/',
-    (_req, res) => {
-      res.clearCookie('token');
-      return res.json({ message: 'success' });
-    }
-  );
+  '/',
+  (_req, res) => {
+    res.clearCookie('token');
+    return res.json({ message: 'success' });
+  }
+);
 
-  // ...
+// ...
 
 // backend/routes/api/session.js
 // ...
 
 // Restore session user
 router.get(
-    '/',
-    restoreUser,
+  '/',
+  restoreUser,
   (req, res) => {
-      let { user } = req;
+    let { user } = req;
 
     if (user) {
       user = user.toJSON();
@@ -82,13 +82,37 @@ router.get(
       user: user
     });
 
-    }
-  );
+  }
+);
 
 //   ...
 
 //   backend/routes/api/session.js
 // ...
+
+//EDIT USER PROFILE INFORMATION
+
+router.put('/edit', requireAuth, async (req, res, next) => {
+  let { user } = req;
+
+  if (user) {
+    const { firstName, lastName, picture_url } = req.body;
+
+    if (firstName) {
+      user.firstName = firstName
+    }
+    if (lastName) {
+      user.lastName = lastName
+    }
+    if (picture_url) {
+      user.picture_url = picture_url
+    }
+
+  }
+  user.save();
+
+  res.json(await user)
+})
 
 const validateLogin = [
   check('credential')

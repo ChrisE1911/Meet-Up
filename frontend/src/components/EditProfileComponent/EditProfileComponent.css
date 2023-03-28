@@ -1,0 +1,23 @@
+.edit-profile-container {
+    width: 80vw;
+    height: 86vh;
+    margin-top: 14vh;
+    display: flex;
+    justify-content: center;
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
+
+#label-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.profile-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3vh;
+}
