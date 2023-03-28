@@ -1,7 +1,7 @@
 function SearchCardComponent({ item }) {
 
     return (
-        <h1>{item.id}</h1>
+        <h1>{item.name}</h1>
     )
 }
 

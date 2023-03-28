@@ -15,7 +15,7 @@ function SearchBarComponent() {
 
     useEffect(() => {
         dispatch(getEvents()).then(() => setData(eventsArr)).then(console.log(data))
-    }, [dispatch])
+    }, [])
 
     const sessionUser = useSelector(state => state.session.user)
 
@@ -24,15 +24,19 @@ function SearchBarComponent() {
     return (
         <>
             {sessionUser && <div className='search-bar'>
-                <input id='search-text' type='text' name='' placeholder='Search for Events'>
-                </input>
-                <div id='glass-box'>
+                <div className='search-inputs'>
+                    <input id='search-text' type='text' name='' placeholder='Search for Events'></input>
+                    <div id='search-icon'>
                     <i className="fa-solid fa-magnifying-glass"></i>
+                    </div>
                 </div>
-            </div>}
+                <div className='data-results'>
                     {data.map((item) => {
                         return <SearchCardComponent key={item.id} item={item} />
                     })}
+                    <div />
+                </div>
+            </div>}
         </>
     )
 }
