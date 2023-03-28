@@ -83,13 +83,16 @@ function EditProfileComponent() {
                         </div>
                         <button className='button-design' type='submit' disabled={validationErrors.length > 0}>Submit</button>
                         <button className='button-design' onClick={() => history.push(`/my-profile`)}>Go back to Profile Page</button>
+                        <div className='delete-button'>
+                            <OpenModalButton
+                                buttonText='Delete Account'
+                                className=''
+                                modalComponent={<DeleteUserModal />}
+                            />
+                        </div>
                     </fieldset>
                 </div>
             </form>
-                        <OpenModalButton
-                            buttonText='Delete Account'
-                            modalComponent={<DeleteUserModal />}
-                        />
         </div>
     )
 }
