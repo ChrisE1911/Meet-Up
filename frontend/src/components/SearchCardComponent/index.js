@@ -1,12 +1,17 @@
-import { Link } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 
 
-function SearchCardComponent({ item }) {
+function SearchCardComponent({ item, clear }) {
+
+    const history = useHistory()
 
     return (
-        <Link to={`/events/${item.id}`}>
-        {item.name}
-        </Link>
+        <li onClick={() => {
+            history.push(`/events/${item.id}`);
+            clear()
+        }} className="list-item">
+            {item.name}
+        </li>
     )
 }
 
