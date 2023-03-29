@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import SearchCardComponent from '../SearchCardComponent';
 import { getSearchEvents } from '../../store/search';
 import { clearSearchAC } from '../../store/search';
-
+//Double column dropdown. One side displays events
+//One side displays groups. Render each group/event based on what's typed in input
 
 function SearchBarComponent() {
     const dispatch = useDispatch()
