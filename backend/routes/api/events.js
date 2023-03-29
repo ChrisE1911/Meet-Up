@@ -79,9 +79,9 @@ router.get('/', async (req, res, next) => {
 
     if (req.query.name) where.name = { [Op.substring]: req.query.name };
 
-    if (req.query.type === 'Online') where.type = { [Op.not]: 'In Person'};
+    if (req.query.type === 'Online') where.type = { [Op.not]: 'In-Person'};
 
-    if (req.query.type === 'In Person') where.type = { [Op.not]: 'Online'};
+    if (req.query.type === 'In-Person') where.type = { [Op.not]: 'Online'};
 
     if (req.query.startDate >= Date.now()) where.startDate = req.query.startDate;
 

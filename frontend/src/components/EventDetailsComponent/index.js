@@ -33,7 +33,7 @@ function EventDetailsComponent() {
 
     useEffect(() => {
         dispatch(getOneEvent(+eventId))
-    }, [dispatch])
+    }, [dispatch, eventId])
 
     useEffect(() => {
         dispatch(getGroups(allGroups))
