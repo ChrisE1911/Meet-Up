@@ -5,6 +5,7 @@ import ProfileButton from './ProfileButton';
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import SearchBarComponent from '../SearchBarComponent';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
@@ -16,7 +17,7 @@ function Navigation({ isLoaded }) {
   if (sessionUser) {
     sessionLinks = (
       <div id='profile-button-container'>
-         <Link className='nav-group-button' to="/groups/new">Start a new group!</Link>
+        <Link className='nav-group-button' to="/groups/new">Start a new group!</Link>
         <ProfileButton user={sessionUser} />
       </div>
     );
@@ -39,6 +40,7 @@ function Navigation({ isLoaded }) {
     <div className='navigation-bar'>
       <div className='site-title'>
         <NavLink exact to="/" id='nav-title'>{homeTitle}</NavLink>
+       <SearchBarComponent />
       </div>
       {isLoaded && sessionLinks}
     </div>
