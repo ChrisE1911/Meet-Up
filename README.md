@@ -151,7 +151,7 @@ Once your group is created you will be navigated to the page to view/edit detail
 Here are a few features that I look forward to implementing in the near future.
 
 -  Memberships - Users will soon be able to see the members apart of the group and owners of those groups will be able to add, edit, and delete memberships from groups.
-- Venues - User will soon be able to add a venue to their group
+- AWS for Images - Users will be able to upload images straight from their device as oppsed to having to input an URL
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
