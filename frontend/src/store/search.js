@@ -28,7 +28,7 @@ export const getSearchEvents = (query) => async (dispatch) => {
 
     dispatch(setSearchQueryAC(query));
 
-    const response = await csrfFetch(`/api/events?name=${query.name}&type=${query.type}`);
+    const response = await csrfFetch(`/api/events?name=${query.name}`);
 
     if (response.ok) {
         const data = await response.json();
@@ -36,6 +36,21 @@ export const getSearchEvents = (query) => async (dispatch) => {
         return data
     }
 }
+
+export const getSearchGroups = (query) => async (dispatch) => {
+
+    dispatch(setSearchQueryAC(query));
+
+    const response = await csrfFetch(`/api/groups?name=${query.name}`);
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setSearchResultsAC(data.Groups))
+        return data
+    }
+}
+
+
 
 const initialState = {
     query: {},
