@@ -8,14 +8,59 @@ const sequelize = require('sequelize')
 
 const router = express.Router();
 
+const { Op } = require("sequelize");
+
 
 //GET ALL GROUPS
 
 router.get('/', async (req, res, next) => {
 
+    let { page, size } = req.query;
+
+
+    if (!page) page = 1;
+    if (!size) size = 20;
+
+
+
+    page = parseInt(page);
+    size = parseInt(size);
+
+    let pagination = {};
+
+    if (Number.isInteger(page) && Number.isInteger(size) && page > 0 && page <= 10 && size > 0 && size <= 20) {
+        pagination.limit = size;
+        pagination.offset = size * (page - 1);
+    } else {
+        const err = new Error("Invalid search parameters");
+        err.status = 400;
+        err.title = "Invalid search parameters";
+        err.errors = ["Page must be greater than or equal to one",
+            "Size must be greater than or equal to one",
+            'Name must be a string',
+            "Type must be 'Online' or 'In Person'",
+            "Start date must be a valid datetime"
+        ];
+        return next(err)
+    }
+
+    let where = {};
+
+    if (req.query.name) where.name = { [Op.substring]: req.query.name };
+
+    if (req.query.type === 'Online') where.type = { [Op.not]: 'In-Person' };
+
+    if (req.query.type === 'In-Person') where.type = { [Op.not]: 'Online' };
+
+    if (req.query.startDate >= Date.now()) where.startDate = req.query.startDate;
+
+
     //find all groups
 
-    const allGroups = await Group.findAll();
+    const allGroups = await Group.findAll({
+        where,
+        ...pagination
+    });
 
     //declare newArr for manipulation
     let newArr = []
