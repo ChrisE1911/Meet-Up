@@ -22,12 +22,15 @@ function SearchBarComponent() {
     useEffect(() => {
         document.addEventListener("click", handleClickOutside)
 
-        return () => document.removeEventListener("click", handleClickOutside)
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        }
     }, [])
 
     const handleClickOutside = (e) => {
         if (searchBoxRef.current && !searchBoxRef.current.contains(e.target)) {
-            setIsOpen(false)
+            setIsOpen(false);
+            setData('')
         }
     }
 

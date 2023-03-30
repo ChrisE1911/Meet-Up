@@ -11,12 +11,14 @@ function SearchCardComponent({ item, clear }) {
 
     return (
         <>
-            {eventLocation ? <li onClick={() => {
-                history.push(`/events/${item.id}`);
-                clear()
-            }} className="list-item">
+            {eventLocation ?
+                <li onClick={() => {
+                    history.push(`/events/${item.id}`);
+                    clear()
+                }} className="list-item">
                 {item.name}
-            </li> : <li onClick={() => {
+                    </li>
+                         : <li onClick={() => {
                 history.push(`/groups/${item.id}`);
                 clear()
             }} className="list-item">

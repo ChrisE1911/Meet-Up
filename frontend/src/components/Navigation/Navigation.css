@@ -126,12 +126,18 @@
     flex-direction: row;
     gap: 1vw;
     position: relative;
+    width: 30vw;
 }
 
 #search-results ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: 10%;
 }
 
 #search-results ul li {
@@ -149,5 +155,24 @@
 }
 
 .list-item {
-    color: black
+    color: black;
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-item:hover {
+    transition: .3s;
+    background-color: gray;
+    color: white
+}
+
+#search-text {
+    width: 85%;
+}
+
+.search-inputs {
+    width: 100%;
 }
