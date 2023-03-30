@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import SearchCardComponent from '../SearchCardComponent';
 import { getSearchEvents } from '../../store/search';
@@ -9,6 +9,8 @@ import { clearSearchAC } from '../../store/search';
 
 function SearchBarComponent() {
     const dispatch = useDispatch()
+    const location = useLocation()
+
     const results = useSelector(state => state.search.results)
     const resultsArr = Object.values(results)
     const [data, setData] = useState('')
@@ -46,7 +48,7 @@ function SearchBarComponent() {
                 <div className='search-bar'>
                     <div className='search-inputs'>
                         <form onChange={handleSubmit}>
-                            <input id='search-text' type='text' value={data} onChange={handleInput} placeholder='Search for Events'></input>
+                            {location.pathname.includes("events") ? <input id='search-text' type='text' value={data} onChange={handleInput} placeholder={'Search for Events'}></input> : <input id='search-text' type='text' value={data} onChange={handleInput} placeholder={'Search for Groups'}></input>}
                             {/* <input
                                 type='radio'
                                 value='Online'
