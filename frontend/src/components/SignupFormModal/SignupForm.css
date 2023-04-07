@@ -1,0 +1,8 @@
+#toggle-modal-buttons button {
+    border: none;
+    background-color: transparent;
+    color:black;
+    font-weight: 700;
+    text-decoration: underline;
+    font-size: medium
+}
