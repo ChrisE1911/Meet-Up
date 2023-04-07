@@ -39,7 +39,7 @@ function Navigation({ isLoaded }) {
   return (
     <div className='navigation-bar'>
       <div className='site-title'>
-        <NavLink exact to="/" id='nav-title'>{homeTitle}</NavLink>
+        {!sessionUser ? <NavLink exact to="/" id='nav-title'>{homeTitle}</NavLink> : <NavLink exact to="/groups" id='nav-title'>{homeTitle}</NavLink>}
        <SearchBarComponent />
       </div>
       {isLoaded && sessionLinks}

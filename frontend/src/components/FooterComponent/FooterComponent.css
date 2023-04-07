@@ -1,0 +1,8 @@
+#about-me-links {
+    text-decoration: none;
+    color: black
+}
+
+#about-me-links:hover {
+     color: white
+}

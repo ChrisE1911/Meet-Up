@@ -6,6 +6,18 @@
     height: 100%;
 }
 
+#event-carousel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#event-carousel:hover {
+    transition: 0.5s;
+    background-color: gray;
+}
+
 .splash-container {
     width: 100vw;
     height: 100vh;
