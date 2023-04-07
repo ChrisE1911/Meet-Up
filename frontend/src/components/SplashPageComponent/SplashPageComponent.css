@@ -20,9 +20,9 @@
 
 .splash-container {
     width: 100vw;
-    height: 100vh;
     background-image: url('https://cdn.wallpapersafari.com/58/66/4exNis.jpg');
     background-size: cover;
+    padding-top: 15vh;
 }
 
 #splash-title-and-picture {
