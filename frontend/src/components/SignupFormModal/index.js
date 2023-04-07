@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../store/session";
+import OpenModalButton from "../OpenModalButton";
+import LoginFormModal from "../LoginFormModal";
 import { useHistory } from "react-router-dom";
 import './SignupForm.css';
 
@@ -37,7 +39,16 @@ function SignupFormModal() {
   return (
     <>
       <div className="sign-up-input-fields">
-      <h1 id="log-in">Sign Up</h1>
+        <h1 id="log-in">Sign Up</h1>
+        <br/>
+        <i class="fa-regular fa-handshake" style={{fontSize: 'xxx-large'}}></i>
+        <br />
+        <div id="toggle-modal-buttons">
+        { <OpenModalButton
+          buttonText="Already have an account? Log in"
+          modalComponent={<LoginFormModal />}
+          />}
+          </div>
       <form id='sign-up-form-container' onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}

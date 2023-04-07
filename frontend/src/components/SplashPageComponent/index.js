@@ -50,7 +50,7 @@ function SplashPageComponent() {
             </div>
             <br />
             <h1 style={{ marginLeft: '10vw' }}>Events</h1>
-            <div style={{ display: 'flex', flexDirection: 'row', width: '80vw', marginLeft: '10vw', marginRight: '10vw' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', width: '80vw', marginLeft: '10vw', marginRight: '10vw', overflowX: 'scroll'}}>
                 {allEventsArr.map((event) => {
                     return (
                         <Link to={`events/${event.id}`} id='event-carousel' style={{ width: '300px', height: '200px', textAlign: 'center', padding: '10px', textDecoration: 'none', color: 'black' }}>
@@ -64,7 +64,7 @@ function SplashPageComponent() {
                 })}
             </div>
             <h1 style={{ marginLeft: '10vw' }}>Groups</h1>
-            <div style={{ display: 'flex', flexDirection: 'row', width: '80vw', marginLeft: '10vw', marginRight: '10vw' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', width: '80vw', marginLeft: '10vw', marginRight: '10vw', overflowX: 'scroll'}}>
                 {allGroupsArr.map((group) => {
                     return (
                         <Link to={`groups/${group.id}`} id='event-carousel' style={{ width: '300px', height: '200px', textAlign: 'center', padding: '10px', textDecoration: 'none', color: 'black' }}>

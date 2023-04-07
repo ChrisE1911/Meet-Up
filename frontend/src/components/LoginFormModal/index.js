@@ -4,6 +4,8 @@ import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
+import SignupFormModal from "../SignupFormModal";
+import OpenModalButton from "../OpenModalButton";
 import "./LoginForm.css";
 import DemoUserLoginItem from '../DemoUserLogin';
 
@@ -34,10 +36,19 @@ function LoginFormModal() {
 
   };
 
+
+
   return (
     <>
       <div className="input-fields">
-      <h1>Log In</h1>
+        <h1>Log In</h1>
+        <i class="fa-regular fa-handshake" style={{ fontSize: 'xxx-large' }}></i>
+        <div id="toggle-modal-buttons">
+        {<OpenModalButton
+          buttonText="Don't have an account? Sign up"
+          modalComponent={<SignupFormModal />}
+          />}
+          </div>
         <form id='form-container' onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
