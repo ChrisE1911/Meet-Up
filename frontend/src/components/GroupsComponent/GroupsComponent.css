@@ -32,6 +32,33 @@
     /* z-index: -1 */
 }
 
+@media screen and (max-width: 999px) {
+    .toggle-buttons-container {
+        margin-top:10px
+    }
+
+    #card-container {
+        margin-top: 20%
+    }
+
+    .navigation-bar {
+        height: 5%
+    }
+
+    .event-container {
+        padding-top: 10%
+    }
+
+    #form-container-div {
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        height: 50vh;
+        width: 50vw;
+    }
+    }
+
+
 .toggle-buttons {
     position: relative;
     left: 10%;
