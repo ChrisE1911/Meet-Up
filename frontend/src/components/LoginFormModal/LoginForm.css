@@ -8,6 +8,19 @@
     height: 100vh;
 }
 
+@media screen and (max-width: 999px) {
+
+    #root {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+    #modal-content {
+        height: auto;
+        width: 80vw
+    }
+}
+
 #log-in {
     display: flex;
     align-items: center;
