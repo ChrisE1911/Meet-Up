@@ -22,7 +22,6 @@ function GroupDetailsComponent() {
 
     const filteredEventsArr = allEventsArr.filter((event) => Number(groupId) === event.groupId)
 
-    console.log(filteredEventsArr)
 
     const sessionUser = useSelector(state => state.session.user)
 

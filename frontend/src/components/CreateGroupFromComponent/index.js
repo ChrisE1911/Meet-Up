@@ -68,7 +68,7 @@ function CreateGroupFormComponent() {
 
         // const newObj = await newGroupDispatch();
 
-        // console.log(newGroupDispatch.id)
+        
 
         history.push(`/groups/${newGroupDispatch.id}`)
 

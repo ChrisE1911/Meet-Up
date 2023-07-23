@@ -15,7 +15,6 @@ function UserProfileComponent() {
     const events = useRef(null)
 
     const scrollToSection = (elementRef) => {
-        console.log(elementRef)
         window.scrollTo({
             top: elementRef.current.offsetTop,
             behavior: 'smooth'
@@ -36,8 +35,6 @@ function UserProfileComponent() {
     // let eventsNumber = 0
 
     const memberDate = new Date(sessionUser.createdAt).toDateString().split(' ').slice(1, 4).join(' ')
-    // console.log('DATE', memberDate.toDateString().split(' ').slice(1, 4).join(' '))
-
 
     useEffect(() => {
         dispatch(getGroups()).then(dispatch(getEvents())).then(dispatch(getCurrentUserGroups()))

@@ -40,11 +40,9 @@ function ProfileButton({ user }) {
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
-  const firstNameString = `${user.firstName}`
+  const firstNameString = `${user.firstName}`;
 
-  const profileButtonLetter = firstNameString.charAt(0)
-
-  console.log('STRINGGGGG', profileButtonLetter)
+  const profileButtonLetter = firstNameString.charAt(0);
 
 
 
