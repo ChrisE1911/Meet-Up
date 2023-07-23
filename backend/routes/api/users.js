@@ -50,7 +50,7 @@ router.post(
 
     user = user.toJSON();
 
-    console.log('USER IN ROUTE', user)
+    
 
     delete user['updatedAt']
 

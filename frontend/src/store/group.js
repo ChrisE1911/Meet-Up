@@ -38,8 +38,6 @@ export const currentUserGroupsAC = (data) => ({
 export const getCurrentUserGroups = () => async (dispatch) => {
     const response = await csrfFetch('/api/groups/current')
 
-    console.log(response)
-
     if (response.ok) {
         const data = await response.json();
         dispatch(currentUserGroupsAC(data))
@@ -50,10 +48,8 @@ export const getCurrentUserGroups = () => async (dispatch) => {
 
 //GET ONE GROUP
 export const getOneGroup = (groupId) => async (dispatch) => {
-    // console.log('GROUP ID', groupId)
-    const response = await csrfFetch(`/api/groups/${groupId}`)
 
-    console.log(response)
+    const response = await csrfFetch(`/api/groups/${groupId}`)
 
     if (response.ok) {
         const group = await response.json();
@@ -83,7 +79,7 @@ export const createAGroup = (groupPayload, imagePayload) => async (dispatch) => 
     })
     if (response.ok) {
         const group = await response.json();
-        console.log('Group', group)
+
         const imageResponse = await csrfFetch(`/api/groups/${group.id}/images`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -164,7 +160,7 @@ const groupReducer = (state = initialState, action) => {
             return newState
         case GET_CURRENT_GROUPS:
             newState = { ...state };
-            // console.log('ACTION', action)
+            
             const currentGroups = {}
             action.payload.Groups.forEach(group => {
                 currentGroups[group.id] = group
