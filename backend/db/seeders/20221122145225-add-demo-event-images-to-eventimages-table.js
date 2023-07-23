@@ -13,7 +13,7 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         eventId: 1,
-        url: 'https://pikwizard.com/photos/2469a7bfd623afbe3536bcfd411245ce-m.jpg',
+        url: 'https://ernietheattorney.net/wp-content/uploads/2019/02/Hands-Shaking.jpg',
         preview: true
       },
       {
