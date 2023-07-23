@@ -12,7 +12,7 @@ function FooterComponent() {
                 <div style={{ display: 'flex', flexDirection: 'column'}}>
                     <h4>About Me</h4>
                     <br />
-                    <Link to={{ pathname: "https://chrise1911.github.io./" }}
+                    <Link to={{ pathname: "https://c-eatmon-port.onrender.com/" }}
                         target='_blank' id='about-me-links'>Portfolio Page</Link>
                     <br />
                     <Link to={{ pathname: "https://github.com/ChrisE1911" }}
