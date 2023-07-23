@@ -78,7 +78,6 @@ function CreateEventFormComponent() {
 
         // const newObj = await newEventDispatch
 
-        console.log(newEventDispatch.id)
 
         history.push(`/events/${newEventDispatch.id}`)
 

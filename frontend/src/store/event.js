@@ -47,8 +47,6 @@ export const getEvents = () => async (dispatch) => {
 export const getCurrentUserEvents = (groupId) => async (dispatch) => {
     const response = await csrfFetch(`/api/groups/${groupId}/events`)
 
-    console.log(response)
-
     if (response.ok) {
         const data = await response.json();
         dispatch(currentUserEventsAC(data))
@@ -132,13 +130,11 @@ const eventReducer = (state = initialState, action) => {
             newState.allEvents = updatedEvents;
             return newState;
         case GET_ONE_EVENT:
-            console.log('ACTION', action)
             return {
                 ...state, singleEvent: action.event
             }
         case GET_CURRENT_EVENTS:
             newState = { ...state };
-            // console.log('ACTION', action)
             const currentEvents = {}
             action.payload.Groups.forEach(events => {
                 currentEvents[events.id] = events

@@ -29,7 +29,6 @@ function EventDetailsComponent() {
     const newEndDate = new Date(currentEvent.endDate).toDateString().split(' ').slice(0, 3)
     const newEndDateTime = new Date(currentEvent.endDate).toLocaleTimeString();
 
-    console.log('DATE', new Date(currentEvent.startDate).toLocaleTimeString())
 
     useEffect(() => {
         dispatch(getOneEvent(+eventId))

@@ -18,7 +18,6 @@ function EditGroupFormComponent() {
     const history = useHistory()
     const { groupId } = useParams();
 
-    console.log(currentGroup)
 
     useEffect(() => {
         dispatch(getOneGroup(groupId))
