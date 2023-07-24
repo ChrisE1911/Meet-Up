@@ -1,6 +1,6 @@
-# About  M Rendezvous U:
+# About Rendezvous:
 
-M Rendezvous U is a web application inspired by MeetUp, that provides a platform for users to create groups and events that people around the world could be interested in, join groups that fit their respective interests, and attend events held by those groups.
+M Rendezvous is a web application inspired by MeetUp, that provides a platform for users to create groups and events that people around the world could be interested in, join groups that fit their respective interests, and attend events held by those groups.
 
 [Live Link to Website](https://meet-up.onrender.com)
 
@@ -57,9 +57,8 @@ Please see the following project Wiki links below:
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![M Rendezvous U][meetup-screenshot]
 
-M Rendezvous U is a web application inspired by MeetUp, that provides a platform for users to create groups and events that people around the world could be interested in, join groups that fit their respective interests, and attend events held by those groups.
+Rendezvous is a web application inspired by MeetUp, that provides a platform for users to create groups and events that people around the world could be interested in, join groups that fit their respective interests, and attend events held by those groups.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -121,21 +120,21 @@ Here is some examples of the functionality within the site:
 
 ### Logging in
 Users will be able to log in with a previous account (if signed up in the past) or sign up and create a brand new account
-![M Rendezvous U][log-in]
+![Rendezvous][log-in]
 
 ### Groups/Events Pages
 
 Once logged in, users will be able to navigate through the events and groups pages to see the different groups and activities to offer.
-![M Rendezvous U][groups-page]
-![M Rendezvous U][events-page]
+![Rendezvous][groups-page]
+![Rendezvous][events-page]
 
 ### Creating a Group and an Event (once group is created)
 
 Once a user is ready to create a group, clicking on ***Start a new group!*** at the top of the page will take you to a form. Once the form is complete and every input field is valid, it will allow you to submit and create your own group.
 
 Once your group is created you will be navigated to the page to view/edit details as you like. You will also be allowed access to create an event once your group is created.
-![M Rendezvous U][create-group]
-![M Rendezvous U][group-created]
+![Rendezvous][create-group]
+![Rendezvous][group-created]
 
 
 
@@ -204,8 +203,8 @@ Project Link: [https://github.com/ChrisE1911/Meet-up](https://github.com/ChrisE1
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com
 [meetup-screenshot]: ./meetup-screenshot.png
-[create-group]: ./create-group-sshot.png
-[events-page]: ./events-sshot.png
-[group-created]: ./group-creation-example-sshot.png
-[groups-page]: ./groups-sshot.png
-[log-in]: ./log-in-sshot.png
+[create-group]: ./Create_Group.png
+[events-page]: ./Events_Page.png
+[group-created]: ./Group_Landing_Page.png
+[groups-page]: ./Groups_Page.png
+[log-in]: ./Log_In.png
